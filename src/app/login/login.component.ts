@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { LoginService } from 'src/shared/login.service';
+import { LoginService } from 'src/app/shared/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,8 @@ import { LoginService } from 'src/shared/login.service';
 })
 export class LoginComponent implements OnInit {
 
+
+
   constructor(private route: ActivatedRoute, private loginService: LoginService) { }
 
   code: string;
@@ -16,18 +18,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(
       params => {
-        console.log(params);
         this.code = params.code;
       }
     )
+    this.loginService.loginToken(this.code).subscribe(() => {
+    });
 
-    this.loginService.loginToken(this.code).subscribe(response => {
-      console.log(response);
-    })
-    
   }
 
-  
-  
+
+
 
 }

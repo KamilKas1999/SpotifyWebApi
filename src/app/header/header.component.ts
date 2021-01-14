@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/shared/login.service';
+import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/shared/login.service';
 
 
 @Component({
@@ -9,16 +10,22 @@ import { LoginService } from 'src/shared/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  collapsed = true;
-
+  isLogin = false;
+  private userSub: Subscription;
+  
   constructor(private authService: LoginService) { }
 
   ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isLogin = !!user;
+    });
   }
 
   onLogin() {
-    let t = this.authService.login();
-    console.log(t);
+    this.authService.login();
   }
-
+  
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
 }

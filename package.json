@@ -23,6 +23,7 @@
     "@types/spotify-web-api-node": "^4.0.2",
     "angular-spotify": "^1.5.1",
     "bootstrap": "^4.5.3",
+    "ngx-bootstrap": "^6.2.0",
     "rxjs": "~6.6.0",
     "spotify-web-api-node": "^5.0.0",
     "tslib": "^2.0.0",

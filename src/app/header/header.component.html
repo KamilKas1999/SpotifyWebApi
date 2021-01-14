@@ -1,10 +1,36 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">SpotifyApp</a>
-    </div>
-  
-    <ul class="nav navbar-nav navbar-right">
-        <li><a style="cursor: pointer" (click) = "onLogin()" style="color: white;cursor: pointer">Zaloguj</a></li>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #91a0a3;">
 
-    </ul>
+
+    <a class="navbar-brand" routerLink="/"><img src='../../assets/Logo.png' width="118" height="35" alt=""></a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item" *ngIf="isLogin">
+                <a class="nav-link" routerLink="/top">
+                    <div class="option">Twoje Top</div>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav right">
+            <li class="nav-item right" *ngIf="!isLogin">
+                <a class="nav-link" (click)="onLogin()">
+                    <div class="option">Zaloguj</div>
+                </a>
+            </li>
+            <li class="nav-item " *ngIf="isLogin">
+                <a class="nav-link">
+                    <div class="option">Wyloguj</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
 </nav>

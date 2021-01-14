@@ -1,5 +1,11 @@
 <div class="row">
     <div class="col-md-20">
-        <h1>Witaj w mojej Aplikacji Spotify</h1>
+        <div *ngIf="!isLogin">
+            <h1 >Witaj w mojej Aplikacji Spotify</h1>
+        </div>
+        <div *ngIf="isLogin">
+            <h1 >Witaj {{name}}</h1>
+        </div>
+
     </div>
 </div>
