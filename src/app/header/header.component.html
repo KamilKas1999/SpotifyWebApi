@@ -11,10 +11,16 @@
 
 
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" *ngIf = "visible">
             <li class="nav-item" *ngIf="isLogin">
                 <a class="nav-link" routerLink="/top">
                     <div class="option">Twoje Top</div>
+                </a>
+            </li>
+
+            <li class="nav-item" *ngIf="isLogin">
+                <a class="nav-link" routerLink="/top">
+                    <div class="option">Rekomenduj</div>
                 </a>
             </li>
         </ul>
@@ -25,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item " *ngIf="isLogin">
-                <a class="nav-link">
+                <a class="nav-link" (click)="onLogout()">
                     <div class="option">Wyloguj</div>
                 </a>
             </li>

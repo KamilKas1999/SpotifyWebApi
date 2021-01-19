@@ -1,5 +1,3 @@
-import { Album } from "./album.model";
-
 export class songInfo {
     album: {
         images: {
@@ -8,7 +6,7 @@ export class songInfo {
     }
     name: string;
 
-    // artists: {
-    //     name: string
-    // }[]
+    artists: {
+        name: string
+     }[]
 }

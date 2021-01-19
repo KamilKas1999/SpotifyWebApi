@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { User } from "./user.model";
+import { environment } from '../../environments/environment'
 export interface TokenData {
     access_token: string,
     token_type: string,
@@ -27,16 +28,17 @@ export class LoginService {
     private refresh_token: string;
 
 
-    constructor(private http: HttpClient, private router : Router) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
-    login() {
-        let scope = 'scope=user-top-read'
-        window.location.href = 
-        'https://accounts.spotify.com/authorize?client_id=c5de057c69af43f78132e18432ab8060&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin%2F&' + scope
+    showWindowlogin() {
+        let scope = environment.spotifyApp.scope;
+        let redirect = encodeURIComponent(environment.spotifyApp.redirect_uri);
+        window.location.href =
+            'https://accounts.spotify.com/authorize?client_id=' + environment.spotifyApp.client_id + '&response_type=code&redirect_uri=' + redirect + '&scope=' + scope
     }
 
 
-    loginToken(code: string) {
+    getloginToken(code: string) {
 
         let options = {
             headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -45,10 +47,10 @@ export class LoginService {
         let params = new HttpParams({
             fromObject: {
                 code: code,
-                redirect_uri: 'http://localhost:4200/login/',
+                redirect_uri: environment.spotifyApp.redirect_uri,
                 grant_type: 'authorization_code',
-                client_id: 'c5de057c69af43f78132e18432ab8060',
-                client_secret: '679bc0f28d7f4478b776c8cdeaac8f0a',
+                client_id: environment.spotifyApp.client_id,
+                client_secret: environment.spotifyApp.client_secret,
             },
         });
 
@@ -69,6 +71,11 @@ export class LoginService {
         this.user.next(user);
         this.router.navigate(['/']);
 
+    }
+
+    logout() {
+        this.user.next(null);
+        this.router.navigate(['/']);
     }
 
 

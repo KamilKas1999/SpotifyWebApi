@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
         this.code = params.code;
       }
     )
-    this.loginService.loginToken(this.code).subscribe(() => {
+    this.loginService.getloginToken(this.code).subscribe(() => {
     });
 
   }

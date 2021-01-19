@@ -1,11 +1,23 @@
 <div class="row">
     <div class="col-md-20">
         <div *ngIf="!isLogin">
-            <h1 >Witaj w mojej Aplikacji Spotify</h1>
+            <h1>Witaj w mojej Aplikacji Spotify</h1>
         </div>
         <div *ngIf="isLogin">
-            <h1 >Witaj {{name}}</h1>
+            <h1>Witaj {{name}}</h1>
         </div>
+        <ul c *ngIf="visible">
+            <li *ngIf="isLogin">
+                <a routerLink="/top">
+                    Twoje Top
+                </a>
+            </li>
 
+            <li *ngIf="isLogin">
+                <a routerLink="/top">
+                    Rekomenduj
+                </a>
+            </li>
+        </ul>
     </div>
 </div>

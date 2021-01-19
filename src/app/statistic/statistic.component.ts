@@ -2,16 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { songInfo } from './songInfo/songInfo.model';
 import { SpotifyTopService } from './spotify-top.service';
 
-export interface data {
-
-  album: {
-    images: {
-      url: string
-    }[]
-  },
-  name: string
-
-}
 
 @Component({
   selector: 'app-statistic',
