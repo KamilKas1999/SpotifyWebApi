@@ -1,5 +1,3 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-
 export class User {
     constructor(
         private _access_token: string,

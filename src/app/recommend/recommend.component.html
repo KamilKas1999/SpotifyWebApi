@@ -1,0 +1,5 @@
+<div class="row mx-auto">
+    <button class="btn btn-dark" (click) = "onRecommend()">Odśwież Rekomendacje</button>
+</div>
+<app-top-element *ngFor = "let track of recommendSongs" [track] = 'track'></app-top-element>
+<!-- <app-recommend-item *ngFor = "let track of recommendSongs" [track] = 'track'></app-recommend-item> -->

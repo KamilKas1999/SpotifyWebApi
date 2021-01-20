@@ -8,9 +8,10 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { StatisticComponent } from './statistic/statistic.component';
 import { TopElementComponent } from './statistic/top-element/top-element.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RecommendComponent } from './recommend/recommend.component';
+import { RecommendItemComponent } from './recommend/recommend-item/recommend-item.component';
+
 
 
 @NgModule({
@@ -21,15 +22,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     LoginComponent,
     StatisticComponent,
     TopElementComponent,
+    RecommendComponent,
+    RecommendItemComponent,
 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
