@@ -1,11 +1,26 @@
 <div class="row mx-auto">
   <form (ngSubmit)="onRecommend()" #form="ngForm">
-      <label for="artist">Wybierz artystę na początek</label>
-    <select name="artist" id="artist" [ngModel]="selected">
-      <option *ngFor="let artist of mapArtist | keyvalue" value={{artist.key}}>
-        {{ artist.key }} - {{ artist.value }} wystąpień
+    <label for="artists">Wybierz artystę na początek</label>
+    <select name="artists" id="artists" [ngModel]="selectedArtist.id">
+      <option *ngFor="let artist of artists" value="{{ artist.id }}">
+        {{ artist.name }}
       </option>
     </select>
+
+    <label for="genres">Wybierz gatunek na początek</label>
+    <select name="genres" id="genres" [ngModel]="selectedGenres">
+      <option *ngFor="let genre of genres" value="{{ genre }}">
+        {{ genre }}
+      </option>
+    </select>
+
+    <label for="tracks">Wybierz utwór na początek</label>
+    <select name="tracks" id="tracks" [ngModel]="selectedTrack.id">
+      <option *ngFor="let track of tracksNameList" value="{{ track.id}}">
+        {{ track.name }}
+      </option>
+    </select>
+
     <button type="submit" class="btn btn-dark">Odśwież Rekomendacje</button>
   </form>
 </div>

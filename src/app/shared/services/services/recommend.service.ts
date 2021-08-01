@@ -13,25 +13,26 @@ export class RecommendService {
   recommendChanged = new Subject<songInfo[]>();
   recommendSongs: songInfo[] = [];
   private token: string;
-  private seed_artists = 'seed_artists=4NHQUGzhtTLFvgF5SZesLK';
-  private seed_genres = 'pop';
-  private seed_tracks = 'seed_tracks=0c6xIDDpzE81m2q797ordA';
-  constructor(
-    private http: HttpClient,
-    private loginService: LoginService,
-  ) {
+  private SEED_ARTISTS = 'seed_artists=';
+  private SEED_GENRES = '&seed_genres=';
+  private SEED_TRACKS = '&seed_tracks=';
+  private RecomendationsLink = 'https://api.spotify.com/v1/recommendations?';
+  constructor(private http: HttpClient, private loginService: LoginService) {
     this.loginService.user.subscribe((user) => {
       this.token = user.token;
     });
   }
 
-
-
-
-  getRecommend() {
+  getRecommend(artist: string, genre: string, track: string) {
     this.http
       .get<{ tracks: songInfo[] }>(
-        'https://api.spotify.com/v1/recommendations?' + this.seed_artists,
+        this.RecomendationsLink +
+          this.SEED_ARTISTS +
+          artist +
+          this.SEED_GENRES +
+          genre +
+          this.SEED_TRACKS +
+          track,
         {
           headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
         }

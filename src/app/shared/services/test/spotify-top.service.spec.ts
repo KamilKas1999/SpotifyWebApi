@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SpotifyTopService } from '../shared/services/services/spotify-top.service';
+import { SpotifyTopService } from '../services/spotify-top.service';
 
 describe('SpotifyTopService', () => {
   let service: SpotifyTopService;
