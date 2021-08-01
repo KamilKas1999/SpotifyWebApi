@@ -1,5 +1,15 @@
 <div class="row mx-auto">
-    <button class="btn btn-dark" (click) = "onRecommend()">Odśwież Rekomendacje</button>
+  <form (ngSubmit)="onRecommend()" #form="ngForm">
+      <label for="artist">Wybierz artystę na początek</label>
+    <select name="artist" id="artist" [ngModel]="selected">
+      <option *ngFor="let artist of mapArtist | keyvalue" value={{artist.key}}>
+        {{ artist.key }} - {{ artist.value }} wystąpień
+      </option>
+    </select>
+    <button type="submit" class="btn btn-dark">Odśwież Rekomendacje</button>
+  </form>
 </div>
-<app-top-element *ngFor = "let track of recommendSongs" [track] = 'track'></app-top-element>
-<!-- <app-recommend-item *ngFor = "let track of recommendSongs" [track] = 'track'></app-recommend-item> -->
+<app-top-element
+  *ngFor="let track of recommendSongs"
+  [track]="track"
+></app-top-element>

@@ -11,7 +11,7 @@ import { TopElementComponent } from './statistic/top-element/top-element.compone
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendComponent } from './recommend/recommend.component';
 import { RecommendItemComponent } from './recommend/recommend-item/recommend-item.component';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,6 +31,7 @@ import { RecommendItemComponent } from './recommend/recommend-item/recommend-ite
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

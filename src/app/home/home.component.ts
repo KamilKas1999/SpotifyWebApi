@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/shared/login.service';
-import { User } from 'src/app/shared/user.model';
-import { HeaderVisibleService } from '../shared/header-visible.service';
+import { LoginService } from 'src/app/shared/services/services/login.service';
+import { User } from 'src/app/shared/models/user.model';
+import { HeaderVisibleService } from '../shared/services/services/header-visible.service';
 
 @Component({
   selector: 'app-home',

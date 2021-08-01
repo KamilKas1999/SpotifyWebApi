@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { songInfo } from '../shared/songInfo.model';
-import { SpotifyTopService } from './spotify-top.service';
+import { textChangeRangeIsUnchanged } from 'typescript';
+import { songInfo } from '../shared/models/songInfo.model';
+import { SpotifyTopService } from '../shared/services/services/spotify-top.service';
 
 
 @Component({
@@ -9,21 +10,24 @@ import { SpotifyTopService } from './spotify-top.service';
   templateUrl: './statistic.component.html',
   styleUrls: ['./statistic.component.scss']
 })
-export class StatisticComponent implements OnInit {
+export class StatisticComponent implements OnInit, OnDestroy {
 
   topTracks: songInfo[];
-  topSub: Subscription;
+  private topSub: Subscription;
 
   constructor(private spotifyTopService: SpotifyTopService) { }
 
+
   ngOnInit(): void {
-    this.topTracks = this.spotifyTopService.topTracks;
-    if (this.topTracks.length == 0) {
-      this.spotifyTopService.getTopTracks();
-    }
-    this.topSub = this.spotifyTopService.topArrive.subscribe(data => {
-      this.topTracks = data;
-    })
+    this.topSub = this.spotifyTopService.getTopTracks().subscribe(
+      data => {
+        this.topTracks = data.items;
+      }
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.topSub.unsubscribe();
   }
 
 }

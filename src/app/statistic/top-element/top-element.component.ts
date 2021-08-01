@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { songInfo } from '../../shared/songInfo.model';
+import { songInfo } from '../../shared/models/songInfo.model';
 
 @Component({
   selector: 'app-top-element',

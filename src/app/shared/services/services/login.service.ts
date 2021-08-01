@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { User } from "./user.model";
-import { environment } from '../../environments/environment'
+import { User } from "../../models/user.model";
+import { environment } from '../../../../environments/environment'
 export interface TokenData {
     access_token: string,
     token_type: string,
@@ -34,8 +34,10 @@ export class LoginService {
         let scope = environment.spotifyApp.scope;
         let redirect = encodeURIComponent(environment.spotifyApp.redirect_uri);
         window.location.href =
-            'https://accounts.spotify.com/authorize?client_id=' + environment.spotifyApp.client_id + '&response_type=code&redirect_uri=' + redirect + '&scope=' + scope
-    }
+            'https://accounts.spotify.com/authorize?client_id=' + environment.spotifyApp.client_id + '&response_type=code&redirect_uri=' + redirect + '&scope=' + scope + "&show_dialog=true"
+     
+        }
+    
 
 
     getloginToken(code: string) {

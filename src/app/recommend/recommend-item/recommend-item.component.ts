@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { songInfo } from 'src/app/shared/songInfo.model';
+import { songInfo } from 'src/app/shared/models/songInfo.model';
 
 @Component({
   selector: 'app-recommend-item',

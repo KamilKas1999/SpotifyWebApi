@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { LoginService } from '../shared/login.service';
-import { songInfo } from '../shared/songInfo.model';
+import { LoginService } from './login.service';
+import { songInfo } from '../../models/songInfo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { songInfo } from '../shared/songInfo.model';
 export class SpotifyTopService {
 
 
-  token: string;
-  topTracks : songInfo[] = [];
-  topArrive = new Subject<songInfo[]>();
+  private token: string;
+   topTracks : songInfo[] = [];
+   private topArrive = new Subject<songInfo[]>();
   
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
@@ -23,10 +23,7 @@ export class SpotifyTopService {
     return this.http.get<{ items: songInfo[] }>('https://api.spotify.com/v1/me/top/tracks',
       {
         headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.token })
-      }).subscribe(data => {
-        this.topTracks = data.items;
-        this.topArrive.next(this.topTracks)
-      })
+       })
   }
 
 
