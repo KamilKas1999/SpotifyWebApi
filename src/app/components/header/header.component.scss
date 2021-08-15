@@ -1,0 +1,25 @@
+.navbar {
+  background-color: #eee;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.option {
+  color: black;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+li {
+  margin-left: 10px;
+}
+
+p {
+  transition: transform 0.2s;
+}
+
+p:hover {
+  transform: scale(1.2);
+}

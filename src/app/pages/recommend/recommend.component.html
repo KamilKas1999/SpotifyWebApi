@@ -1,0 +1,7 @@
+<div class="row mx-auto">
+<app-panel></app-panel>
+</div>
+<app-music-card
+  *ngFor="let track of recommendSongs"
+  [track]="track"
+></app-music-card>

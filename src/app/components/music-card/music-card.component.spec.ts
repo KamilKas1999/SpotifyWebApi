@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecommendItemComponent } from './recommend-item.component';
+import { MusicCardComponent } from './music-card.component';
 
-describe('RecommendItemComponent', () => {
-  let component: RecommendItemComponent;
-  let fixture: ComponentFixture<RecommendItemComponent>;
+describe('TopElementComponent', () => {
+  let component: MusicCardComponent;
+  let fixture: ComponentFixture<MusicCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecommendItemComponent ]
+      declarations: [ MusicCardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecommendItemComponent);
+    fixture = TestBed.createComponent(MusicCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

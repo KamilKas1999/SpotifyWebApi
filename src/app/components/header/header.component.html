@@ -19,25 +19,25 @@
     <ul class="navbar-nav" *ngIf="visible">
       <li class="nav-item" *ngIf="isLogin">
         <a class="nav-link" routerLink="/top">
-          <div class="option">Twoje Top</div>
+          <div class="option"><p>Twoje Top</p></div>
         </a>
       </li>
 
       <li class="nav-item" *ngIf="isLogin">
         <a class="nav-link" routerLink="/recommend">
-          <div class="option">Rekomenduj</div>
+          <div class="option"><p>Rekomenduj</p></div>
         </a>
       </li>
     </ul>
     <ul class="navbar-nav right">
       <li class="nav-item right" *ngIf="!isLogin">
         <a class="nav-link" (click)="onLogin()">
-          <div class="option">Zaloguj</div>
+          <div class="option"><p>Zaloguj</p></div>
         </a>
       </li>
       <li class="nav-item" *ngIf="isLogin">
         <a class="nav-link" (click)="onLogout()">
-          <div class="option">Wyloguj</div>
+          <div class="option"><p>Wyloguj</p></div>
         </a>
       </li>
     </ul>

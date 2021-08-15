@@ -1,30 +1,36 @@
-<div class="row mx-auto">
-  <form (ngSubmit)="onRecommend()" #form="ngForm">
+<form (ngSubmit)="onRecommend()" #form="ngForm">
+  <div class="sel">
     <label for="artists">Wybierz artystę na początek</label>
     <select name="artists" id="artists" [ngModel]="selectedArtist.id">
       <option *ngFor="let artist of artists" value="{{ artist.id }}">
         {{ artist.name }}
       </option>
     </select>
+  </div>
 
+  <div class="sel">
     <label for="genres">Wybierz gatunek na początek</label>
     <select name="genres" id="genres" [ngModel]="selectedGenres">
       <option *ngFor="let genre of genres" value="{{ genre }}">
         {{ genre }}
       </option>
     </select>
+  </div>
 
+  <div class="sel">
     <label for="tracks">Wybierz utwór na początek</label>
     <select name="tracks" id="tracks" [ngModel]="selectedTrack.id">
-      <option *ngFor="let track of tracksNameList" value="{{ track.id}}">
+      <option *ngFor="let track of tracksNameList" value="{{ track.id }}">
         {{ track.name }}
       </option>
     </select>
+  </div>
 
-    <button type="submit" class="btn btn-dark">Odśwież Rekomendacje</button>
-  </form>
-</div>
-<app-top-element
-  *ngFor="let track of recommendSongs"
-  [track]="track"
-></app-top-element>
+  <button type="submit" >Odśwież Rekomendacje</button>
+</form>
+*Dostępni do wyboru artyści oraz utwory bazują na twoich najczęściej słuchanych utworach
+<!-- "
+
+
+
+ -->

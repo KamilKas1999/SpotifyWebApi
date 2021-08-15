@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { textChangeRangeIsUnchanged } from 'typescript';
-import { songInfo } from '../shared/models/songInfo.model';
-import { SpotifyTopService } from '../shared/services/services/spotify-top.service';
+import { songInfo } from 'src/app/shared/models/songInfo.model';
+import { SpotifyTopService } from 'src/app/shared/services/services/spotify-top.service';
+
 
 
 @Component({

@@ -1,44 +1,33 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { songInfo } from '../shared/models/songInfo.model';
-import { SpotifyTopService } from '../shared/services/services/spotify-top.service';
-import { RecommendService } from '../shared/services/services/recommend.service';
-import { DataPreparingService } from '../shared/services/services/data-preparing.service';
-import { genre } from '../shared/models/genre.model';
-import { artistShort } from '../shared/models/artistShort.model';
-import { trackShort } from '../shared/models/trackShort.model';
+import { artistShort } from 'src/app/shared/models/artistShort.model';
+import { trackShort } from 'src/app/shared/models/trackShort.model';
+import { DataPreparingService } from 'src/app/shared/services/services/data-preparing.service';
+import { RecommendService } from 'src/app/shared/services/services/recommend.service';
+import { SpotifyTopService } from 'src/app/shared/services/services/spotify-top.service';
 
 @Component({
-  selector: 'app-recommend',
-  templateUrl: './recommend.component.html',
-  styleUrls: ['./recommend.component.scss'],
+  selector: 'app-panel',
+  templateUrl: './panel.component.html',
+  styleUrls: ['./panel.component.scss']
 })
-export class RecommendComponent implements OnInit, OnDestroy {
+export class PanelComponent implements OnInit, OnDestroy {
   @ViewChild('form', { static: false }) signupForm: NgForm;
-  private recommendSub: Subscription;
-  private topSub: Subscription;
-  private genresSub: Subscription;
-  genres: string[];
-  recommendSongs: songInfo[];
   tracksNameList: trackShort[] = [];
   artists: artistShort[] = [];
   selectedArtist: artistShort = { name: '', id: '' };
   selectedGenres = '';
   selectedTrack: trackShort = { name: '', id: '' };
-  constructor(
-    private recommendService: RecommendService,
+  genres: string[];
+  private topSub: Subscription;
+  private genresSub: Subscription;
+
+  constructor(private recommendService: RecommendService,
     private topsevice: SpotifyTopService,
-    private dataPreparing: DataPreparingService
-  ) {}
+    private dataPreparing: DataPreparingService) { }
 
   ngOnInit(): void {
-    this.recommendSongs = this.recommendService.recommendSongs;
-    this.recommendSub = this.recommendService.recommendChanged.subscribe(
-      (data) => {
-        this.recommendSongs = data;
-      }
-    );
     this.topSub = this.topsevice.getTopTracks().subscribe((data) => {
       this.artists = this.dataPreparing.prepareArtist(data.items);
       this.selectedArtist = this.dataPreparing.getRandomArtist(this.artists);
@@ -53,16 +42,15 @@ export class RecommendComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.recommendSub.unsubscribe();
-    this.topSub.unsubscribe();
-    this.genresSub.unsubscribe();
-  }
-
   onRecommend() {
     const genre = this.signupForm.value.genres;
     const track = this.signupForm.value.tracks;
     const artist = this.signupForm.value.artists;
     this.recommendService.getRecommend(artist, genre, track);
   }
+  ngOnDestroy() {
+    this.topSub.unsubscribe();
+    this.genresSub.unsubscribe();
+  }
+
 }

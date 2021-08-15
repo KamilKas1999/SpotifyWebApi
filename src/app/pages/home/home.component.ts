@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/shared/services/services/login.service';
 import { User } from 'src/app/shared/models/user.model';
-import { HeaderVisibleService } from '../shared/services/services/header-visible.service';
+import { HeaderVisibleService } from '../../shared/services/services/header-visible.service';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.authService.userData);
     this.headerVisible.status.emit(false);
     this.userSub = this.authService.user.subscribe(user => {
       this.isLogin = !!user;
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
     this.headerSub = this.headerVisible.status.subscribe((visible : boolean) => {
       this.visible = visible
     }
+
     )
   }
 

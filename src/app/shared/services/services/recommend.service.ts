@@ -14,9 +14,11 @@ export class RecommendService {
   recommendSongs: songInfo[] = [];
   private token: string;
   private SEED_ARTISTS = 'seed_artists=';
-  private SEED_GENRES = '&seed_genres=';
-  private SEED_TRACKS = '&seed_tracks=';
-  private RecomendationsLink = 'https://api.spotify.com/v1/recommendations?';
+  private SEED_GENRES = 'seed_genres=';
+  private SEED_TRACKS = 'seed_tracks=';
+  private LIMIT = 'limit=5';
+  private RecomendationsLink = 'https://api.spotify.com/v1/recommendations';
+  private BEARER = 'Bearer ';
   constructor(private http: HttpClient, private loginService: LoginService) {
     this.loginService.user.subscribe((user) => {
       this.token = user.token;
@@ -27,14 +29,19 @@ export class RecommendService {
     this.http
       .get<{ tracks: songInfo[] }>(
         this.RecomendationsLink +
+          '?' +
+          this.LIMIT +
+          "&" +
           this.SEED_ARTISTS +
           artist +
+          '&' +
           this.SEED_GENRES +
           genre +
+          '&' +
           this.SEED_TRACKS +
           track,
         {
-          headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
+          headers: new HttpHeaders({ Authorization: this.BEARER + this.token }),
         }
       )
       .subscribe((data) => {

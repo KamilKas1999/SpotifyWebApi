@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/shared/services/services/login.service';
-import { HeaderVisibleService } from '../shared/services/services/header-visible.service';
+import { HeaderVisibleService } from '../../shared/services/services/header-visible.service';
 
 
 @Component({
