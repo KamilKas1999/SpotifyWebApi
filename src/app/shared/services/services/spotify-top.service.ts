@@ -11,9 +11,7 @@ export class SpotifyTopService {
 
 
   private token: string;
-   topTracks : songInfo[] = [];
-   private topArrive = new Subject<songInfo[]>();
-  
+     
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
   getTopTracks() {

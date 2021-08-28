@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { artistShort } from 'src/app/shared/models/artistShort.model';
@@ -22,6 +22,8 @@ export class PanelComponent implements OnInit, OnDestroy {
   genres: string[];
   private topSub: Subscription;
   private genresSub: Subscription;
+  @Output() newItemEvent = new EventEmitter<never>();
+
 
   constructor(private recommendService: RecommendService,
     private topsevice: SpotifyTopService,
@@ -43,6 +45,7 @@ export class PanelComponent implements OnInit, OnDestroy {
   }
 
   onRecommend() {
+    this.newItemEvent.emit();
     const genre = this.signupForm.value.genres;
     const track = this.signupForm.value.tracks;
     const artist = this.signupForm.value.artists;

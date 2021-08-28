@@ -45,28 +45,18 @@ export class LoginService {
   }
 
   getloginToken(code: string) {
-    let options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      ),
-    };
-
     let params = new HttpParams({
       fromObject: {
         code: code,
-        redirect_uri: environment.spotifyApp.redirect_uri,
-        grant_type: 'authorization_code',
-        client_id: environment.spotifyApp.client_id,
-        client_secret: environment.spotifyApp.client_secret,
       },
     });
 
     return this.http
       .post<TokenData>(
-        'https://accounts.spotify.com/api/token',
-        params,
-        options
+        'http://localhost:8080/getToken',
+        {
+          code: code,
+        }
       )
       .pipe(
         tap((resData) => {

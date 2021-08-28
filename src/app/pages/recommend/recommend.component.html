@@ -1,7 +1,12 @@
 <div class="row mx-auto">
-<app-panel></app-panel>
+  <app-panel (newItemEvent)="startLoading()"></app-panel>
 </div>
-<app-music-card
-  *ngFor="let track of recommendSongs"
-  [track]="track"
-></app-music-card>
+<div *ngIf="!isLoading">
+  <app-music-card
+    *ngFor="let track of recommendSongs"
+    [track]="track"
+  ></app-music-card>
+</div>
+<div *ngIf="isLoading">
+  <app-loading></app-loading>
+</div>

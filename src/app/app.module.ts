@@ -13,6 +13,7 @@ import { PanelComponent } from './pages/recommend/panel/panel.component';
 import { RecommendComponent } from './pages/recommend/recommend.component';
 import { StatisticComponent } from './pages/statistic/statistic.component';
 import { MusicCardComponent } from './components/music-card/music-card.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MusicCardComponent } from './components/music-card/music-card.component
     RecommendComponent,
     PanelComponent,
     MusicCardComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
