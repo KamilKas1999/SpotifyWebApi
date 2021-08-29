@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/shared/services/services/login.service';
 import { User } from 'src/app/shared/models/user.model';
 import { HeaderVisibleService } from '../../shared/services/services/header-visible.service';
-import { UserInfo } from 'os';
 import { UserService } from 'src/app/shared/services/services/user.service';
 
 @Component({
@@ -19,7 +18,7 @@ export class HomeComponent implements OnInit {
   visible = true;
   private userSub: Subscription;
   private headerSub: Subscription;
-  private userDataSub : Subscription;
+  private userDataSub: Subscription;
   constructor(
     private authService: LoginService,
     private headerVisible: HeaderVisibleService,
@@ -41,14 +40,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
   private getUserName() {
     this.userDataSub = this.userInfo.getUserInfo().subscribe((data) => {
       this.name = data.display_name;
       this.loading = false;
     });
   }
-  
+
   ngOnDestroy() {
     this.headerVisible.status.emit(true);
     this.userSub.unsubscribe();

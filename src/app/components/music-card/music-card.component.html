@@ -18,16 +18,35 @@
           <li *ngFor="let artist of track.artists">{{ artist.name }}</li>
         </ul>
       </div>
-      <div *ngIf="isAudioAvailable">
-        <button (click)="onPlayMusic()">Play</button>
-        <button (click)="onPauseMusic()">Stop</button>
-      </div>
-      <div *ngIf="!isAudioAvailable">
-        <p>Odtworzenie fragmentu jest nie możliwe :(</p>
-      </div>
       <div>
-        <button (click)="onLikeMusic()">Like it</button>
+        <button
+          (click)="onPlayMusic()"
+          [disabled]="!isAudioAvailable || !audio.paused"
+        >
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button (click)="onPauseMusic()" [disabled]="audio.paused">
+          <mat-icon>pause</mat-icon>
+        </button>
+        <button (click)="onReplay()" [disabled]="musicTime == 0">
+          <mat-icon>replay</mat-icon>
+        </button>
+        <button (click)="changeTrackSaving()">
+          <img
+            src="{{
+              isSaved
+                ? '../../../assets/heart-64.svg'
+                : '../../../assets/heart-64 unliked.svg'
+            }}"
+          />
+        </button>
       </div>
+      <p *ngIf="!isAudioAvailable">
+        Niestety nie mogę odtworzyć fragmentu tego utworu :(
+      </p>
+      <p *ngIf="!isAudioAvailable">
+        Kliknij na nazwę utworu lub zdjęcie by zobaczyć ją w serwisie Spotify
+      </p>
     </div>
   </div>
 </div>

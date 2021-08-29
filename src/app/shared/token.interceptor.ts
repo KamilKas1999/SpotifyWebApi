@@ -3,25 +3,25 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginService } from './services/services/login.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-
   constructor(private loginService: LoginService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if(this.loginService.userData){
-      console.log("interceptor")
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    if (this.loginService.userData) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.loginService.userData.token}`
-        }
+          Authorization: `Bearer ${this.loginService.userData.token}`,
+        },
       });
-
     }
     return next.handle(request);
   }

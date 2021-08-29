@@ -10,7 +10,6 @@ export class MusicPlayerService {
 
   add(audio: any): void {
     this.audioArray.push(audio);
-    console.log(this.audioArray);
   }
 
   stopAllMusic(): void {
