@@ -5,6 +5,8 @@
   <app-music-card
     *ngFor="let track of recommendSongs"
     [track]="track"
+    [isLoading] = "isLoading"
+    (stopAllMusic)="stopAllMusic()"
   ></app-music-card>
 </div>
 <div *ngIf="isLoading">

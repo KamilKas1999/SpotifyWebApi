@@ -26,7 +26,7 @@
     </select>
   </div>
 
-  <button type="submit" >Odśwież Rekomendacje</button>
+  <button type="submit" [disabled]="isLoading ? 'disabled': null" >Odśwież Rekomendacje</button>
 </form>
 *Dostępni do wyboru artyści oraz utwory bazują na twoich najczęściej słuchanych utworach
 <!-- "

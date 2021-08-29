@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { environment } from '../../../../environments/environment';
@@ -19,19 +19,14 @@ export interface TokenData {
 export class LoginService {
   user = new BehaviorSubject<User>(null);
   userData: User;
-  private access_token: string;
-  private token_type: string;
-  private scope: string;
-  private expire_in: number;
-  private refresh_token: string;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  isLogin() {
+  isLogin(): boolean {
     return !!this.userData;
   }
 
-  showWindowlogin() {
+  showWindowlogin(): void {
     let scope = environment.spotifyApp.scope;
     let redirect = encodeURIComponent(environment.spotifyApp.redirect_uri);
     window.location.href =
@@ -44,20 +39,11 @@ export class LoginService {
       '&show_dialog=true';
   }
 
-  getloginToken(code: string) {
-    let params = new HttpParams({
-      fromObject: {
-        code: code,
-      },
-    });
-
+  getloginToken(code: string): Observable<TokenData> {
     return this.http
-      .post<TokenData>(
-        'http://localhost:8080/getToken',
-        {
-          code: code,
-        }
-      )
+      .post<TokenData>('http://localhost:8080/getToken', {
+        code: code,
+      })
       .pipe(
         tap((resData) => {
           this.handleAuthentication(
@@ -77,7 +63,7 @@ export class LoginService {
     scope: string,
     expire_in: number,
     refresh_token: string
-  ) {
+  ): void {
     this.userData = new User(
       access_token,
       token_type,
@@ -85,12 +71,11 @@ export class LoginService {
       expire_in,
       refresh_token
     );
-    console.log(this.userData);
     this.user.next(this.userData);
     this.router.navigate(['/']);
   }
 
-  logout() {
+  logout(): void {
     this.user.next(null);
     this.router.navigate(['/']);
   }

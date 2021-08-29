@@ -50,7 +50,7 @@ export class RecommendService {
       });
   }
 
-  getRecommendArray() {
+  getRecommendArray(): songInfo[] {
     return this.recommendSongs;
   }
 }

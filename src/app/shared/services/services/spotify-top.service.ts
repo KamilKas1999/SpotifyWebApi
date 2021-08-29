@@ -1,30 +1,17 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { LoginService } from './login.service';
 import { songInfo } from '../../models/songInfo.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SpotifyTopService {
+  private getTopTracksLink = 'https://api.spotify.com/v1/me/top/tracks';
+  constructor(private http: HttpClient, private loginService: LoginService) {}
 
-
-  private token: string;
-     
-  constructor(private http: HttpClient, private loginService: LoginService) { }
-
-  getTopTracks() {
-    this.loginService.user.subscribe(user => {
-      this.token = user.token;
-    })
-    return this.http.get<{ items: songInfo[] }>('https://api.spotify.com/v1/me/top/tracks',
-      {
-        headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.token })
-       })
+  getTopTracks(): Observable<{ items: songInfo[] }> {
+    return this.http.get<{ items: songInfo[] }>(this.getTopTracksLink);
   }
-
-
-
-
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { artistShort } from 'src/app/shared/models/artistShort.model';
@@ -23,6 +23,7 @@ export class PanelComponent implements OnInit, OnDestroy {
   private topSub: Subscription;
   private genresSub: Subscription;
   @Output() newItemEvent = new EventEmitter<never>();
+  @Input() isLoading: boolean = false;
 
 
   constructor(private recommendService: RecommendService,

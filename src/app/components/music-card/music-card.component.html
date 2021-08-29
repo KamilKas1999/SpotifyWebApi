@@ -18,6 +18,16 @@
           <li *ngFor="let artist of track.artists">{{ artist.name }}</li>
         </ul>
       </div>
+      <div *ngIf="isAudioAvailable">
+        <button (click)="onPlayMusic()">Play</button>
+        <button (click)="onPauseMusic()">Stop</button>
+      </div>
+      <div *ngIf="!isAudioAvailable">
+        <p>Odtworzenie fragmentu jest nie możliwe :(</p>
+      </div>
+      <div>
+        <button (click)="onLikeMusic()">Like it</button>
+      </div>
     </div>
   </div>
 </div>

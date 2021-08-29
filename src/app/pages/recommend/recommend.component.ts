@@ -20,8 +20,6 @@ export class RecommendComponent implements OnInit, OnDestroy {
       (data) => {
         this.recommendSongs = data;
         this.isLoading = false;
-        console.log(this.isLoading)
-        console.log( this.recommendSongs)
 
       }
     );
@@ -29,7 +27,9 @@ export class RecommendComponent implements OnInit, OnDestroy {
 
   startLoading() : void{
     this.isLoading = true;
-    console.log(this.isLoading)
+  }
+
+  stopAllMusic(){
   }
 
   ngOnDestroy() {

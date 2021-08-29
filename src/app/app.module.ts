@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -14,6 +14,7 @@ import { RecommendComponent } from './pages/recommend/recommend.component';
 import { StatisticComponent } from './pages/statistic/statistic.component';
 import { MusicCardComponent } from './components/music-card/music-card.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { TokenInterceptor } from './shared/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     NgbModule,
     FormsModule,
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
