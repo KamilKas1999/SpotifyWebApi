@@ -1,45 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-  <a class="navbar-brand" routerLink="/"
-    ><img src="../../assets/Logo.png" width="118" height="35" alt=""
-  /></a>
+<!-- test1
+<nav class="appheader" [ngClass]="{ close: isNavigationHidden }">
+test2
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <ul class="left" *ngIf="visible">
+    <li class="item" *ngIf="isLogin">
+      <a class="link" routerLink="/top">
+        <div class="option"><p>Twoje Top</p></div>
+      </a>
+    </li>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav" *ngIf="visible">
-      <li class="nav-item" *ngIf="isLogin">
-        <a class="nav-link" routerLink="/top">
-          <div class="option"><p>Twoje Top</p></div>
-        </a>
-      </li>
-
-      <li class="nav-item" *ngIf="isLogin">
-        <a class="nav-link" routerLink="/recommend">
-          <div class="option"><p>Rekomenduj</p></div>
-        </a>
-      </li>
-    </ul>
-    <ul class="navbar-nav right">
-      <li class="nav-item right" *ngIf="!isLogin">
-        <a class="nav-link" (click)="onLogin()">
-          <div class="option"><p>Zaloguj</p></div>
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="isLogin">
-        <a class="nav-link" (click)="onLogout()">
-          <div class="option"><p>Wyloguj</p></div>
-        </a>
-      </li>
-    </ul>
-  </div>
+    <li class="item" *ngIf="isLogin">
+      <a class="link" routerLink="/recommend" (click)="hideNavigation()">
+        <div class="option"><p>Rekomenduj</p></div>
+      </a>
+    </li>
+  </ul>
+  <ul class="right">
+    <li class="item right" *ngIf="!isLogin">
+      <a class="link" (click)="onLogin()">
+        <div class="option"><p>Zaloguj</p></div>
+      </a>
+    </li>
+    <li class="item" *ngIf="isLogin">
+      <a class="link" (click)="onLogout()">
+        <div class="option"><p>Wyloguj</p></div>
+      </a>
+    </li>
+  </ul>
 </nav>
+<div class="openOrClose" (click)="onShow()"><div></div><div></div><div></div></div> -->
+<div class="navigationpanel" [ngClass]="{ open: isOpen }">
+  <a class="link" routerLink="/top" (click)="hideNavigation()" *ngIf="isLogin">
+    <p>Twoje Top</p>
+  </a>
+  <a
+    class="link"
+    routerLink="/recommend"
+    (click)="hideNavigation()"
+    *ngIf="isLogin"
+  >
+    <p>Rekomenduj</p>
+  </a>
+  <a class="link" (click)="onLogin()" *ngIf="!isLogin">
+    <p>Zaloguj</p>
+  </a>
+  <a class="link" (click)="onLogout()" *ngIf="isLogin">
+    <p>Wyloguj</p>
+  </a>
+</div>
+<div class="openOrClose" (click)="onShow()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>

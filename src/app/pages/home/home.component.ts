@@ -11,8 +11,8 @@ import { UserService } from 'src/app/shared/services/services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  isLogin = false;
   loading = false;
+  isLogin = false;
   user: User;
   name: string;
   visible = true;
@@ -41,10 +41,15 @@ export class HomeComponent implements OnInit {
   }
 
   private getUserName() {
-    this.userDataSub = this.userInfo.getUserInfo().subscribe((data) => {
-      this.name = data.display_name;
-      this.loading = false;
-    });
+    this.userDataSub = this.userInfo.getUserInfo().subscribe(
+      (data) => {
+        this.name = data.display_name;
+        this.loading = false;
+      },
+      (err) => {
+        this.loading = false;
+      }
+    );
   }
 
   ngOnDestroy() {

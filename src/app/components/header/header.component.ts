@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   private userSub: Subscription;
   private headerSub: Subscription;
   visible = true;
+  isOpen = false;
 
   constructor(private authService: LoginService, private headerVisible: HeaderVisibleService) { }
 
@@ -28,6 +29,10 @@ export class HeaderComponent implements OnInit {
     )
   }
 
+  hideNavigation(){
+    this.isOpen = false;
+  }
+
   ngOnDestroy() {
     this.userSub.unsubscribe();
     this.headerSub.unsubscribe();
@@ -35,11 +40,17 @@ export class HeaderComponent implements OnInit {
 
   onLogin() {
     this.authService.showWindowlogin();
+    this.isOpen = false;
+
   }
 
+  onShow(){
+     this.isOpen = !this.isOpen;
+  }
 
 
   onLogout() {
     this.authService.logout();
+    this.isOpen = false;
   }
 }

@@ -1,16 +1,19 @@
 <div class="element">
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mx-auto">
+    <div class="logo">
       <a target="_blank" href="{{ track.album.external_urls.spotify }}">
-        <img src="{{ imageUrl }}" />
+        <img src="../../../assets//Spotify_Logo_RGB_White.png" />
       </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="album col-sm-12 col-md-6 col-lg-5 col-xl-4 mx-auto">
+      <img src="{{ imageUrl }}" />
     </div>
     <div class="col-sm-0 col-md-6 col-lg-7 col-xl-8 mx-auto">
       <div class="name">
         <div class="link">
-          <a target="_blank" href="{{ track.album.external_urls.spotify }}">
-            <h1>{{ track.name }}</h1></a
-          >
+          <h1>{{ track.name }}</h1>
         </div>
       </div>
       <div class="name">
@@ -18,19 +21,16 @@
           <li *ngFor="let artist of track.artists">{{ artist.name }}</li>
         </ul>
       </div>
-      <div>
-        <button
-          (click)="onPlayMusic()"
-          [disabled]="!isAudioAvailable || !audio.paused"
-        >
-          <mat-icon>play_arrow</mat-icon>
+      <div class="buttons">
+        <button (click)="onPlayMusic()" [disabled]="!linkToMusic">
+          <img src="../../../assets/outline_play_arrow_white_48dp.png" />
         </button>
-        <button (click)="onPauseMusic()" [disabled]="audio.paused">
-          <mat-icon>pause</mat-icon>
+        <!-- <button (click)="onPauseMusic()">
+          <img src="../../../assets/pause_white_24dp.svg" />
         </button>
-        <button (click)="onReplay()" [disabled]="musicTime == 0">
-          <mat-icon>replay</mat-icon>
-        </button>
+        <button (click)="onReplay()">
+          <img src="../../../assets/replay_white_24dp.svg" />
+        </button> -->
         <button (click)="changeTrackSaving()">
           <img
             src="{{
@@ -41,10 +41,13 @@
           />
         </button>
       </div>
-      <p *ngIf="!isAudioAvailable">
+      <p *ngIf="linkToMusic">
+        Posłuchaj fragmentu utworu
+      </p>
+      <p *ngIf="!linkToMusic">
         Niestety nie mogę odtworzyć fragmentu tego utworu :(
       </p>
-      <p *ngIf="!isAudioAvailable">
+      <p *ngIf="!linkToMusic">
         Kliknij na nazwę utworu lub zdjęcie by zobaczyć ją w serwisie Spotify
       </p>
     </div>

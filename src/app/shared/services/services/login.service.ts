@@ -40,8 +40,9 @@ export class LoginService {
   }
 
   getloginToken(code: string): Observable<TokenData> {
+    console.log("get token")
     return this.http
-      .post<TokenData>('http://localhost:8080/getToken', {
+      .post<TokenData>(`${environment.spotifyApp.api}/getToken`, {
         code: code,
       })
       .pipe(

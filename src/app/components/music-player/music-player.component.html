@@ -1,0 +1,17 @@
+<div class="panel">
+  <button (click)="onPauseMusic()">
+    <img src="../../../assets/pause_white_24dp.svg" />
+  </button>
+  
+  <input
+    #ranger
+    type="range"
+    min="{{ minValue }}"
+    max="{{ maxValue }}"
+    value="{{ actuallValue }}"
+    step="0.02"
+    (input)="valueChange(ranger.value)"
+    (change)="valueChange(ranger.value)"
+  />
+</div>
+

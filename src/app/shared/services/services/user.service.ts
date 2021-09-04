@@ -9,6 +9,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserInfo(): Observable<{ display_name: string }> {
+    console.log("get User")
     return this.http.get<{ display_name: string }>(
       'https://api.spotify.com/v1/me'
     );

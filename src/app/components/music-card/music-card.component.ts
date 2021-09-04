@@ -19,12 +19,10 @@ import { songInfo } from '../../shared/models/songInfo.model';
 export class MusicCardComponent implements OnInit, OnDestroy {
   @Input() track: songInfo;
   imageUrl: string;
-  audio = new Audio();
-  isAudioAvailable = false;
   isSaved = false;
   isPaused = false;
   musicTime = 0;
-  musicInterval: any;
+  linkToMusic: string;
   constructor(
     private musicPlayer: MusicPlayerService,
     private userLibrary: UserLibraryService
@@ -39,20 +37,11 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   }
 
   onPlayMusic(): void {
-    this.musicPlayer.stopAllMusic();
-    this.audio.play();
-    this.musicInterval = setInterval(() => {
-      this.musicTime = this.audio.currentTime;
-      if ((this.audio.currentTime == this.audio.duration)) {
-        clearInterval(this.musicInterval);
-        this.musicTime= 0;
-      }
-    }, 500);
+    this.musicPlayer.play(this.linkToMusic);
   }
 
   onPauseMusic(): void {
-    this.audio.pause();
-    clearInterval(this.musicInterval);
+    this.musicPlayer.pause();
   }
 
   onSaveMusic(): void {
@@ -71,13 +60,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkUserSavedThisSong();
     this.imageUrl = this.track.album.images[1].url;
-    let linkToMusic = this.track.preview_url;
-    if (linkToMusic) {
-      this.audio = new Audio(linkToMusic);
-      this.audio.load();
-      this.musicPlayer.add(this.audio);
-      this.isAudioAvailable = true;
-    }
+    this.linkToMusic = this.track.preview_url;
   }
 
   checkUserSavedThisSong() {
@@ -86,21 +69,11 @@ export class MusicCardComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.audio.pause();
-    this.audio = null;
-    this.musicPlayer.clearAudioArray();
-    clearInterval(this.musicInterval);
-  }
+  ngOnDestroy(): void {}
 
   onReplay() {
-    this.audio.currentTime = 0;
-    this.musicTime = 0;
-    clearInterval(this.musicInterval);
-    this.onPlayMusic();
+    this.musicPlayer.replay();
   }
 
-  getMusicTime(): number {
-    return this.audio.currentTime;
-  }
+
 }

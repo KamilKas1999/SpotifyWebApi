@@ -5,7 +5,7 @@ export class songInfo {
       external_urls: {
         spotify: string;
       };
-      href : string
+      href: string;
       name: string;
       id: string;
       type: string;
@@ -31,32 +31,31 @@ export class songInfo {
   };
   artists: {
     external_urls: {
-        spotify: string
-    },
-    href: string,
-    id: string,
-    name: string,
-    type: string,
-    uri: string
+      spotify: string;
+    };
+    href: string;
+    id: string;
+    name: string;
+    type: string;
+    uri: string;
   }[];
-  available_markets : string[]
-  disc_number: number
-  duration_ms: number
-explicit: boolean
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
   external_ids: {
-      isrc: string
-  }
+    isrc: string;
+  };
   external_urls: {
-      spotify: string
-  }
-  href: string
-  id: string
-  is_local: boolean
-  name: string
-  popularity: number
-  preview_url: string
-  track_number: number
-  type: string
-  uri: string
-
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  is_local: boolean;
+  name: string;
+  popularity: number;
+  preview_url: string;
+  track_number: number;
+  type: string;
+  uri: string;
 }

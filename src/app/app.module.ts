@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -16,6 +15,8 @@ import { StatisticComponent } from './pages/statistic/statistic.component';
 import { MusicCardComponent } from './components/music-card/music-card.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { TokenInterceptor } from './shared/token.interceptor';
+import { MusicPlayerComponent } from './components/music-player/music-player.component';
+import {MatSliderModule } from '@angular/material/slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { TokenInterceptor } from './shared/token.interceptor';
     PanelComponent,
     MusicCardComponent,
     LoadingComponent,
+    MusicPlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { TokenInterceptor } from './shared/token.interceptor';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    MatIconModule,
+    MatSliderModule,
   ],
   providers: [
     AuthGuardService,
