@@ -25,12 +25,6 @@
         <button (click)="onPlayMusic()" [disabled]="!linkToMusic">
           <img src="../../../assets/outline_play_arrow_white_48dp.png" />
         </button>
-        <!-- <button (click)="onPauseMusic()">
-          <img src="../../../assets/pause_white_24dp.svg" />
-        </button>
-        <button (click)="onReplay()">
-          <img src="../../../assets/replay_white_24dp.svg" />
-        </button> -->
         <button (click)="changeTrackSaving()">
           <img
             src="{{
@@ -41,14 +35,12 @@
           />
         </button>
       </div>
-      <p *ngIf="linkToMusic">
-        Posłuchaj fragmentu utworu
-      </p>
+      <p *ngIf="linkToMusic">Posłuchaj fragmentu utworu</p>
       <p *ngIf="!linkToMusic">
         Niestety nie mogę odtworzyć fragmentu tego utworu :(
       </p>
       <p *ngIf="!linkToMusic">
-        Kliknij na nazwę utworu lub zdjęcie by zobaczyć ją w serwisie Spotify
+        Kliknij na logo Spotify by zobaczyć ją w serwisie Spotify
       </p>
     </div>
   </div>

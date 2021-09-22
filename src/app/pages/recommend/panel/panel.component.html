@@ -25,12 +25,161 @@
       </option>
     </select>
   </div>
+  <div class="sel">
+    <label for="limit">Liczba polecanych</label>
+    <input
+      type="number"
+      name="limit"
+      id="limit"
+      min="1"
+      max="100"
+      [(ngModel)]="limit"
+    />
+  </div>
+  <div class="advanced" *ngIf="advancedVisible">
+    <h1>Zaawansowane</h1>
+    <div>
+      <div>
+        <label for="minDuration">Minimalny czas trwania</label>
+        <input
+          type="range"
+          name="minDuration"
+          id="minDuration"
+          min="0"
+          max="1000000"
+          step="10000"
+          [(ngModel)]="minDuration"
+          #minDur
+        />
 
-  <button type="submit" [disabled]="isLoading ? 'disabled': null" >Odśwież Rekomendacje</button>
+        <p *ngIf="minDuration">{{ (minDuration / 60000).toFixed(2) }} min</p>
+      </div>
+      <div>
+        <label for="maxDuration">Maksymalny czas trwania</label>
+        <input
+          type="range"
+          name="maxDuration"
+          id="maxDuration"
+          min="0"
+          max="1000000"
+          step="10000"
+          [(ngModel)]="maxDuration"
+          #maxDur
+        />
+        <p *ngIf="maxDuration">{{ (maxDuration / 60000).toFixed(2) }} min</p>
+      </div>
+    </div>
+
+    <!-- 
+    <label for="targetDuration">Oczekiwany czas trwania</label>
+    <input
+      type="range"
+      name="targetDuration"
+      id="targetDuration"
+      min="0"
+      max="1000000"
+      step="10000"
+      ngModel
+      #targetDur
+    />
+    {{ (targetDur.value / 60000).toFixed(2) }} min -->
+
+    <!-- <label for="minAcousticness">Minimalna akustyka</label>
+  <input
+    type="range"
+    name="minAcousticness"
+    id="minAcousticness"
+    min="0"
+    max="1"
+    step="0.01"
+    ngModel
+    #minAcousticness
+  />
+  {{minAcousticness.value * 100}} 
+
+  <label for="maxAcousticness">Maksymalna akustyka</label>
+  <input
+    type="range"
+    name="maxAcousticness"
+    id="maxAcousticness"
+    min="0"
+    max="1"
+    step="0.01"
+    ngModel
+    #maxAcousticness
+  />
+  {{maxAcousticness.value * 100}}  -->
+    <div>
+      <div>
+        <label for="minTempo">Minimalne tempo</label>
+        <input
+          type="range"
+          name="minTempo"
+          id="minTempo"
+          min="0"
+          max="200"
+          [(ngModel)]="minTempo"
+        />
+        <p *ngIf="minTempo">
+          {{ minTempo }}
+        </p>
+      </div>
+
+      <div>
+        <label for="maxTempo">Maksymalne tempo</label>
+        <input
+          type="range"
+          name="maxTempo"
+          id="maxTempo"
+          min="0"
+          max="200"
+          [(ngModel)]="maxTempo"
+        />
+        <p *ngIf="maxTempo">
+          {{ maxTempo }}
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <label for="minPopularity">Minimalna pupularność</label>
+        <input
+          type="range"
+          name="minPopularity"
+          id="minPopularity"
+          min="0"
+          max="100"
+          [(ngModel)]="minPopularity"
+        />
+        <p *ngIf="minPopularity">{{ minPopularity }}</p>
+      </div>
+      <div>
+        <label for="maxPopularity">Maksymalna popularność</label>
+        <input
+          type="range"
+          name="maxPopularity"
+          id="maxPopularity"
+          min="0"
+          max="100"
+          [(ngModel)]="maxPopularity"
+        />
+        <p *ngIf="maxPopularity">{{ maxPopularity }}</p>
+      </div>
+    </div>
+    <button type="button" (click)="resetAdvanced()">
+      Resetuj zaawansowane
+    </button>
+  </div>
+  <div class="buttons">
+    <button type="button" (click)="randomSettings()">Losuj ustawienia</button>
+    <button type="button" (click)="advanceButton()">
+      {{ advancedVisible ? "Ukryj zaawansowane" : "Pokaż zaawansowane" }}
+    </button>
+  </div>
+  <button type="submit" [disabled]="isLoading ? 'disabled' : null">
+    Odśwież Rekomendacje
+  </button>
 </form>
-*Dostępni do wyboru artyści oraz utwory bazują na twoich najczęściej słuchanych utworach
-<!-- "
-
-
-
- -->
+*Dostępni do wyboru artyści oraz utwory bazują na twoich najczęściej słuchanych
+utworach

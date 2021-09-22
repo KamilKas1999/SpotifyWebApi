@@ -1,12 +1,9 @@
 import {
   Component,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output,
 } from '@angular/core';
-import { Subscription, TimeInterval } from 'rxjs';
 import { MusicPlayerService } from 'src/app/shared/services/services/music-player.service';
 import { UserLibraryService } from 'src/app/shared/services/services/user-library.service';
 import { songInfo } from '../../shared/models/songInfo.model';
