@@ -36,11 +36,22 @@
       [(ngModel)]="limit"
     />
   </div>
+  <div class="buttons">
+    <button type="button" (click)="randomSettings()">Losuj podstawowe ustawienia</button>
+    <button type="button" (click)="advanceButton()">
+      {{ advancedVisible ? "Ukryj zaawansowane" : "Pokaż zaawansowane" }}
+    </button>
+  </div>
   <div class="advanced" *ngIf="advancedVisible">
     <h1>Zaawansowane</h1>
     <div>
       <div>
-        <label for="minDuration">Minimalny czas trwania</label>
+        <label for="minDuration"
+          >Minimalny czas trwania
+          {{
+            minDuration ? ": " + (minDuration / 60000).toFixed(2) : ""
+          }}</label
+        >
         <input
           type="range"
           name="minDuration"
@@ -49,13 +60,23 @@
           max="1000000"
           step="10000"
           [(ngModel)]="minDuration"
-          #minDur
+          [ngClass]="{
+            green: minDuration
+              ? maxDuration
+                ? minDuration < maxDuration
+                : true
+              : false,
+            red: maxDuration && minDuration && minDuration > maxDuration
+          }"
         />
-
-        <p *ngIf="minDuration">{{ (minDuration / 60000).toFixed(2) }} min</p>
       </div>
       <div>
-        <label for="maxDuration">Maksymalny czas trwania</label>
+        <label for="maxDuration"
+          >Maksymalny czas trwania
+          {{
+            maxDuration ? ": " + (maxDuration / 60000).toFixed(2) : ""
+          }}</label
+        >
         <input
           type="range"
           name="maxDuration"
@@ -64,9 +85,15 @@
           max="1000000"
           step="10000"
           [(ngModel)]="maxDuration"
-          #maxDur
+          [ngClass]="{
+            green: maxDuration
+              ? minDuration
+                ? minDuration < maxDuration
+                : true
+              : false,
+            red: maxDuration && minDuration && minDuration > maxDuration
+          }"
         />
-        <p *ngIf="maxDuration">{{ (maxDuration / 60000).toFixed(2) }} min</p>
       </div>
     </div>
 
@@ -111,7 +138,10 @@
   {{maxAcousticness.value * 100}}  -->
     <div>
       <div>
-        <label for="minTempo">Minimalne tempo</label>
+        <label for="minTempo"
+          >Minimalne tempo {{ minTempo ? ": " + minTempo : "" }}</label
+        >
+
         <input
           type="range"
           name="minTempo"
@@ -119,14 +149,18 @@
           min="0"
           max="200"
           [(ngModel)]="minTempo"
+          [ngClass]="{
+            green: minTempo ? (maxTempo ? minTempo < maxTempo : true) : false,
+            red: minTempo && maxTempo && minTempo > maxTempo
+          }"
         />
-        <p *ngIf="minTempo">
-          {{ minTempo }}
-        </p>
       </div>
 
       <div>
-        <label for="maxTempo">Maksymalne tempo</label>
+        <label for="maxTempo"
+          >Maksymalne tempo {{ maxTempo ? ": " + maxTempo : "" }}
+        </label>
+
         <input
           type="range"
           name="maxTempo"
@@ -134,16 +168,21 @@
           min="0"
           max="200"
           [(ngModel)]="maxTempo"
+          [ngClass]="{
+            green: maxTempo ? (minTempo ? minTempo < maxTempo : true) : false,
+            red: maxTempo && minTempo && minTempo > maxTempo
+          }"
         />
-        <p *ngIf="maxTempo">
-          {{ maxTempo }}
-        </p>
       </div>
     </div>
 
     <div>
       <div>
-        <label for="minPopularity">Minimalna pupularność</label>
+        <label for="minPopularity"
+          >Minimalna pupularność
+          {{ minPopularity ? ": " + minPopularity : "" }}</label
+        >
+
         <input
           type="range"
           name="minPopularity"
@@ -151,11 +190,17 @@
           min="0"
           max="100"
           [(ngModel)]="minPopularity"
+          [ngClass]="{
+            green: minPopularity ? (maxPopularity ? minPopularity < maxPopularity : true) : false,
+            red: minPopularity && maxPopularity && minPopularity > maxPopularity
+          }"
         />
-        <p *ngIf="minPopularity">{{ minPopularity }}</p>
       </div>
       <div>
-        <label for="maxPopularity">Maksymalna popularność</label>
+        <label for="maxPopularity"
+          >Maksymalna popularność
+          {{ maxPopularity ? ": " + maxPopularity : "" }}</label
+        >
         <input
           type="range"
           name="maxPopularity"
@@ -163,20 +208,18 @@
           min="0"
           max="100"
           [(ngModel)]="maxPopularity"
+          [ngClass]="{
+            green: maxPopularity ? (minPopularity ? minPopularity < maxPopularity : true) : false,
+            red: maxPopularity && minPopularity && minPopularity > maxPopularity
+          }"
         />
-        <p *ngIf="maxPopularity">{{ maxPopularity }}</p>
       </div>
     </div>
     <button type="button" (click)="resetAdvanced()">
       Resetuj zaawansowane
     </button>
   </div>
-  <div class="buttons">
-    <button type="button" (click)="randomSettings()">Losuj ustawienia</button>
-    <button type="button" (click)="advanceButton()">
-      {{ advancedVisible ? "Ukryj zaawansowane" : "Pokaż zaawansowane" }}
-    </button>
-  </div>
+
   <button type="submit" [disabled]="isLoading ? 'disabled' : null">
     Odśwież Rekomendacje
   </button>

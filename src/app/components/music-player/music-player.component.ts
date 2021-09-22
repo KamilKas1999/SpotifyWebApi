@@ -45,6 +45,12 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   valueChange(s) {
     this.musicPlayer.setTime(s);
+    this.actuallTimeSub = this.musicPlayer.status.subscribe(
+      (time) => (this.actuallValue = time)
+    );
+  } 
+  valueInput(s) {
+    this.actuallTimeSub.unsubscribe();
   }
 
   ngOnDestroy(): void {

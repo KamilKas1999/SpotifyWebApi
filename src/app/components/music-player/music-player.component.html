@@ -15,8 +15,8 @@
       max="{{ maxValue }}"
       value="{{ actuallValue }}"
       step="0.02"
-      (input)="valueChange(ranger.value)"
       (change)="valueChange(ranger.value)"
+      (input)="valueInput(ranger.value)"
     />
   </div>
 </div>
