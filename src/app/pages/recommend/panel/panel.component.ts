@@ -27,13 +27,13 @@ export class PanelComponent implements OnInit, OnDestroy {
   limit = 5;
   minDuration = null;
   maxDuration = null;
-  minTempo   = null;
-  maxTempo   = null;
-  minPopularity   = null;
-  maxPopularity =   null;
+  minTempo = null;
+  maxTempo = null;
+  minPopularity = null;
+  maxPopularity = null;
   tracksNameList: trackShort[] = [];
   artists: artistShort[] = [];
-  selectedArtist: artistShort = { name: '', id: '' };
+  selectedArtist: artistShort;
   selectedGenres = '';
   selectedTrack: trackShort = { name: '', id: '' };
   genres: string[];
@@ -49,10 +49,10 @@ export class PanelComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-this.randomSettings()
+    this.randomSettings();
   }
 
-  randomSettings(){
+  randomSettings() {
     this.topSub = this.topsevice.getTopTracks().subscribe((data) => {
       this.artists = this.dataPreparing.prepareArtist(data.items);
       this.selectedArtist = this.dataPreparing.getRandomArtist(this.artists);
@@ -104,13 +104,13 @@ this.randomSettings()
     this.advancedVisible = !this.advancedVisible;
   }
 
-  resetAdvanced(){
+  resetAdvanced() {
     this.minDuration = null;
     this.maxDuration = null;
-    this.minTempo   = null;
-    this.maxTempo   = null;
-    this.minPopularity   = null;
-    this.maxPopularity =   null;
+    this.minTempo = null;
+    this.maxTempo = null;
+    this.minPopularity = null;
+    this.maxPopularity = null;
   }
   ngOnDestroy() {
     this.topSub.unsubscribe();

@@ -11,30 +11,64 @@
       <img src="{{ imageUrl }}" />
     </div>
     <div class="col-sm-0 col-md-6 col-lg-7 col-xl-8 mx-auto">
-      <div class="name">
-        <div class="link">
-          <h1>{{ track.name }}</h1>
+      <div class="row">
+        <h1>{{ track.name }}</h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 mx-auto">
+          <div class="details">
+            <p>Czas trawania:</p>
+            <p>{{ minutes }} : {{ seconds }}</p>
+          </div>
+          <div class="details">
+            <p>Popularność:</p>
+            <p>{{ track.popularity }} na 100</p>
+          </div>
+          <div class="details">
+            <p>Data wydania albumu:</p>
+            <p>{{ track.album.release_date }}</p>
+          </div>
+        </div>
+        <div class="col-sm-0 col-md-12 col-lg-6 col-xl-6 mx-auto">
+          <div class="name">
+            <div class="details">
+              <p>Artyści:</p>
+              <ul>
+                <li *ngFor="let artist of track.artists">{{ artist.name }}</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="name">
-        <ul>
-          <li *ngFor="let artist of track.artists">{{ artist.name }}</li>
-        </ul>
+      <div class="row">
+        <div class="buttons">
+          <button
+            (click)="onPlayMusic()"
+            title="Odtwórz 30 sekund"
+            [disabled]="!linkToMusic"
+          >
+            <img src="../../../assets/outline_play_arrow_white_48dp.png" />
+          </button>
+          <button
+            (click)="changeTrackSaving()"
+            title="{{ isSaved ? 'Usuń z ulubionych' : 'Dodaj do ulubionych' }}"
+          >
+            <img
+              src="{{
+                isSaved
+                  ? '../../../assets/heart-64.svg'
+                  : '../../../assets/heart-64 unliked.svg'
+              }}"
+            />
+          </button>
+          <a routerLink="{{ '/track/' + track.id }}">
+            <button title="Dowiedz się więcej o utworze">
+              <img src="../../../assets/more_horiz_white_48dp.svg" />
+            </button>
+          </a>
+        </div>
       </div>
-      <div class="buttons">
-        <button (click)="onPlayMusic()" [disabled]="!linkToMusic">
-          <img src="../../../assets/outline_play_arrow_white_48dp.png" />
-        </button>
-        <button (click)="changeTrackSaving()">
-          <img
-            src="{{
-              isSaved
-                ? '../../../assets/heart-64.svg'
-                : '../../../assets/heart-64 unliked.svg'
-            }}"
-          />
-        </button>
-      </div>
+
       <p *ngIf="linkToMusic">Posłuchaj fragmentu utworu</p>
       <p *ngIf="!linkToMusic">
         Niestety nie mogę odtworzyć fragmentu tego utworu :(

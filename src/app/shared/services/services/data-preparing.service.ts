@@ -19,10 +19,7 @@ export class DataPreparingService {
     const artists: artistShort[] = [];
     for (let el of top) {
       for (let artist of el.artists) {
-        artists.push({
-          name: artist.name,
-          id: artist.id,
-        });
+        artists.push(new artistShort(artist.name, artist.id));
       }
     }
     return artists;

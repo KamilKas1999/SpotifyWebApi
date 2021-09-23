@@ -1,7 +1,12 @@
 <form (ngSubmit)="onRecommend()" #form="ngForm">
   <div class="sel">
     <label for="artists">Wybierz artystę na początek</label>
-    <select name="artists" id="artists" [ngModel]="selectedArtist.id">
+    <select
+      *ngIf="selectedArtist"
+      name="artists"
+      id="artists"
+      [ngModel]="selectedArtist.id"
+    >
       <option *ngFor="let artist of artists" value="{{ artist.id }}">
         {{ artist.name }}
       </option>
@@ -10,7 +15,12 @@
 
   <div class="sel">
     <label for="genres">Wybierz gatunek na początek</label>
-    <select name="genres" id="genres" [ngModel]="selectedGenres">
+    <select
+      *ngIf="selectedGenres"
+      name="genres"
+      id="genres"
+      [ngModel]="selectedGenres"
+    >
       <option *ngFor="let genre of genres" value="{{ genre }}">
         {{ genre }}
       </option>
@@ -19,7 +29,12 @@
 
   <div class="sel">
     <label for="tracks">Wybierz utwór na początek</label>
-    <select name="tracks" id="tracks" [ngModel]="selectedTrack.id">
+    <select
+      *ngIf="selectedTrack"
+      name="tracks"
+      id="tracks"
+      [ngModel]="selectedTrack.id"
+    >
       <option *ngFor="let track of tracksNameList" value="{{ track.id }}">
         {{ track.name }}
       </option>
@@ -37,7 +52,9 @@
     />
   </div>
   <div class="buttons">
-    <button type="button" (click)="randomSettings()">Losuj podstawowe ustawienia</button>
+    <button type="button" (click)="randomSettings()">
+      Losuj podstawowe ustawienia
+    </button>
     <button type="button" (click)="advanceButton()">
       {{ advancedVisible ? "Ukryj zaawansowane" : "Pokaż zaawansowane" }}
     </button>
@@ -191,7 +208,11 @@
           max="100"
           [(ngModel)]="minPopularity"
           [ngClass]="{
-            green: minPopularity ? (maxPopularity ? minPopularity < maxPopularity : true) : false,
+            green: minPopularity
+              ? maxPopularity
+                ? minPopularity < maxPopularity
+                : true
+              : false,
             red: minPopularity && maxPopularity && minPopularity > maxPopularity
           }"
         />
@@ -209,7 +230,11 @@
           max="100"
           [(ngModel)]="maxPopularity"
           [ngClass]="{
-            green: maxPopularity ? (minPopularity ? minPopularity < maxPopularity : true) : false,
+            green: maxPopularity
+              ? minPopularity
+                ? minPopularity < maxPopularity
+                : true
+              : false,
             red: maxPopularity && minPopularity && minPopularity > maxPopularity
           }"
         />

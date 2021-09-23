@@ -17,6 +17,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { TokenInterceptor } from './shared/token.interceptor';
 import { MusicPlayerComponent } from './components/music-player/music-player.component';
 import {MatSliderModule } from '@angular/material/slider';
+import { TrackComponent } from './pages/track/track.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import {MatSliderModule } from '@angular/material/slider';
     MusicCardComponent,
     LoadingComponent,
     MusicPlayerComponent,
+    TrackComponent,
   ],
   imports: [
     BrowserModule,
