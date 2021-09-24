@@ -2,24 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { RecommendComponent } from './pages/recommend/recommend.component';
-import { StatisticComponent } from './pages/statistic/statistic.component';
-import { TrackComponent } from './pages/track/track.component';
-import { AuthGuardService } from './shared/AuthGuard';
-
+import { AuthGuardService } from './security/AuthGuard';
 
 const appRoutes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'top', component: StatisticComponent, canActivate: [AuthGuardService]},
-    {path: 'recommend', component: RecommendComponent, canActivate: [AuthGuardService]},
-    {path: 'track/:id', component: TrackComponent, canActivate: [AuthGuardService]}
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule{
-
-}
+export class AppRoutingModule {}

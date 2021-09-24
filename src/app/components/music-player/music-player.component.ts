@@ -1,7 +1,7 @@
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MusicPlayerService } from 'src/app/shared/services/services/music-player.service';
+import { MusicPlayerService } from 'src/app/services/music-player.service';
 
 @Component({
   selector: 'app-music-player',

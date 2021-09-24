@@ -1,22 +1,32 @@
-<div class="panel">
-  <div class="header">
-    <p *ngIf="trackName">Aktualne grane: {{ trackName }}</p>
-  </div>
-  <div class="main">
-    <button (click)="onClick()" [disabled] = "!trackName">
-      <img src="../../../assets/pause_white_24dp.svg" *ngIf="!isPaused" />
-      <img src="../../../assets/play_arrow_white_24dp.svg" *ngIf="isPaused" />
-    </button>
+<div class="footer">
+  <div class="panel">
 
-    <input
-      #ranger
-      type="range"
-      min="{{ minValue }}"
-      max="{{ maxValue }}"
-      value="{{ actuallValue }}"
-      step="0.02"
-      (change)="valueChange(ranger.value)"
-      (input)="valueInput(ranger.value)"
-    />
+    <div class="main">
+      <div class="buttons">
+        <button
+          (click)="onClick()"
+          [disabled]="!trackName"
+          title="{{ isPaused ? 'Odtwórz utwór' : 'Zapauzuj utwór' }}"
+        >
+          <img src="../../../assets/pause_white_24dp.svg" *ngIf="!isPaused" />
+          <img
+            src="../../../assets/play_arrow_white_24dp.svg"
+            *ngIf="isPaused"
+          />
+        </button>
+      </div>
+      <div class="ranger">
+        <input
+          #ranger
+          type="range"
+          min="{{ minValue }}"
+          max="{{ maxValue }}"
+          value="{{ actuallValue }}"
+          step="0.02"
+          (change)="valueChange(ranger.value)"
+          (input)="valueInput(ranger.value)"
+        />
+      </div>
+    </div>
   </div>
 </div>

@@ -1,0 +1,38 @@
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { RecommendService } from 'src/app/modules/recommend/services/recommend.service';
+
+
+@Component({
+  selector: 'app-recommend',
+  templateUrl: './recommend.component.html',
+  styleUrls: ['./recommend.component.scss'],
+})
+export class RecommendComponent implements OnInit, OnDestroy {
+  private recommendSub: Subscription;
+  recommendSongs: songInfo[];
+  constructor(private recommendService: RecommendService) {}
+  @Input() isLoading = false;
+  ngOnInit(): void {
+    this.recommendSongs = this.recommendService.recommendSongs;
+    this.recommendSub = this.recommendService.recommendChanged.subscribe(
+      (data) => {
+        this.recommendSongs = data;
+        this.isLoading = false;
+
+      }
+    );
+  }
+
+  startLoading() : void{
+    this.isLoading = true;
+  }
+
+  stopAllMusic(){
+  }
+
+  ngOnDestroy() {
+    this.recommendSub.unsubscribe();
+  }
+}

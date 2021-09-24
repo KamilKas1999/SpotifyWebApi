@@ -1,16 +1,40 @@
-.panel {
-  position: fixed;
+.footer {
   width: 100vw;
+  position: fixed;
   bottom: 0;
   left: 0;
+  transform: scale(0.5) translateY(50px);
+  transition: 0.3s ease;
+  opacity: 0.8;
+}
+.footer:hover {
+  transform: scale(1) translateY(0px);
+  opacity: 1;
+}
+.buttons,
+.ranger {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  text-align: center;
+}
+
+.buttons {
+  width: 64px;
+}
+.ranger {
+  width: 100%;
+}
+
+.panel {
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #191414;
-  border: 5px solid white;
-  .header {
-    text-align: center;
-    color: white;
-  }
+  border: 10px solid white;
+  border-radius: 20px;
+
   .main {
-    display: flex;
     width: 100%;
   }
   button {
@@ -44,10 +68,12 @@
 }
 
 input[type="range"] {
-  height: 48px;
+  height: 64px;
   -webkit-appearance: none;
   margin: 10px 0;
-  width: 100%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #191414;
 }
 input[type="range"]:focus {
@@ -95,7 +121,7 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 50px;
   background: white;
   cursor: pointer;
-  :hover{
+  :hover {
     transform: scale(1.2);
   }
 }
