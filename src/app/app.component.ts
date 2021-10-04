@@ -9,17 +9,15 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent implements OnInit {
   isLogin = false;
-  private userSub: Subscription;
 
   constructor(private authService: LoginService) {}
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe((user) => {
-      this.isLogin = !!user;
+    this.isLogin = this.authService.isLogin();
+    this.authService.loginEmitter.subscribe((isLogin) => {
+      this.isLogin = isLogin;
     });
   }
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
-  }
+
   title = 'SpotifyAppByKamilKasprzak';
 }

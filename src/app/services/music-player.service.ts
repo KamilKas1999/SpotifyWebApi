@@ -1,18 +1,16 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import {
-  collapseTextChangeRangesAcrossMultipleVersions,
-  isConstructorDeclaration,
-} from 'typescript';
+import { songInfo } from '../modules/shared/models/songInfo.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MusicPlayerService {
   audio = new Audio();
-  status = new EventEmitter<number>();
-  maxTime = new EventEmitter<number>();
+  actualTime = new EventEmitter<number>();
   isPaused = new EventEmitter<boolean>();
-  musicName = new EventEmitter<string>();
+  trackData = new EventEmitter<songInfo>();
+  trackDuration = new EventEmitter<number>();
+  trackVolume = new EventEmitter<number>();
   interval: any;
 
   constructor() {}
@@ -23,13 +21,22 @@ export class MusicPlayerService {
     clearInterval(this.interval);
   }
 
-  play(linkToTrack: string, trackName): void {
-    this.musicName.next(trackName);
+  play(newTrack: songInfo): void {
     this.pause();
-    this.audio = new Audio(linkToTrack);
+    this.audio = new Audio(newTrack.preview_url);
+    this.loadAndPlay(newTrack);
+  }
+
+  setVolume(newValue: number) {
+    console.log('new volume : ' + newValue);
+    this.audio.volume = newValue;
+  }
+
+  private loadAndPlay(newTrack: songInfo) {
     this.audio.load();
     this.audio.onloadeddata = () => {
-      this.maxTime.emit(this.audio.duration);
+      this.trackData.next(newTrack);
+      this.trackDuration.next(this.audio.duration);
       this.audio.play();
       this.isPaused.next(false);
       this.playInterval();
@@ -44,7 +51,7 @@ export class MusicPlayerService {
 
   private playInterval(): void {
     this.interval = setInterval(() => {
-      this.status.next(this.audio.currentTime);
+      this.actualTime.next(this.audio.currentTime);
       if (this.audio.paused) {
         clearInterval(this.interval);
         this.isPaused.next(true);

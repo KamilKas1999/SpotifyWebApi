@@ -10,18 +10,20 @@ import { LoginService } from '../services/login.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private loginService: LoginService) {}
+  constructor(private authService: LoginService) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (this.loginService.userData) {
+    if (this.authService.isLogin()) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.loginService.userData.token}`,
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       });
+    } else {
+      this.authService.logout();
     }
     return next.handle(request);
   }

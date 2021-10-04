@@ -1,4 +1,5 @@
-<form (ngSubmit)="onRecommend()" #form="ngForm">
+<app-loading *ngIf="isLoadingTop && isLoadingGenres"></app-loading>
+<form (ngSubmit)="onRecommend()" #form="ngForm" *ngIf="!isLoadingTop || !isLoadingGenres">
   <div class="sel">
     <label for="artists">Wybierz artystę na początek</label>
     <select
@@ -245,7 +246,7 @@
     </button>
   </div>
 
-  <button type="submit" [disabled]="isLoading ? 'disabled' : null">
+  <button type="submit" >
     Odśwież Rekomendacje
   </button>
 </form>

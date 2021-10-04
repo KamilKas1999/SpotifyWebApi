@@ -1,6 +1,6 @@
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 
 @Component({
@@ -13,26 +13,31 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   maxValue = 0;
   actuallValue = 0;
   isPaused = true;
-  trackName: string;
   actuallTimeSub: Subscription;
-  maxTimeSub: Subscription;
   isPausedSub: Subscription;
-  trackNameSub: Subscription;
+  trackSub: Subscription;
+  trackDuration: Subscription;
+  track: songInfo;
   constructor(private musicPlayer: MusicPlayerService) {}
 
   ngOnInit(): void {
-    this.actuallTimeSub = this.musicPlayer.status.subscribe(
-      (time) => (this.actuallValue = time)
-    );
-    this.maxTimeSub = this.musicPlayer.maxTime.subscribe(
-      (time) => (this.maxValue = time)
-    );
+    this.actuallTimeSub = this.musicPlayer.actualTime.subscribe((time) => {
+      this.actuallValue = time;
+    });
     this.isPausedSub = this.musicPlayer.isPaused.subscribe(
       (isPaused) => (this.isPaused = isPaused)
     );
-    this.trackNameSub = this.musicPlayer.musicName.subscribe(
-      (name) => (this.trackName = name)
-    );
+    this.trackSub = this.musicPlayer.trackData.subscribe((track) => {
+      this.track = track;
+      console.log(track)
+    });
+    this.trackDuration = this.musicPlayer.trackDuration.subscribe(duration => {
+      this.maxValue = duration;
+    })
+  }
+
+  volumeInput(newValue : number){
+    this.musicPlayer.setVolume(newValue);
   }
 
   onClick() {
@@ -45,18 +50,17 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   valueChange(s) {
     this.musicPlayer.setTime(s);
-    this.actuallTimeSub = this.musicPlayer.status.subscribe(
+    this.actuallTimeSub = this.musicPlayer.actualTime.subscribe(
       (time) => (this.actuallValue = time)
     );
-  } 
+  }
   valueInput(s) {
     this.actuallTimeSub.unsubscribe();
   }
 
   ngOnDestroy(): void {
     this.actuallTimeSub.unsubscribe();
-    this.maxTimeSub.unsubscribe();
     this.isPausedSub.unsubscribe();
-    this.trackNameSub.unsubscribe();
+    this.trackSub.unsubscribe();
   }
 }

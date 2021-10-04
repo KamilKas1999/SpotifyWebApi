@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/models/user.model';
-import { HeaderVisibleService } from '../../services/header-visible.service';
+import { AuthGuardService } from 'src/app/security/AuthGuard';
+import { HeaderVisibleService } from 'src/app/services/header-visible.service';
+import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,10 +14,8 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent implements OnInit {
   loading = false;
   isLogin = false;
-  user: User;
   name: string;
   visible = true;
-  private userSub: Subscription;
   private headerSub: Subscription;
   private userDataSub: Subscription;
   constructor(
@@ -26,15 +25,21 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.headerVisible.status.emit(false);
-    this.userSub = this.authService.user.subscribe((user) => {
-      this.isLogin = !!user;
-      if (this.isLogin) {
-        this.loading = true;
-        this.user = user;
+    this.isLogin = this.authService.isLogin();
+    if (this.isLogin) {
+      this.getUserName();
+      this.authService.loginEmitter.subscribe((isLogin) => {
+        this.isLogin = isLogin;
         this.getUserName();
-      }
-    });
+      });
+      // this.authService
+      //   .getloginToken(localStorage.getItem('refresh_token'))
+      //   .subscribe((data) => {
+      //     console.log(data);
+      //   });
+    }
+
+    this.headerVisible.status.emit(false);
     this.headerSub = this.headerVisible.status.subscribe((visible: boolean) => {
       this.visible = visible;
     });
@@ -45,6 +50,7 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.name = data.display_name;
         this.loading = false;
+        console.log(data);
       },
       (err) => {
         this.loading = false;
@@ -54,8 +60,11 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy() {
     this.headerVisible.status.emit(true);
-    this.userSub.unsubscribe();
-    this.headerSub.unsubscribe();
-    this.userDataSub.unsubscribe();
+    if (this.headerSub) {
+      this.headerSub.unsubscribe();
+    }
+    if (this.userDataSub) {
+      this.userDataSub.unsubscribe();
+    }
   }
 }

@@ -41,7 +41,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   }
 
   onPlayMusic(): void {
-    this.musicPlayer.play(this.linkToMusic, this.track.name);
+    this.musicPlayer.play(this.track);
   }
 
   onPauseMusic(): void {

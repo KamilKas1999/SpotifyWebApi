@@ -37,10 +37,12 @@ export class PanelComponent implements OnInit, OnDestroy {
   selectedGenres = '';
   selectedTrack: trackShort = { name: '', id: '' };
   genres: string[];
+
   private topSub: Subscription;
   private genresSub: Subscription;
   @Output() newItemEvent = new EventEmitter<never>();
-  @Input() isLoading: boolean = false;
+  isLoadingTop: boolean = false;
+  isLoadingGenres: boolean = false;
 
   constructor(
     private recommendService: RecommendService,
@@ -49,6 +51,8 @@ export class PanelComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.isLoadingTop = true;
+    this.isLoadingGenres = true;
     this.randomSettings();
   }
 
@@ -60,16 +64,17 @@ export class PanelComponent implements OnInit, OnDestroy {
       this.selectedTrack = this.dataPreparing.getRandomTrack(
         this.tracksNameList
       );
+      this.isLoadingTop = false;
     });
     this.genresSub = this.dataPreparing.getGenres().subscribe((data) => {
       this.genres = data.genres;
       this.selectedGenres = this.dataPreparing.getRandomGenre(this.genres);
+      this.isLoadingGenres = false;
     });
   }
 
   onRecommend() {
     this.newItemEvent.emit();
-    console.log(this.signupForm.value);
     const genre = this.signupForm.value.genres;
     const track = this.signupForm.value.tracks;
     const artist = this.signupForm.value.artists;

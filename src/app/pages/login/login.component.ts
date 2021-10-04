@@ -5,28 +5,20 @@ import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
-
-
-  constructor(private route: ActivatedRoute, private loginService: LoginService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private loginService: LoginService
+  ) {}
 
   code: string;
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(
-      params => {
-        this.code = params.code;
-      }
-    )
-    this.loginService.getloginToken(this.code).subscribe(() => {
+    this.route.queryParams.subscribe((params) => {
+      this.code = params.code;
     });
-
+    this.loginService.getloginToken(this.code).subscribe(() => {});
   }
-
-
-
-
 }

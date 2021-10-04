@@ -29,9 +29,7 @@ export class RecommendService {
   private RecomendationsLink = 'https://api.spotify.com/v1/recommendations';
   private BEARER = 'Bearer ';
   constructor(private http: HttpClient, private loginService: LoginService) {
-    this.loginService.user.subscribe((user) => {
-      this.token = user.token;
-    });
+
   }
 
   getRecommend(

@@ -8,13 +8,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { AuthGuardService } from './security/AuthGuard';
-import { LoadingComponent } from './components/loading/loading.component';
-import { TokenInterceptor } from './security/token.interceptor';
 import { MusicPlayerComponent } from './components/music-player/music-player.component';
 import { RecommendModule } from './modules/recommend/recommend.module';
 import { TopModule } from './modules/top/top.module';
 import { TrackModule } from './modules/track/track.module';
+import { AuthGuardService } from './security/AuthGuard';
+import { TokenInterceptor } from './security/token.interceptor';
+import { SharedModule } from './modules/shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -22,8 +23,7 @@ import { TrackModule } from './modules/track/track.module';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    LoadingComponent,
-    MusicPlayerComponent,
+    MusicPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +33,7 @@ import { TrackModule } from './modules/track/track.module';
     RecommendModule,
     TopModule,
     TrackModule,
+    SharedModule
   ],
   providers: [
     AuthGuardService,
