@@ -1,8 +1,13 @@
 <app-loading *ngIf="isLoadingTop && isLoadingGenres"></app-loading>
-<form (ngSubmit)="onRecommend()" #form="ngForm" *ngIf="!isLoadingTop || !isLoadingGenres">
+<form
+  (ngSubmit)="onRecommend()"
+  #form="ngForm"
+  *ngIf="!isLoadingTop || !isLoadingGenres"
+>
   <div class="sel">
     <label for="artists">Wybierz artystę na początek</label>
     <select
+      [disabled]="!artistCheckBox"
       *ngIf="selectedArtist"
       name="artists"
       id="artists"
@@ -12,11 +17,20 @@
         {{ artist.name }}
       </option>
     </select>
+    <label class="checkbox">
+      <input
+        type="checkbox"
+        [checked]="artistCheckBox"
+        (change)="artistCheckBox = !artistCheckBox"
+      />
+      <span></span>
+    </label>
   </div>
 
   <div class="sel">
     <label for="genres">Wybierz gatunek na początek</label>
     <select
+      [disabled]="!genreCheckBox"
       *ngIf="selectedGenres"
       name="genres"
       id="genres"
@@ -26,11 +40,20 @@
         {{ genre }}
       </option>
     </select>
+    <label class="checkbox">
+      <input
+        type="checkbox"
+        [checked]="genreCheckBox"
+        (change)="genreCheckBox = !genreCheckBox"
+      />
+      <span></span>
+    </label>
   </div>
 
   <div class="sel">
     <label for="tracks">Wybierz utwór na początek</label>
     <select
+      [disabled]="!nameCheckBox"
       *ngIf="selectedTrack"
       name="tracks"
       id="tracks"
@@ -40,8 +63,21 @@
         {{ track.name }}
       </option>
     </select>
+    <label class="checkbox">
+      <input
+        type="checkbox"
+        [checked]="nameCheckBox"
+        (change)="nameCheckBox = !nameCheckBox"
+      />
+      <span></span>
+    </label>
   </div>
-  <div class="sel">
+  {{
+    !nameCheckBox && !genreCheckBox && !artistCheckBox
+      ? "Przynajmniej jedno musi być zaznaczona"
+      : ""
+  }}
+  <div class="trackNumberSelect">
     <label for="limit">Liczba polecanych</label>
     <input
       type="number"
@@ -246,9 +282,7 @@
     </button>
   </div>
 
-  <button type="submit" >
-    Odśwież Rekomendacje
-  </button>
+  <button type="submit">Odśwież Rekomendacje</button>
 </form>
 *Dostępni do wyboru artyści oraz utwory bazują na twoich najczęściej słuchanych
 utworach

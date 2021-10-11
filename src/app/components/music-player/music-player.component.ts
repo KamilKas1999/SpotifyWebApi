@@ -29,7 +29,6 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     );
     this.trackSub = this.musicPlayer.trackData.subscribe((track) => {
       this.track = track;
-      console.log(track)
     });
     this.trackDuration = this.musicPlayer.trackDuration.subscribe(duration => {
       this.maxValue = duration;

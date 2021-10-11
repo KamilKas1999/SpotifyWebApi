@@ -12,18 +12,20 @@ export class MusicPlayerService {
   trackDuration = new EventEmitter<number>();
   trackVolume = new EventEmitter<number>();
   interval: any;
+  intervalForPaused: any;
 
   constructor() {}
 
   pause(): void {
     this.isPaused.next(true);
     this.audio.pause();
-    clearInterval(this.interval);
+    this.pauseInterval();
   }
 
   play(newTrack: songInfo): void {
     this.pause();
     this.audio = new Audio(newTrack.preview_url);
+    this.isPaused.next(false);
     this.loadAndPlay(newTrack);
   }
 
@@ -50,13 +52,27 @@ export class MusicPlayerService {
   }
 
   private playInterval(): void {
+    clearInterval(this.intervalForPaused)
     this.interval = setInterval(() => {
       this.actualTime.next(this.audio.currentTime);
+      console.log("playInterval")
       if (this.audio.paused) {
         clearInterval(this.interval);
+        this.pauseInterval();
         this.isPaused.next(true);
       }
-    }, 20);
+    }, 50);
+  }
+
+  private pauseInterval(){
+    clearInterval(this.interval);
+    this.intervalForPaused = setInterval(() => {
+      console.log("pauseInterval")
+      if (!this.audio.paused) {
+        this.isPaused.next(false);
+        this.playInterval();
+      }
+    }, 100);
   }
 
   setTime(time: number): void {

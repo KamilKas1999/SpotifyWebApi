@@ -28,9 +28,7 @@ export class RecommendService {
   private MAX_POPULARITY = 'max_popularity ';
   private RecomendationsLink = 'https://api.spotify.com/v1/recommendations';
   private BEARER = 'Bearer ';
-  constructor(private http: HttpClient, private loginService: LoginService) {
-
-  }
+  constructor(private http: HttpClient, private loginService: LoginService) {}
 
   getRecommend(
     artist: string,
@@ -39,28 +37,66 @@ export class RecommendService {
     limit: number,
     minDuration: number,
     maxDuration: number,
-    targetDuration: number,
     minAcousticness: number,
     maxAcousticness: number,
     minTempo: number,
     maxTempo: number,
-    minPopularity : number,
+    minPopularity: number,
     maxPopularity: number
   ) {
-    let link =
-      this.RecomendationsLink +
-      '?' +
-      this.LIMIT +
-      limit +
-      '&' +
-      this.SEED_ARTISTS +
-      artist +
-      '&' +
-      this.SEED_GENRES +
-      genre +
-      '&' +
-      this.SEED_TRACKS +
-      track;
+    const link = this.createLink(
+      artist,
+      genre,
+      track,
+      limit,
+      minDuration,
+      maxDuration,
+      minAcousticness,
+      maxAcousticness,
+      minTempo,
+      maxTempo,
+      minPopularity,
+      maxPopularity
+    );
+
+    this.http
+      .get<{ tracks: songInfo[] }>(link, {
+        headers: new HttpHeaders({ Authorization: this.BEARER + this.token }),
+      })
+      .subscribe((data) => {
+        this.recommendSongs = data.tracks;
+        this.recommendChanged.next(this.recommendSongs);
+      });
+  }
+
+  getRecommendArray(): songInfo[] {
+    return this.recommendSongs;
+  }
+
+  private createLink(
+    artist: string,
+    genre: string,
+    track: string,
+    limit: number,
+    minDuration: number,
+    maxDuration: number,
+    minAcousticness: number,
+    maxAcousticness: number,
+    minTempo: number,
+    maxTempo: number,
+    minPopularity: number,
+    maxPopularity: number
+  ) {
+    let link = this.RecomendationsLink + '?' + this.LIMIT + limit;
+    if (artist) {
+      link = link + '&' + this.SEED_ARTISTS + artist;
+    }
+    if (genre) {
+      link = link + '&' + this.SEED_GENRES + genre;
+    }
+    if (track) {
+      link = link + '&' + this.SEED_TRACKS + track;
+    }
 
     if (minDuration) {
       link = link + '&' + this.MIN_DURATION_MS + minDuration;
@@ -69,9 +105,7 @@ export class RecommendService {
     if (maxDuration) {
       link = link + '&' + this.MAX_DURATION_MS + maxDuration;
     }
-    if (targetDuration) {
-      link = link + '&' + this.TARGET_DURATION_MS + targetDuration;
-    }
+
     if (minAcousticness) {
       link = link + '&' + this.MIN_ACOUSTICNESS + minAcousticness;
     }
@@ -88,24 +122,12 @@ export class RecommendService {
     }
 
     if (minPopularity) {
-      link = link + '&' + this.MIN_POPULARITY+ minPopularity;
+      link = link + '&' + this.MIN_POPULARITY + minPopularity;
     }
 
     if (maxPopularity) {
       link = link + '&' + this.MAX_POPULARITY + maxPopularity;
     }
-
-    this.http
-      .get<{ tracks: songInfo[] }>(link, {
-        headers: new HttpHeaders({ Authorization: this.BEARER + this.token }),
-      })
-      .subscribe((data) => {
-        this.recommendSongs = data.tracks;
-        this.recommendChanged.next(this.recommendSongs);
-      });
-  }
-
-  getRecommendArray(): songInfo[] {
-    return this.recommendSongs;
+    return link;
   }
 }

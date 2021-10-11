@@ -1,7 +1,6 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -31,6 +30,9 @@ export class PanelComponent implements OnInit, OnDestroy {
   maxTempo = null;
   minPopularity = null;
   maxPopularity = null;
+  artistCheckBox: boolean = true;
+  nameCheckBox: boolean = true;
+  genreCheckBox: boolean = true;
   tracksNameList: trackShort[] = [];
   artists: artistShort[] = [];
   selectedArtist: artistShort;
@@ -75,14 +77,13 @@ export class PanelComponent implements OnInit, OnDestroy {
 
   onRecommend() {
     this.newItemEvent.emit();
-    const genre = this.signupForm.value.genres;
-    const track = this.signupForm.value.tracks;
-    const artist = this.signupForm.value.artists;
+    const genre = this.genreCheckBox ? this.signupForm.value.genres : '';
+    const track = this.nameCheckBox ? this.signupForm.value.tracks : '';
+    const artist = this.artistCheckBox ? this.signupForm.value.artists : '';
     const limit =
       this.signupForm.value.limit == '' ? 5 : this.signupForm.value.limit;
     const minDuration = this.signupForm.value.minDuration;
     const maxDuration = this.signupForm.value.maxDuration;
-    const targetDuration = this.signupForm.value.targetDuration;
     const maxAcousticness = this.signupForm.value.maxAcousticness;
     const minAcousticness = this.signupForm.value.minAcousticness;
     const minTempo = this.signupForm.value.minTempo;
@@ -96,7 +97,6 @@ export class PanelComponent implements OnInit, OnDestroy {
       limit,
       minDuration,
       maxDuration,
-      targetDuration,
       minAcousticness,
       maxAcousticness,
       minTempo,
