@@ -4,10 +4,11 @@ import { MusicCardComponent } from './components/music-card/music-card.component
 import { HttpClientModule } from '@angular/common/http';
 import { SharedRoutingModule } from './shared-routing.module';
 import { LoadingComponent } from './components/loading/loading.component';
+import { SmallerLoadingComponent } from './components/smaller-loading/smaller-loading.component';
 
 @NgModule({
-  declarations: [MusicCardComponent, LoadingComponent],
+  declarations: [MusicCardComponent, LoadingComponent, SmallerLoadingComponent],
   imports: [CommonModule, HttpClientModule, SharedRoutingModule],
-  exports: [MusicCardComponent,LoadingComponent]
+  exports: [MusicCardComponent, LoadingComponent, SmallerLoadingComponent],
 })
 export class SharedModule {}

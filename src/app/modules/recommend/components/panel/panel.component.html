@@ -34,9 +34,10 @@
       *ngIf="selectedGenres"
       name="genres"
       id="genres"
-      [ngModel]="selectedGenres"
+      [(ngModel)]="selectedGenres"
+      (change)="t()"
     >
-      <option *ngFor="let genre of genres" value="{{ genre }}">
+      <option  *ngFor="let genre of genres" value="{{ genre }}">
         {{ genre }}
       </option>
     </select>
@@ -150,46 +151,6 @@
         />
       </div>
     </div>
-
-    <!-- 
-    <label for="targetDuration">Oczekiwany czas trwania</label>
-    <input
-      type="range"
-      name="targetDuration"
-      id="targetDuration"
-      min="0"
-      max="1000000"
-      step="10000"
-      ngModel
-      #targetDur
-    />
-    {{ (targetDur.value / 60000).toFixed(2) }} min -->
-
-    <!-- <label for="minAcousticness">Minimalna akustyka</label>
-  <input
-    type="range"
-    name="minAcousticness"
-    id="minAcousticness"
-    min="0"
-    max="1"
-    step="0.01"
-    ngModel
-    #minAcousticness
-  />
-  {{minAcousticness.value * 100}} 
-
-  <label for="maxAcousticness">Maksymalna akustyka</label>
-  <input
-    type="range"
-    name="maxAcousticness"
-    id="maxAcousticness"
-    min="0"
-    max="1"
-    step="0.01"
-    ngModel
-    #maxAcousticness
-  />
-  {{maxAcousticness.value * 100}}  -->
     <div>
       <div>
         <label for="minTempo"

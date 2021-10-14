@@ -2,10 +2,17 @@
   <div class="panel">
     <div class="main">
       <div class="row">
-        <div class=" col-sm-12 col-md-3 col-lg-3 col-xl-2 mx-auto">
-          <img id="albumImg" [ngClass] ="{animation : !isPaused }"  src="{{ track.album.images[1].url }}" />
+        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 mx-auto">
+          <img
+            id="albumImg"
+            [ngClass]="{ animation: !isPaused }"
+            src="{{ track.album.images[1].url }}"
+          />
         </div>
-        <div class=" col-sm-12 col-md-6 col-lg-6 col-xl-8 mx-auto">
+        <div
+          class="col-sm-12 col-md-6 col-lg-6 col-xl-8 mx-auto"
+          *ngIf="!isLoading"
+        >
           <div class="row">
             <div class="col-12">
               <div class="buttons">
@@ -30,26 +37,46 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <div class="ranger">
-                <input
-                  #ranger
-                  type="range"
-                  min="{{ minValue }}"
-                  max="{{ maxValue }}"
-                  value="{{ actuallValue }}"
-                  step="0.02"
-                  (change)="valueChange(ranger.value)"
-                  (input)="valueInput(ranger.value)"
-                />
+              <div class="row">
+                <div class="time">
+                  <p>
+                    {{ minutes }} :
+                    {{ seconds < 10 ? "0" + seconds : seconds }}
+                  </p>
+                </div>
+                <div class="ranger">
+                  <input
+                    #ranger
+                    type="range"
+                    min="{{ minValue }}"
+                    max="{{ maxValue }}"
+                    value="{{ actuallValue }}"
+                    step="0.02"
+                    (change)="valueChange(ranger.value)"
+                    (input)="valueInput(ranger.value)"
+                  />
+                </div>
+                <div class="time">
+                  <p>
+                    {{ totalMinutes }}:{{
+                      totalSeconds < 10 ? "0" + totalSeconds : totalSeconds
+                    }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class=" col-sm-12 col-md-3 col-lg-3 col-xl-2 mx-auto">
+        <div
+          class="col-sm-12 col-md-6 col-lg-6 col-xl-8 mx-auto"
+          *ngIf="isLoading"
+        >
+          <app-smaller-loading></app-smaller-loading>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 mx-auto">
           <div id="volumeIcon">
             <img src="../../../assets/volume_up_white_48dp.svg" />
           </div>
-         
           <input
             #volumeRange
             type="range"

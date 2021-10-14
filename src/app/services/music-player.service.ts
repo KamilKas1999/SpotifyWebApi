@@ -1,6 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { songInfo } from '../modules/shared/models/songInfo.model';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -13,6 +12,9 @@ export class MusicPlayerService {
   trackVolume = new EventEmitter<number>();
   interval: any;
   intervalForPaused: any;
+  isLoading = new EventEmitter<boolean>();
+  public;
+  volume = 0.5;
 
   constructor() {}
 
@@ -30,18 +32,21 @@ export class MusicPlayerService {
   }
 
   setVolume(newValue: number) {
-    console.log('new volume : ' + newValue);
+    this.volume = newValue;
     this.audio.volume = newValue;
   }
 
   private loadAndPlay(newTrack: songInfo) {
+    this.isLoading.next(true);
     this.audio.load();
     this.audio.onloadeddata = () => {
       this.trackData.next(newTrack);
       this.trackDuration.next(this.audio.duration);
+      this.audio.volume = this.volume;
       this.audio.play();
       this.isPaused.next(false);
       this.playInterval();
+      this.isLoading.next(false);
     };
   }
 
@@ -52,10 +57,10 @@ export class MusicPlayerService {
   }
 
   private playInterval(): void {
-    clearInterval(this.intervalForPaused)
+    clearInterval(this.intervalForPaused);
     this.interval = setInterval(() => {
       this.actualTime.next(this.audio.currentTime);
-      console.log("playInterval")
+      this.actualTime;
       if (this.audio.paused) {
         clearInterval(this.interval);
         this.pauseInterval();
@@ -64,10 +69,9 @@ export class MusicPlayerService {
     }, 50);
   }
 
-  private pauseInterval(){
+  private pauseInterval() {
     clearInterval(this.interval);
     this.intervalForPaused = setInterval(() => {
-      console.log("pauseInterval")
       if (!this.audio.paused) {
         this.isPaused.next(false);
         this.playInterval();
@@ -77,6 +81,7 @@ export class MusicPlayerService {
 
   setTime(time: number): void {
     this.audio.currentTime = time;
+  
   }
 
   replay() {

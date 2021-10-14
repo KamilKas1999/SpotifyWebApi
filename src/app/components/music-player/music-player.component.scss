@@ -1,11 +1,19 @@
 .footer {
   width: 100vw;
+  min-height: 100px;
   position: fixed;
   bottom: 0;
   left: 0;
   transition: 0.3s ease;
+  min-height: 200px;
 }
 .footer:hover {
+}
+
+.time{
+  color: white;
+  width: 10%;
+  text-align: center;
 }
 .buttons,
 .ranger {
@@ -19,7 +27,7 @@
   width: 64px;
 }
 .ranger {
-  width: 100%;
+  width: 80%;
 }
 
 .panel {
@@ -33,6 +41,7 @@
   .main {
     width: 100%;
   }
+ 
   button {
     border-radius: 100%;
     height: 40px;
@@ -76,15 +85,13 @@
 #albumImg {
   width: 50%;
   margin: 10px;
-
 }
 
-.animation{
+.animation {
   animation-name: imageAnimation;
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
-
 }
 
 input[type="range"] {
@@ -183,7 +190,7 @@ input[type="range"]:focus::-ms-fill-upper {
   background: #ffffff;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   #albumImg {
     width: 20%;
     position: fixed;
@@ -191,22 +198,28 @@ input[type="range"]:focus::-ms-fill-upper {
     left: 0;
     border: 5px solid black;
   }
+  .ranger {
+    width: 60%;
+  }
+  .time{
+    width: 20%;
+  }
 }
 
 @keyframes imageAnimation {
   0% {
     transform: scale(1);
   }
-  25%{
+  25% {
     scale: 1.03;
   }
   50% {
     transform: scale(1.1);
   }
-  75%{
+  75% {
     scale: 1.17;
   }
-  100%{
+  100% {
     scale: (1.2);
   }
 }

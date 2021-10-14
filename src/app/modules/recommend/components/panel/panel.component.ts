@@ -57,6 +57,10 @@ export class PanelComponent implements OnInit, OnDestroy {
     this.isLoadingGenres = true;
     this.randomSettings();
   }
+  t() {
+    console.log(this.signupForm.value.genres);
+    console.log(this.selectedGenres);
+  }
 
   randomSettings() {
     this.topSub = this.topsevice.getTopTracks().subscribe((data) => {
