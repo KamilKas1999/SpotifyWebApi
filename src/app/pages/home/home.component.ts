@@ -12,12 +12,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  loading = false;
+  isLoading = false;
   isLogin = false;
   name: string;
   visible = true;
   private headerSub: Subscription;
-  private userDataSub: Subscription;
+  private isLoginSub: Subscription;
   constructor(
     private authService: LoginService,
     private headerVisible: HeaderVisibleService,
@@ -28,16 +28,11 @@ export class HomeComponent implements OnInit {
     this.isLogin = this.authService.isLogin();
     if (this.isLogin) {
       this.getUserName();
-      this.authService.loginEmitter.subscribe((isLogin) => {
-        this.isLogin = isLogin;
-        this.getUserName();
-      });
-      // this.authService
-      //   .getloginToken(localStorage.getItem('refresh_token'))
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
     }
+    this.isLoginSub = this.authService.loginEmitter.subscribe((isLogin) => {
+      this.isLogin = isLogin;
+      this.getUserName();
+    });
 
     this.headerVisible.status.emit(false);
     this.headerSub = this.headerVisible.status.subscribe((visible: boolean) => {
@@ -46,14 +41,14 @@ export class HomeComponent implements OnInit {
   }
 
   private getUserName() {
-    this.userDataSub = this.userInfo.getUserInfo().subscribe(
+    this.isLoading = true;
+    this.userInfo.getUserInfo().subscribe(
       (data) => {
         this.name = data.display_name;
-        this.loading = false;
-        console.log(data);
+        this.isLoading = false;
       },
       (err) => {
-        this.loading = false;
+        this.isLoading = false;
       }
     );
   }
@@ -63,8 +58,8 @@ export class HomeComponent implements OnInit {
     if (this.headerSub) {
       this.headerSub.unsubscribe();
     }
-    if (this.userDataSub) {
-      this.userDataSub.unsubscribe();
+    if (this.isLoginSub) {
+      this.isLoginSub.unsubscribe();
     }
   }
 }

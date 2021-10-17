@@ -1,0 +1,146 @@
+<h1>Zaawansowane</h1>
+<div>
+  <div>
+    <label for="minDuration"
+      >Minimalny czas trwania
+      {{
+        advancedSettings.minDuration ? ": " + (advancedSettings.minDuration / 60000).toFixed(2) : ""
+      }}</label
+    >
+    <input
+      type="range"
+      name="minDuration"
+      id="minDuration"
+      min="0"
+      max="1000000"
+      step="10000"
+      [(ngModel)]="advancedSettings.minDuration"
+      (change) = "changed()"
+      [ngClass]="{
+        green: advancedSettings.minDuration
+          ? advancedSettings.maxDuration
+            ? advancedSettings.minDuration < advancedSettings.maxDuration
+            : true
+          : false,
+        red: advancedSettings.maxDuration && advancedSettings.minDuration && advancedSettings.minDuration > advancedSettings.maxDuration
+      }"
+    />
+  </div>
+  <div>
+    <label for="maxDuration"
+      >Maksymalny czas trwania
+      {{
+        advancedSettings.maxDuration ? ": " + (advancedSettings.maxDuration / 60000).toFixed(2) : ""
+      }}</label
+    >
+    <input
+      type="range"
+      name="maxDuration"
+      id="maxDuration"
+      min="0"
+      max="1000000"
+      step="10000"
+      [(ngModel)]="advancedSettings.maxDuration"
+      [ngClass]="{
+        green: advancedSettings.maxDuration
+          ? advancedSettings.minDuration
+            ? advancedSettings.minDuration < advancedSettings.maxDuration
+            : true
+          : false,
+        red: advancedSettings.maxDuration && advancedSettings.minDuration && advancedSettings.minDuration > advancedSettings.maxDuration
+      }"
+    />
+  </div>
+</div>
+<div>
+  <div>
+    <label for="minTempo"
+      >Minimalne tempo {{ advancedSettings.minTempo ? ": " + advancedSettings.minTempo : "" }}</label
+    >
+
+    <input
+      type="range"
+      name="minTempo"
+      id="minTempo"
+      min="0"
+      max="200"
+      [(ngModel)]="advancedSettings.minTempo"
+      [ngClass]="{
+        green: advancedSettings.minTempo ? (advancedSettings.maxTempo ? advancedSettings.minTempo < advancedSettings.maxTempo : true) : false,
+        red: advancedSettings.minTempo && advancedSettings.maxTempo && advancedSettings.minTempo > advancedSettings.maxTempo
+      }"
+    />
+  </div>
+
+  <div>
+    <label for="maxTempo"
+      >Maksymalne tempo {{ advancedSettings.maxTempo ? ": " + advancedSettings.maxTempo : "" }}
+    </label>
+
+    <input
+      type="range"
+      name="maxTempo"
+      id="maxTempo"
+      min="0"
+      max="200"
+      [(ngModel)]="advancedSettings.maxTempo"
+      [ngClass]="{
+        green: advancedSettings.maxTempo ? (advancedSettings.minTempo ? advancedSettings.minTempo < advancedSettings.maxTempo : true) : false,
+        red: advancedSettings.maxTempo && advancedSettings.minTempo && advancedSettings.minTempo > advancedSettings.maxTempo
+      }"
+    />
+  </div>
+</div>
+
+<div>
+  <div>
+    <label for="minPopularity"
+      >Minimalna pupularność
+      {{ advancedSettings.minPopularity ? ": " + advancedSettings.minPopularity : "" }}</label
+    >
+
+    <input
+      type="range"
+      name="minPopularity"
+      id="minPopularity"
+      min="0"
+      max="100"
+      [(ngModel)]="advancedSettings.minPopularity"
+      [ngClass]="{
+        green: advancedSettings.minPopularity
+          ? advancedSettings.maxPopularity
+            ? advancedSettings.minPopularity < advancedSettings.maxPopularity
+            : true
+          : false,
+        red: advancedSettings.minPopularity && advancedSettings.maxPopularity && advancedSettings.minPopularity > advancedSettings.maxPopularity
+      }"
+    />
+  </div>
+  <div>
+    <label for="maxPopularity"
+      >Maksymalna popularność
+      {{ advancedSettings.maxPopularity ? ": " + advancedSettings.maxPopularity : "" }}</label
+    >
+    <input
+      type="range"
+      name="maxPopularity"
+      id="maxPopularity"
+      min="0"
+      max="100"
+      [(ngModel)]="advancedSettings.maxPopularity"
+      [ngClass]="{
+        green: advancedSettings.maxPopularity
+          ? advancedSettings.minPopularity
+            ? advancedSettings.minPopularity < advancedSettings.maxPopularity
+            : true
+          : false,
+        red: advancedSettings.maxPopularity && advancedSettings.minPopularity && advancedSettings.minPopularity > advancedSettings.maxPopularity
+      }"
+    />
+  </div>
+</div>
+<button type="button" (click)="resetAdvanced()">
+  Resetuj zaawansowane
+</button>
+
+

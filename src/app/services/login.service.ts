@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { environment } from '../../environments/environment';
 
@@ -42,11 +42,9 @@ export class LoginService {
       })
       .pipe(
         tap((resData) => {
-          console.log(resData)
+          console.log(resData);
           this.handleAuthentication(
             resData.access_token,
-            resData.token_type,
-            resData.scope,
             resData.expires_in,
             resData.refresh_token
           );
@@ -56,19 +54,16 @@ export class LoginService {
 
   private handleAuthentication(
     access_token: string,
-    token_type: string,
-    scope: string,
+
     expires_in: number,
     refresh_token: string
   ): void {
-    console.log(expires_in)
+    console.log(expires_in);
     const date = new Date().getTime() + expires_in * 1000;
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('expire_date', date.toString());
     localStorage.setItem('refresh_token', refresh_token);
-
     this.loginEmitter.next(true);
-    this.router.navigate(['/']);
   }
 
   logout(): void {

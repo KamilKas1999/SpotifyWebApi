@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-20" *ngIf="!loading">
+    <div class="col-md-20" *ngIf="!isLoading">
         <div *ngIf="!isLogin">
             <h1>Witaj w mojej Aplikacji Spotify</h1>
         </div>
@@ -20,5 +20,5 @@
             </li>
         </ul>
     </div>
-    <app-loading *ngIf="loading"></app-loading>
+    <app-loading *ngIf="isLoading"></app-loading>
 </div>

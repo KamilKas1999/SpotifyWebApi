@@ -1,8 +1,14 @@
-import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { RecommendService } from 'src/app/modules/recommend/services/recommend.service';
-
 
 @Component({
   selector: 'app-recommend',
@@ -20,16 +26,12 @@ export class RecommendComponent implements OnInit, OnDestroy {
       (data) => {
         this.recommendSongs = data;
         this.isLoading = false;
-
       }
     );
   }
 
-  startLoading() : void{
+  startLoading(): void {
     this.isLoading = true;
-  }
-
-  stopAllMusic(){
   }
 
   ngOnDestroy() {

@@ -1,17 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { LoginService } from '../../../services/login.service';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { songInfo } from '../../shared/models/songInfo.model';
-import { SpotifyTopService } from '../../top/services/spotify-top.service';
+import { AdvancedSettings } from '../models/advancedSettings.model';
+import { PrimarySettings } from '../models/primarySettings.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecommendService {
   recommendChanged = new Subject<songInfo[]>();
-  recommendSongs: songInfo[] = [];
+  private recommendSongs: songInfo[] = [];
   private token: string;
   private SEED_ARTISTS = 'seed_artists=';
   private SEED_GENRES = 'seed_genres=';
@@ -19,114 +19,91 @@ export class RecommendService {
   private LIMIT = 'limit=';
   private MIN_DURATION_MS = 'min_duration_ms=';
   private MAX_DURATION_MS = 'max_duration_ms=';
-  private TARGET_DURATION_MS = 'target_duration_ms=';
-  private MIN_ACOUSTICNESS = 'min_acousticness=';
-  private MAX_ACOUSTICNESS = 'max_acousticness=';
   private MIN_TEMPO = 'min_tempo=';
   private MAX_TEMPO = 'max_tempo=';
   private MIN_POPULARITY = 'min_popularity=';
   private MAX_POPULARITY = 'max_popularity ';
   private RecomendationsLink = 'https://api.spotify.com/v1/recommendations';
   private BEARER = 'Bearer ';
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+  private primarySettings: PrimarySettings;
+  private advancedSettings: AdvancedSettings;
+  primarySettingsEmmiter = new EventEmitter<PrimarySettings>();
+  advancedSettingsEmmiter = new EventEmitter<AdvancedSettings>();
+  isLoadingEmmiter = new EventEmitter<boolean>();
 
-  getRecommend(
-    artist: string,
-    genre: string,
-    track: string,
-    limit: number,
-    minDuration: number,
-    maxDuration: number,
-    minAcousticness: number,
-    maxAcousticness: number,
-    minTempo: number,
-    maxTempo: number,
-    minPopularity: number,
-    maxPopularity: number
-  ) {
-    const link = this.createLink(
-      artist,
-      genre,
-      track,
-      limit,
-      minDuration,
-      maxDuration,
-      minAcousticness,
-      maxAcousticness,
-      minTempo,
-      maxTempo,
-      minPopularity,
-      maxPopularity
-    );
+  constructor(private http: HttpClient) {
+    this.primarySettingsEmmiter.subscribe((settings) => {
+      this.primarySettings = settings;
+      console.log(this.primarySettings);
+    });
+    this.advancedSettingsEmmiter.subscribe((settings) => {
+      this.advancedSettings = settings;
+    });
+  }
 
-    this.http
+  getRecommend(): Observable<{ tracks: songInfo[] }> {
+    const link = this.createLink();
+    return this.http
       .get<{ tracks: songInfo[] }>(link, {
         headers: new HttpHeaders({ Authorization: this.BEARER + this.token }),
       })
-      .subscribe((data) => {
-        this.recommendSongs = data.tracks;
-        this.recommendChanged.next(this.recommendSongs);
-      });
+      .pipe(
+        tap(
+          (data) => {
+            this.recommendSongs = data.tracks;
+            this.recommendChanged.next(this.recommendSongs);
+          },
+          () => {
+            this.recommendSongs = [];
+            this.recommendChanged.next(this.recommendSongs);
+          }
+        )
+      );
   }
 
   getRecommendArray(): songInfo[] {
     return this.recommendSongs;
   }
 
-  private createLink(
-    artist: string,
-    genre: string,
-    track: string,
-    limit: number,
-    minDuration: number,
-    maxDuration: number,
-    minAcousticness: number,
-    maxAcousticness: number,
-    minTempo: number,
-    maxTempo: number,
-    minPopularity: number,
-    maxPopularity: number
-  ) {
-    let link = this.RecomendationsLink + '?' + this.LIMIT + limit;
-    if (artist) {
-      link = link + '&' + this.SEED_ARTISTS + artist;
+  private createLink() {
+    let link =
+      this.RecomendationsLink + '?' + this.LIMIT + this.primarySettings.limit;
+    if (this.primarySettings.artistActive) {
+      link = link + '&' + this.SEED_ARTISTS + this.primarySettings.artist.id;
     }
-    if (genre) {
-      link = link + '&' + this.SEED_GENRES + genre;
+    if (this.primarySettings.genreActive) {
+      link = link + '&' + this.SEED_GENRES + this.primarySettings.genre;
     }
-    if (track) {
-      link = link + '&' + this.SEED_TRACKS + track;
+    if (this.primarySettings.trackActive) {
+      link = link + '&' + this.SEED_TRACKS + this.primarySettings.track.id;
     }
 
-    if (minDuration) {
-      link = link + '&' + this.MIN_DURATION_MS + minDuration;
+    if (this.advancedSettings.minDuration) {
+      link =
+        link + '&' + this.MIN_DURATION_MS + this.advancedSettings.minDuration;
     }
 
-    if (maxDuration) {
-      link = link + '&' + this.MAX_DURATION_MS + maxDuration;
+    if (this.advancedSettings.maxDuration) {
+      link =
+        link + '&' + this.MAX_DURATION_MS + this.advancedSettings.maxDuration;
     }
 
-    if (minAcousticness) {
-      link = link + '&' + this.MIN_ACOUSTICNESS + minAcousticness;
-    }
-    if (maxAcousticness) {
-      link = link + '&' + this.MAX_ACOUSTICNESS + maxAcousticness;
+    if (this.advancedSettings.minTempo) {
+      link = link + '&' + this.MIN_TEMPO + this.advancedSettings.minTempo;
     }
 
-    if (minTempo) {
-      link = link + '&' + this.MIN_TEMPO + minTempo;
+    if (this.advancedSettings.maxTempo) {
+      link = link + '&' + this.MAX_TEMPO + this.advancedSettings.maxTempo;
     }
 
-    if (maxTempo) {
-      link = link + '&' + this.MAX_TEMPO + maxTempo;
+    if (this.advancedSettings.minPopularity) {
+      link =
+        link + '&' + this.MIN_POPULARITY + this.advancedSettings.minPopularity;
     }
 
-    if (minPopularity) {
-      link = link + '&' + this.MIN_POPULARITY + minPopularity;
-    }
-
-    if (maxPopularity) {
-      link = link + '&' + this.MAX_POPULARITY + maxPopularity;
+    if (this.advancedSettings.maxPopularity) {
+      link =
+        link + '&' + this.MAX_POPULARITY + this.advancedSettings.maxPopularity;
     }
     return link;
   }

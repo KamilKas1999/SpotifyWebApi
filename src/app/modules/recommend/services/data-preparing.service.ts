@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { artistShort } from '../models/artistShort.model';
 import { genre } from '../models/genre.model';
@@ -10,6 +10,9 @@ import { trackShort } from '../models/trackShort.model';
   providedIn: 'root',
 })
 export class DataPreparingService {
+  trackEmitter = new EventEmitter<trackShort[]>();
+
+
   private GETRECOMENDGENRESLINK =
     'https://api.spotify.com/v1/recommendations/available-genre-seeds';
 
@@ -45,7 +48,7 @@ export class DataPreparingService {
   }
 
   getGenres(): Observable<genre> {
-    return this.http.get<genre>(this.GETRECOMENDGENRESLINK);
+    return this.http.get<genre>(this.GETRECOMENDGENRESLINK)
   }
 
   getRandomGenre(genres: string[]): string {

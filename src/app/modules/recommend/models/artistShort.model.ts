@@ -7,6 +7,13 @@ export class artistShort {
   public get id() {
     return this._id;
   }
+
+  public set name(name: string) {
+    this._name = name;
+  }
+  public set id(id: string) {
+    this._id = id;
+  }
   public constructor(name: string, id: string) {
     this._name = name;
     this._id = id;

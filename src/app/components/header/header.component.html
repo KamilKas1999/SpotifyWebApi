@@ -1,34 +1,3 @@
-<!-- test1
-<nav class="appheader" [ngClass]="{ close: isNavigationHidden }">
-test2
-
-  <ul class="left" *ngIf="visible">
-    <li class="item" *ngIf="isLogin">
-      <a class="link" routerLink="/top">
-        <div class="option"><p>Twoje Top</p></div>
-      </a>
-    </li>
-
-    <li class="item" *ngIf="isLogin">
-      <a class="link" routerLink="/recommend" (click)="hideNavigation()">
-        <div class="option"><p>Rekomenduj</p></div>
-      </a>
-    </li>
-  </ul>
-  <ul class="right">
-    <li class="item right" *ngIf="!isLogin">
-      <a class="link" (click)="onLogin()">
-        <div class="option"><p>Zaloguj</p></div>
-      </a>
-    </li>
-    <li class="item" *ngIf="isLogin">
-      <a class="link" (click)="onLogout()">
-        <div class="option"><p>Wyloguj</p></div>
-      </a>
-    </li>
-  </ul>
-</nav>
-<div class="openOrClose" (click)="onShow()"><div></div><div></div><div></div></div> -->
 <div class="navigationpanel" [ngClass]="{ open: isOpen }">
   <a class="link" routerLink="/top" (click)="hideNavigation()" *ngIf="isLogin">
     <p>Twoje Top</p>
@@ -53,3 +22,10 @@ test2
   <div></div>
   <div></div>
 </div>
+<button
+  id="backToTop"
+  [ngClass]="{ visible: positionY != 0, notvisible: positionY == 0 }"
+  (click)="onBackToTop()"
+>
+  <img src="../../../assets/arrow_drop_up_white_24dp.svg" />
+</button>

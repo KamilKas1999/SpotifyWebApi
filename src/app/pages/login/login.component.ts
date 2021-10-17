@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   code: string;
@@ -19,6 +20,9 @@ export class LoginComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.code = params.code;
     });
-    this.loginService.getloginToken(this.code).subscribe(() => {});
+    this.loginService.getloginToken(this.code).subscribe(() => {
+      this.router.navigate(['/']);
+
+    });
   }
 }

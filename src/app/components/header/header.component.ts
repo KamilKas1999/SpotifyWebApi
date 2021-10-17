@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   private headerSub: Subscription;
   visible = true;
   isOpen = false;
+  positionY = window.scrollY;
 
   constructor(
     private authService: LoginService,
@@ -28,6 +29,9 @@ export class HeaderComponent implements OnInit {
     this.headerSub = this.headerVisible.status.subscribe((visible: boolean) => {
       this.visible = visible;
     });
+    setInterval(() => {
+      this.positionY = window.scrollY;
+    },1000)
   }
 
   hideNavigation() {
@@ -51,5 +55,17 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout();
     this.isOpen = false;
+  }
+
+  onBackToTop() {
+    let scrollToTop = window.setInterval(() => {
+      let pos = window.pageYOffset;
+    
+      if (pos > 0) {
+        window.scrollTo(0, pos - 50);
+      } else {
+        window.clearInterval(scrollToTop);
+      }
+    }, 16);
   }
 }

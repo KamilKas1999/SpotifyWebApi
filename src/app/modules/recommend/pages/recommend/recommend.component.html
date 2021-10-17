@@ -2,14 +2,16 @@
   <app-panel (newItemEvent)="startLoading()"></app-panel>
 </div>
 <div *ngIf="!isLoading">
-  <p *ngIf="recommendSongs.length === 0">Nie znaleziono pasujących utworów lub użytkownik ich jeszcze nie wyszukał</p>
+  <p *ngIf="recommendSongs.length === 0">
+    Nie znaleziono pasujących utworów lub użytkownik ich jeszcze nie wyszukał
+  </p>
   <app-music-card
     *ngFor="let track of recommendSongs"
     [track]="track"
     [isLoading]="isLoading"
-    (stopAllMusic)="stopAllMusic()"
   ></app-music-card>
 </div>
 <div *ngIf="isLoading">
+  lo
   <app-loading></app-loading>
 </div>
