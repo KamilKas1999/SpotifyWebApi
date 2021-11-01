@@ -31,6 +31,10 @@ export class RecommendService {
   advancedSettingsEmmiter = new EventEmitter<AdvancedSettings>();
   isLoadingEmmiter = new EventEmitter<boolean>();
 
+  getRecommendSongs() : songInfo[] {
+     return this.recommendSongs.slice();
+  }
+
   constructor(private http: HttpClient) {
     this.primarySettingsEmmiter.subscribe((settings) => {
       this.primarySettings = settings;

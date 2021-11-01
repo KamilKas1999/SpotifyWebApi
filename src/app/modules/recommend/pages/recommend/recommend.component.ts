@@ -21,7 +21,7 @@ export class RecommendComponent implements OnInit, OnDestroy {
   constructor(private recommendService: RecommendService) {}
   @Input() isLoading = false;
   ngOnInit(): void {
-    this.recommendSongs = this.recommendService.recommendSongs;
+    this.recommendSongs = this.recommendService.getRecommendSongs();
     this.recommendSub = this.recommendService.recommendChanged.subscribe(
       (data) => {
         this.recommendSongs = data;
