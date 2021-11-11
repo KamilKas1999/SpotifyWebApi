@@ -34,6 +34,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.subIsLoading();
   }
 
+  clearPlayer(){
+    this.track = null;
+    this.musicPlayer.clearPlayer();
+  }
+
   private subTime(): void {
     this.actuallTimeSub = this.musicPlayer.actualTime.subscribe((time) => {
       this.actuallValue = time;

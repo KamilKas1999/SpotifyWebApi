@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class SpotifyTopService {
   private getTopTracksLink = 'https://api.spotify.com/v1/me/top/tracks';
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+  constructor(private http: HttpClient) {}
 
   getTopTracks(): Observable<{ items: songInfo[] }> {
     return this.http.get<{ items: songInfo[] }>(this.getTopTracksLink);

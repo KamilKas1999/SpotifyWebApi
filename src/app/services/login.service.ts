@@ -5,13 +5,18 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { environment } from '../../environments/environment';
+import { MusicPlayerService } from './music-player.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   loginEmitter = new EventEmitter<boolean>();
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private musicPlayer: MusicPlayerService
+  ) {}
 
   isLogin(): boolean {
     return (
@@ -31,18 +36,17 @@ export class LoginService {
       redirect +
       '&scope=' +
       scope;
-    //+
-    // '&show_dialog=true'
+    +'&show_dialog=true';
   }
 
   getloginToken(code: string): Observable<User> {
     return this.http
       .post<User>(`${environment.spotifyApp.api}/getToken`, {
         code: code,
+        redirect_uri: environment.spotifyApp.redirect_uri,
       })
       .pipe(
         tap((resData) => {
-          console.log(resData);
           this.handleAuthentication(
             resData.access_token,
             resData.expires_in,
@@ -54,11 +58,9 @@ export class LoginService {
 
   private handleAuthentication(
     access_token: string,
-
     expires_in: number,
     refresh_token: string
   ): void {
-    console.log(expires_in);
     const date = new Date().getTime() + expires_in * 1000;
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('expire_date', date.toString());
@@ -67,11 +69,11 @@ export class LoginService {
   }
 
   logout(): void {
+    this.musicPlayer.clearPlayer();
     this.loginEmitter.next(false);
     localStorage.removeItem('access_token');
     localStorage.removeItem('expire_date');
     localStorage.removeItem('refresh_token');
-
     this.router.navigate(['/']);
   }
 }

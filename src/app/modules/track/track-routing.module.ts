@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { AuthGuardService } from '../../security/AuthGuard';
-import { TrackComponent } from '../track/pages/track/track.component';
+import { TrackComponent } from './pages/track/track.component';
 
-const sharedRoutes: Routes = [
+const trackRoutes: Routes = [
   {
     path: 'track/:id',
     component: TrackComponent,
@@ -14,7 +14,7 @@ const sharedRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(sharedRoutes)],
+  imports: [RouterModule.forChild(trackRoutes)],
   exports: [RouterModule],
 })
 export class SharedRoutingModule {}

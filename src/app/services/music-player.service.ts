@@ -4,7 +4,7 @@ import { songInfo } from '../modules/shared/models/songInfo.model';
   providedIn: 'root',
 })
 export class MusicPlayerService {
-  audio = new Audio();
+  private audio = new Audio();
   actualTime = new EventEmitter<number>();
   isPaused = new EventEmitter<boolean>();
   trackData = new EventEmitter<songInfo>();
@@ -13,20 +13,26 @@ export class MusicPlayerService {
   interval: any;
   intervalForPaused: any;
   isLoading = new EventEmitter<boolean>();
-  public;
   volume = 0.5;
 
   constructor() {}
 
   pause(): void {
-    this.isPaused.next(true);
-    this.audio.pause();
-    this.pauseInterval();
+    if (!this.audio.paused) {
+      this.isPaused.next(true);
+      this.audio.pause();
+      this.pauseInterval();
+    }
+  }
+
+  clearPlayer() {
+    this.audio.pause()
+    this.audio.setAttribute('src','');
   }
 
   play(newTrack: songInfo): void {
     this.pause();
-    this.audio = new Audio(newTrack.preview_url);
+    this.audio.setAttribute('src',newTrack.preview_url);
     this.isPaused.next(false);
     this.loadAndPlay(newTrack);
   }
@@ -81,7 +87,6 @@ export class MusicPlayerService {
 
   setTime(time: number): void {
     this.audio.currentTime = time;
-  
   }
 
   replay() {

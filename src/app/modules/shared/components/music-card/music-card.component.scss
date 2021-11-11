@@ -1,5 +1,6 @@
 .element {
   padding: 20px;
+  margin:20px;
   background-color: #191414;
   border: 1px solid black;
   color: #fff;
@@ -12,8 +13,12 @@
   margin-left: auto;
   margin-right: auto;
 }
+h1{
+  text-align: center;
+}
 .album {
   img {
+    max-width: 90%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -33,24 +38,26 @@
   border-left: 1px solid white;
   border-bottom-left-radius: 20px;
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
   p {
     margin: 0;
   }
 }
 .buttons {
+  text-align: center;
   button {
     border-radius: 100%;
-    height: 64px;
-    width: 64px;
+    height: 50px;
+    width: 50px;
     background: #191414;
-    border: 1px solid white;
+    border: 2px solid white;
     margin: 20px;
     color: white;
     box-shadow: none;
     font-size: 20px;
     text-align: center;
     transition: 0.4s;
+    
   }
   button:disabled {
     background: #868686;
@@ -60,8 +67,8 @@
     background: white;
   }
   img {
-    width: 50px;
-    height: 50px;
+    width: 32px;
+    height:32px;
     transition: 0.3s;
   }
   button:enabled:hover > img {
@@ -80,7 +87,7 @@
   border-bottom: 1px solid white;
   a {
     img {
-      height: 70px;
+      height: 40px;
       transition: transform 0.3s;
     }
     img:hover {

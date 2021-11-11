@@ -1,4 +1,7 @@
-<div class="navigationpanel" [ngClass]="{ open: isOpen }">
+<div class="navigationpanel" [ngClass]="{ open: isOpen }" *ngIf="visible">
+  <a class="link" routerLink="/" (click)="hideNavigation()" *ngIf="isLogin">
+    <p>Strona główna</p>
+  </a>
   <a class="link" routerLink="/top" (click)="hideNavigation()" *ngIf="isLogin">
     <p>Twoje Top</p>
   </a>
@@ -13,8 +16,8 @@
   <a class="link" (click)="onLogin()" *ngIf="!isLogin">
     <p>Zaloguj</p>
   </a>
-  <a class="link" (click)="onLogout()" *ngIf="isLogin">
-    <p>Wyloguj</p>
+  <a class="link " (click)="onLogout()" *ngIf="isLogin">
+    <p class="logout">Wyloguj</p>
   </a>
 </div>
 <div class="openOrClose" (click)="onShow()">

@@ -1,0 +1,19 @@
+<div>
+  <h1>Witaj {{ name }}</h1>
+  <ul>
+    <li>
+      <a routerLink="/top"> Twoje Top </a>
+    </li>
+
+    <li>
+      <a routerLink="/recommend"> Rekomenduj </a>
+    </li>
+
+    <li>
+      <a class="link" (click)="onLogout()">Wyloguj </a>
+    </li>
+  </ul>
+  <img class="first" *ngIf="firstImageSrc" src="{{ firstImageSrc }}" />
+  <img class="second" *ngIf="secondImageSrc" src="{{ secondImageSrc }}" />
+  <img class="third" *ngIf="thirdImageSrc" src="{{ thirdImageSrc }}" />
+</div>

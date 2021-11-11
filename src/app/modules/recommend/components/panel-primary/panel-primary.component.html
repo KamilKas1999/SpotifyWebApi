@@ -1,9 +1,9 @@
 <div class="row" *ngIf="primarySettings.artist">
-  <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
     <label for="artists">Wykonawca</label>
   </div>
 
-  <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
+  <div class="col-9 col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
     <select
       [disabled]="!primarySettings.artistActive"
       *ngIf="primarySettings.artist"
@@ -15,7 +15,7 @@
       </option>
     </select>
   </div>
-  <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
+  <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
     <label class="checkbox">
       <input
         type="checkbox"
@@ -28,10 +28,10 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
     <label for="genres">Gatunek</label>
   </div>
-  <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
+  <div class="col-9 col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
     <select
       [disabled]="!primarySettings.genreActive"
       *ngIf="primarySettings.genre || primarySettings.genre == ''"
@@ -43,7 +43,7 @@
       </option>
     </select>
   </div>
-  <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
+  <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
     <label class="checkbox">
       <input
         type="checkbox"
@@ -56,10 +56,10 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
     <label for="tracks">Utwór</label>
   </div>
-  <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
+  <div class="col-9 col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
     <select
       [disabled]="!primarySettings.trackActive"
       *ngIf="primarySettings.track"
@@ -71,7 +71,7 @@
       </option>
     </select>
   </div>
-  <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
+  <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
     <label class="checkbox">
       <input
         type="checkbox"
@@ -90,11 +90,11 @@
     : ""
 }}
 <div class="row trackNumberSelect">
-  <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
     <label for="limit">Ilość</label>
   </div>
 
-  <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
+  <div class="col-9 col-sm-9 col-md-9 col-lg-7 col-xl-7 mx-auto">
     <input
       type="number"
       min="1"
@@ -104,9 +104,9 @@
     />
   </div>
 
-  <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
+  <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 mx-auto">
     <button type="button" (click)="randomSettings()">
-      <img src="../../../../../assets/casino_white_24dp.svg">
+      <img src="../../../../../assets/casino_white_24dp.svg" />
     </button>
   </div>
 </div>

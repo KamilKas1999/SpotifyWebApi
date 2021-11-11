@@ -1,24 +1,6 @@
 <div class="row">
-    <div class="col-md-20" *ngIf="!isLoading">
-        <div *ngIf="!isLogin">
-            <h1>Witaj w mojej Aplikacji Spotify</h1>
-        </div>
-        <div *ngIf="isLogin">
-            <h1>Witaj {{name}}</h1>
-        </div>
-        <ul c *ngIf="visible">
-            <li *ngIf="isLogin">
-                <a routerLink="/top">
-                    Twoje Top
-                </a>
-            </li>
-
-            <li *ngIf="isLogin">
-                <a routerLink="/recommend">
-                    Rekomenduj
-                </a>
-            </li>
-        </ul>
-    </div>
-    <app-loading *ngIf="isLoading"></app-loading>
+  <div class="col-md-12">
+    <app-home-logged *ngIf="isLogin"></app-home-logged>
+    <app-home-not-logged *ngIf="!isLogin"></app-home-not-logged>
+  </div>
 </div>

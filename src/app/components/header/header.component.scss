@@ -40,7 +40,6 @@ button:hover {
   border: 2px solid black;
 }
 img {
-
   transition: 0.3s;
 }
 button:enabled:hover > img {
@@ -48,17 +47,12 @@ button:enabled:hover > img {
   filter: invert(1);
 }
 
-.notvisible{
-
+.notvisible {
   opacity: 0;
-
 }
-.visible{
+.visible {
   opacity: 1;
-
 }
-
-
 
 @media only screen and (max-width: 1000px) {
   .navigationpanel {
@@ -69,7 +63,7 @@ button:enabled:hover > img {
     height: 100%;
     position: fixed;
     top: 0;
-    left:  0;
+    left: 0;
     background-color: #191414;
     z-index: 1000;
     a {
@@ -85,6 +79,9 @@ button:enabled:hover > img {
   }
   .open {
     transform: translate(0, 0);
+  }
+  .logout {
+    color: rgb(189, 22, 22);
   }
   .openOrClose {
     display: block;

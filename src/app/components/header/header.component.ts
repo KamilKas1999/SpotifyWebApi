@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
       let pos = window.pageYOffset;
     
       if (pos > 0) {
-        window.scrollTo(0, pos - 50);
+        window.scrollTo(0, pos - 200);
       } else {
         window.clearInterval(scrollToTop);
       }

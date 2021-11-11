@@ -15,6 +15,8 @@ import { TrackModule } from './modules/track/track.module';
 import { AuthGuardService } from './security/AuthGuard';
 import { TokenInterceptor } from './security/token.interceptor';
 import { SharedModule } from './modules/shared/shared.module';
+import { HomeLoggedComponent } from './components/home-logged/home-logged.component';
+import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-logged.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { SharedModule } from './modules/shared/shared.module';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    MusicPlayerComponent
+    MusicPlayerComponent,
+    HomeLoggedComponent,
+    HomeNotLoggedComponent
   ],
   imports: [
     BrowserModule,
