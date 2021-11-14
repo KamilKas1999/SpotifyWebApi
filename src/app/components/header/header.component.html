@@ -1,8 +1,10 @@
 <div class="navigationpanel" [ngClass]="{ open: isOpen }" *ngIf="visible">
   <a class="link" routerLink="/" (click)="hideNavigation()" *ngIf="isLogin">
+    <img src="assets/home_white_48dp.svg" />
     <p>Strona główna</p>
   </a>
   <a class="link" routerLink="/top" (click)="hideNavigation()" *ngIf="isLogin">
+    <img src="assets/favorite_border_white_48dp.svg" />
     <p>Twoje Top</p>
   </a>
   <a
@@ -11,16 +13,18 @@
     (click)="hideNavigation()"
     *ngIf="isLogin"
   >
+    <img src="assets/audiotrack_white_48dp.svg" />
     <p>Rekomenduj</p>
   </a>
   <a class="link" (click)="onLogin()" *ngIf="!isLogin">
     <p>Zaloguj</p>
   </a>
-  <a class="link " (click)="onLogout()" *ngIf="isLogin">
+  <a class="link" (click)="onLogout()" *ngIf="isLogin">
+    <img src="assets/logout_white_48dp.svg" />
     <p class="logout">Wyloguj</p>
   </a>
 </div>
-<div class="openOrClose" (click)="onShow()">
+<div class="openOrClose" (click)="onShow()" *ngIf="visible">
   <div></div>
   <div></div>
   <div></div>

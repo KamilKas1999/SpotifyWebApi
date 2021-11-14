@@ -38,7 +38,6 @@ export class RecommendService {
   constructor(private http: HttpClient) {
     this.primarySettingsEmmiter.subscribe((settings) => {
       this.primarySettings = settings;
-      console.log(this.primarySettings);
     });
     this.advancedSettingsEmmiter.subscribe((settings) => {
       this.advancedSettings = settings;

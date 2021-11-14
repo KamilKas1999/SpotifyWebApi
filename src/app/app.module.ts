@@ -17,7 +17,8 @@ import { TokenInterceptor } from './security/token.interceptor';
 import { SharedModule } from './modules/shared/shared.module';
 import { HomeLoggedComponent } from './components/home-logged/home-logged.component';
 import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-logged.component';
-
+import { MessageComponent } from './components/message/message.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-lo
     LoginComponent,
     MusicPlayerComponent,
     HomeLoggedComponent,
-    HomeNotLoggedComponent
+    HomeNotLoggedComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-lo
     RecommendModule,
     TopModule,
     TrackModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuardService,

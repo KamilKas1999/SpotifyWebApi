@@ -1,14 +1,17 @@
-li {
-  margin-left: 10px;
-
-  cursor: pointer;
-  border: none;
-}
-
 ul {
   list-style: none;
   padding-left: 3px;
   font-size: 20px;
+  li {
+    margin-left: 10px;
+
+    cursor: pointer;
+    border: none;
+  }
+  img {
+    filter: invert(1);
+    width: 24px;
+  }
 }
 
 a {
@@ -39,7 +42,6 @@ div {
   top: 350px;
   width: 250px;
   animation: scaleSecond 8s ease-in-out infinite;
-
 }
 .third {
   position: absolute;
@@ -47,10 +49,9 @@ div {
   top: 500px;
   width: 200px;
   animation: scaleThird 10s ease-in-out infinite;
-
 }
 
-img {
+.albumImage {
   border: 2px solid black;
 }
 
@@ -70,7 +71,7 @@ img {
   0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.15);
   }
   100% {
@@ -78,12 +79,11 @@ img {
   }
 }
 
-
 @keyframes scaleSecond {
   0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.125);
   }
   100% {
@@ -95,7 +95,7 @@ img {
   0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.1);
   }
   100% {

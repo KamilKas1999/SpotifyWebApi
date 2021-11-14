@@ -1,5 +1,5 @@
 <div>
-  <h1>Witaj {{ name }}</h1>
+  <h1>Witaj, {{ name }} :)</h1>
   <ul>
     <li>
       <a routerLink="/top"> Twoje Top </a>
@@ -10,10 +10,23 @@
     </li>
 
     <li>
-      <a class="link" (click)="onLogout()">Wyloguj </a>
+      <a routerLink="/" (click)="onLogout()">Wyloguj </a>
     </li>
   </ul>
-  <img class="first" *ngIf="firstImageSrc" src="{{ firstImageSrc }}" />
-  <img class="second" *ngIf="secondImageSrc" src="{{ secondImageSrc }}" />
-  <img class="third" *ngIf="thirdImageSrc" src="{{ thirdImageSrc }}" />
+
+  <img
+    class="first albumImage"
+    *ngIf="firstImageSrc"
+    src="{{ firstImageSrc }}"
+  />
+  <img
+    class="second albumImage"
+    *ngIf="secondImageSrc"
+    src="{{ secondImageSrc }}"
+  />
+  <img
+    class="third albumImage"
+    *ngIf="thirdImageSrc"
+    src="{{ thirdImageSrc }}"
+  />
 </div>

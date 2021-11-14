@@ -1,0 +1,7 @@
+<div [@openClose]="isMessage ? 'open' : 'closed'" class="box"[@newMessage]="isNewMessage ? 'rise' : 'standard'">
+  <p> {{ message }}</p>
+  <p >{{ trackName }}</p>
+  <button (click)="close()">
+    <img id="buttonImg" src="assets/close_white_48dp.svg" />
+  </button>
+</div>

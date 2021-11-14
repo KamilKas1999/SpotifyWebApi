@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { UserLibraryService } from 'src/app/modules/shared/services/user-library.service';
-
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-music-card',
@@ -18,9 +18,12 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   linkToMusic: string;
   minutes: string | number;
   seconds: string | number;
+  private followMessageText = 'Dodano do polubionych!';
+  private unfollowMessageText = 'Usunięto z polubionych!';
   constructor(
     private musicPlayer: MusicPlayerService,
-    private userLibrary: UserLibraryService
+    private userLibrary: UserLibraryService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +32,9 @@ export class MusicCardComponent implements OnInit, OnDestroy {
     this.linkToMusic = this.track.preview_url;
     const tempTime = this.track.duration_ms / 60000;
     this.minutes = Math.floor(tempTime);
-    this.seconds = String(Math.floor((tempTime - this.minutes) * 600)).substring(0,2);
+    this.seconds = String(
+      Math.floor((tempTime - this.minutes) * 600)
+    ).substring(0, 2);
   }
 
   changeTrackSaving(): void {
@@ -51,6 +56,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   onSaveMusic(): void {
     this.userLibrary.putTrackToUserLibrary(this.track.id).subscribe(() => {
       this.isSaved = true;
+      this.messageService.sendMessage(this.followMessageText, this.track.name);
     });
     this.checkUserSavedThisSong();
   }
@@ -58,6 +64,10 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   onRemoveMusic(): void {
     this.userLibrary.removeTrackFromUserLibrary(this.track.id).subscribe(() => {
       this.isSaved = false;
+      this.messageService.sendMessage(
+        this.unfollowMessageText,
+        this.track.name
+      );
     });
   }
 
