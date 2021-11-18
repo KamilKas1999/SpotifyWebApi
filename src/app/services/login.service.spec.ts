@@ -1,18 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TokenInterceptor } from './token.interceptor';
+import { LoginService } from './login.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('TokenInterceptor', () => {
-  beforeEach(() =>
+describe('LoginService', () => {
+  let service: LoginService;
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [TokenInterceptor],
-    })
-  );
+      providers: [LoginService],
+    });
+    service = TestBed.inject(LoginService);
+  });
 
   it('should be created', () => {
-    const interceptor: TokenInterceptor = TestBed.inject(TokenInterceptor);
-    expect(interceptor).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 });

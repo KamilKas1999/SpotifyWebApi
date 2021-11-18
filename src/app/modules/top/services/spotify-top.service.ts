@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
 import { songInfo } from '../../shared/models/songInfo.model';
 import { Observable } from 'rxjs';
 

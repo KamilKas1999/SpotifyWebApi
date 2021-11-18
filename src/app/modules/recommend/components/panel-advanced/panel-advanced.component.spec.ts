@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PanelAdvancedComponent } from './panel-advanced.component';
 
 describe('PanelAdvancedComponent', () => {
@@ -8,9 +8,9 @@ describe('PanelAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PanelAdvancedComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      declarations: [PanelAdvancedComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

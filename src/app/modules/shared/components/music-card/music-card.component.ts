@@ -27,14 +27,14 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.checkUserSavedThisSong();
-    this.imageUrl = this.track.album.images[1].url;
-    this.linkToMusic = this.track.preview_url;
-    const tempTime = this.track.duration_ms / 60000;
-    this.minutes = Math.floor(tempTime);
-    this.seconds = String(
-      Math.floor((tempTime - this.minutes) * 600)
-    ).substring(0, 2);
+      this.checkUserSavedThisSong();
+      this.imageUrl = this.track.album.images[1].url;
+      this.linkToMusic = this.track.preview_url;
+      const tempTime = this.track.duration_ms / 60000;
+      this.minutes = Math.floor(tempTime);
+      this.seconds = String(
+        Math.floor((tempTime - this.minutes) * 600)
+      ).substring(0, 2);
   }
 
   changeTrackSaving(): void {

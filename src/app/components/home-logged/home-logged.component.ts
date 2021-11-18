@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
-import { SpotifyTopService } from 'src/app/modules/top/services/spotify-top.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SpotifyTopAlbumsService } from 'src/app/services/spotify-top-albums.service';
 import { UserService } from 'src/app/services/user.service';
