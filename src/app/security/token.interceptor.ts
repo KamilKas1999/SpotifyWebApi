@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
         },
       });
     } else {
-      this.authService.logout();
+      this.authService.logout(true);
     }
     return next.handle(request);
   }

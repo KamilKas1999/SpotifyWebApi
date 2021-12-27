@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { RecommendService } from 'src/app/modules/recommend/services/recommend.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { RecommendService } from 'src/app/modules/recommend/services/recommend.s
 })
 export class RecommendComponent implements OnInit, OnDestroy {
   private recommendSub: Subscription;
-  recommendSongs: songInfo[];
+  recommendSongs: SongInfo[];
   constructor(private recommendService: RecommendService) {}
   @Input() isLoading = false;
   ngOnInit(): void {

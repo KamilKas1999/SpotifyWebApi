@@ -1,54 +1,54 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { artistShort } from '../models/artistShort.model';
-import { genre } from '../models/genre.model';
-import { songInfo } from '../../shared/models/songInfo.model';
-import { trackShort } from '../models/trackShort.model';
+import { ArtistShort } from '../models/artistShort.model';
+import { Genre } from '../models/genre.model';
+import { SongInfo } from '../../shared/models/songInfo.model';
+import { TrackShort } from '../models/trackShort.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataPreparingService {
-  trackEmitter = new EventEmitter<trackShort[]>();
-
+  trackEmitter = new EventEmitter<TrackShort[]>();
 
   private GETRECOMENDGENRESLINK =
     'https://api.spotify.com/v1/recommendations/available-genre-seeds';
 
   constructor(private http: HttpClient) {}
 
-  prepareArtist(top: songInfo[]): artistShort[] {
-    const artists: artistShort[] = [];
+  prepareArtist(top: SongInfo[]): ArtistShort[] {
+    let artists: ArtistShort[] = [];
+    const map = new Map<string,string>();
     for (let el of top) {
       for (let artist of el.artists) {
-        artists.push(new artistShort(artist.name, artist.id));
+        map.set(artist.id,artist.name);
       }
     }
+    map.forEach((value,key) => {
+      artists.push(new ArtistShort(value,key));
+    })
     return artists;
   }
 
-  getRandomArtist(mapArtist: artistShort[]): artistShort {
+  getRandomArtist(mapArtist: ArtistShort[]): ArtistShort {
     return mapArtist[Math.floor(Math.random() * mapArtist.length)];
   }
 
-  prepareTracks(top: songInfo[]): trackShort[] {
-    const tracksNameList: trackShort[] = [];
+  prepareTracks(top: SongInfo[]): TrackShort[] {
+    const tracksNameList: TrackShort[] = [];
     for (let el of top) {
-      tracksNameList.push({
-        name: el.name,
-        id: el.id,
-      });
+      tracksNameList.push(new TrackShort(el.name, el.id));
     }
     return tracksNameList;
   }
 
-  getRandomTrack(tracksNameList: trackShort[]): trackShort {
+  getRandomTrack(tracksNameList: TrackShort[]): TrackShort {
     return tracksNameList[Math.floor(Math.random() * tracksNameList.length)];
   }
 
-  getGenres(): Observable<genre> {
-    return this.http.get<genre>(this.GETRECOMENDGENRESLINK)
+  getGenres(): Observable<Genre> {
+    return this.http.get<Genre>(this.GETRECOMENDGENRESLINK);
   }
 
   getRandomGenre(genres: string[]): string {

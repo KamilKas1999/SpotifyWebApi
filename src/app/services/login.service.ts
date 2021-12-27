@@ -26,7 +26,7 @@ export class LoginService {
   }
 
   showWindowlogin(): void {
-    this.logout();
+    this.logout(false);
     let scope = environment.spotifyApp.scope;
     let redirect = encodeURIComponent(environment.spotifyApp.redirect_uri);
     window.location.href =
@@ -35,8 +35,8 @@ export class LoginService {
       '&response_type=code&redirect_uri=' +
       redirect +
       '&scope=' +
-      scope;
-    +'&show_dialog=true';
+      scope +
+      '&show_dialog=true';
   }
 
   getloginToken(code: string): Observable<User> {
@@ -65,15 +65,20 @@ export class LoginService {
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('expire_date', date.toString());
     localStorage.setItem('refresh_token', refresh_token);
+    
     this.loginEmitter.next(true);
   }
 
-  logout(): void {
+  logout(sessionExpired: boolean): void {
     this.musicPlayer.clearPlayer();
     this.loginEmitter.next(false);
     localStorage.removeItem('access_token');
     localStorage.removeItem('expire_date');
     localStorage.removeItem('refresh_token');
-    this.router.navigate(['/']);
+    if (sessionExpired) {
+      this.router.navigate(['/sesionExpired']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

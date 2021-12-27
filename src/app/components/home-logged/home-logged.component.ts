@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { LoginService } from 'src/app/services/login.service';
 import { SpotifyTopAlbumsService } from 'src/app/services/spotify-top-albums.service';
 import { UserService } from 'src/app/services/user.service';
@@ -9,10 +9,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './home-logged.component.html',
   styleUrls: ['./home-logged.component.scss'],
 })
+
 export class HomeLoggedComponent implements OnInit, OnDestroy {
   isLoading = false;
   name: string;
-  artists: songInfo[];
+  artists: SongInfo[];
   firstImageSrc: string;
   secondImageSrc: string;
   thirdImageSrc: string;
@@ -29,7 +30,7 @@ export class HomeLoggedComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.logout();
+    this.authService.logout(false);
   }
 
   private getUserName() {
@@ -38,6 +39,7 @@ export class HomeLoggedComponent implements OnInit, OnDestroy {
       (data) => {
         this.name = data.display_name;
         this.isLoading = false;
+        console.log(data.display_name + "gg");
       },
       (err) => {
         this.isLoading = false;

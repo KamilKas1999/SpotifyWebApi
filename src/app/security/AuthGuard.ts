@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
     if (this.authService.isLogin()) {
       return true;
     }
-    this.authService.logout();
+    this.authService.logout(true);
     return false;
   }
 }

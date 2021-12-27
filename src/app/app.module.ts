@@ -19,6 +19,7 @@ import { HomeLoggedComponent } from './components/home-logged/home-logged.compon
 import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-logged.component';
 import { MessageComponent } from './components/message/message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MusicPlayerComponent,
     HomeLoggedComponent,
     HomeNotLoggedComponent,
-    MessageComponent
+    MessageComponent,
+    SessionExpiredComponent
   ],
   imports: [
     BrowserModule,

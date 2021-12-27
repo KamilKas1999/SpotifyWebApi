@@ -1,4 +1,4 @@
-export class artistShort {
+export class ArtistShort {
   private _name: string;
   private _id: string;
   public get name() {

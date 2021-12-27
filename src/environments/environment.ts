@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   spotifyApp: {
     client_id: 'c5de057c69af43f78132e18432ab8060',
     redirect_uri: 'http://192.168.1.238:4200/login/',

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   private isPausedSub: Subscription;
   private trackSub: Subscription;
   private trackDuration: Subscription;
-  track: songInfo;
+  track: SongInfo;
   isLoading = false;
   minutes: string | number = 0;
   seconds: string | number = 0;

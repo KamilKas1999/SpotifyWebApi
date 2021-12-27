@@ -23,4 +23,18 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render app-home-logged', () => {
+    component.isLogin = true;
+    let debug = fixture.debugElement.nativeElement;
+    fixture.detectChanges();
+    expect(debug.querySelector('app-home-logged')).toBeTruthy();
+  })
+
+  it('should render app-home-not-logger', () => {
+    component.isLogin = false;
+    let debug = fixture.debugElement.nativeElement;
+    fixture.detectChanges();
+    expect(debug.querySelector('app-home-not-logged')).toBeTruthy();
+  })
 });

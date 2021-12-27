@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { UserLibraryService } from 'src/app/modules/shared/services/user-library.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -10,7 +10,7 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./music-card.component.scss'],
 })
 export class MusicCardComponent implements OnInit, OnDestroy {
-  @Input() track: songInfo;
+  @Input() track: SongInfo;
   imageUrl: string;
   isSaved = false;
   isPaused = false;

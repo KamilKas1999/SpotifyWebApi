@@ -1,3 +1,3 @@
-export class genre{
+export class Genre{
     genres : string[];
 }

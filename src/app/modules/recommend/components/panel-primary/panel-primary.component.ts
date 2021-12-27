@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpotifyTopService } from 'src/app/modules/top/services/spotify-top.service';
-import { artistShort } from '../../models/artistShort.model';
+import { ArtistShort } from '../../models/artistShort.model';
 import { PrimarySettings } from '../../models/primarySettings.model';
-import { trackShort } from '../../models/trackShort.model';
+import { TrackShort } from '../../models/trackShort.model';
 import { DataPreparingService } from '../../services/data-preparing.service';
 import { RecommendService } from '../../services/recommend.service';
 
@@ -14,10 +14,10 @@ import { RecommendService } from '../../services/recommend.service';
 })
 export class PanelPrimaryComponent implements OnInit {
   primarySettings: PrimarySettings = new PrimarySettings();
-  tracks: trackShort[] = [];
-  track: trackShort;
-  artists: artistShort[] = [];
-  artist: artistShort;
+  tracks: TrackShort[] = [];
+  track: TrackShort;
+  artists: ArtistShort[] = [];
+  artist: ArtistShort;
   genres: string[];
   genre: string;
 

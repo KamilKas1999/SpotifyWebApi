@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { trackFeature } from 'src/app/modules/track/models/trackFeature.model';
 import { TrackFeaturesService } from 'src/app/modules/track/services/track-features.service';
 import { TrackService } from '../../services/track.service';
@@ -15,7 +15,7 @@ import { TrackService } from '../../services/track.service';
 export class TrackComponent implements OnInit, OnDestroy {
   private routeSub: Subscription;
   trackId: string;
-  track: songInfo;
+  track: SongInfo;
   trackFeature: trackFeature;
   loadingTrack = true;
   loadingTrackFeatures = true;

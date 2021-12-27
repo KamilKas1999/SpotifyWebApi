@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { songInfo } from '../../shared/models/songInfo.model';
+import { SongInfo } from '../../shared/models/songInfo.model';
 import { AdvancedSettings } from '../models/advancedSettings.model';
 import { PrimarySettings } from '../models/primarySettings.model';
 
@@ -10,8 +10,8 @@ import { PrimarySettings } from '../models/primarySettings.model';
   providedIn: 'root',
 })
 export class RecommendService {
-  recommendChanged = new Subject<songInfo[]>();
-  private recommendSongs: songInfo[] = [];
+  recommendChanged = new Subject<SongInfo[]>();
+  private recommendSongs: SongInfo[] = [];
   private token: string;
   private SEED_ARTISTS = 'seed_artists=';
   private SEED_GENRES = 'seed_genres=';
@@ -31,7 +31,7 @@ export class RecommendService {
   advancedSettingsEmmiter = new EventEmitter<AdvancedSettings>();
   isLoadingEmmiter = new EventEmitter<boolean>();
 
-  getRecommendSongs() : songInfo[] {
+  getRecommendSongs() : SongInfo[] {
      return this.recommendSongs.slice();
   }
 
@@ -44,10 +44,10 @@ export class RecommendService {
     });
   }
 
-  getRecommend(): Observable<{ tracks: songInfo[] }> {
+  getRecommend(): Observable<{ tracks: SongInfo[] }> {
     const link = this.createLink();
     return this.http
-      .get<{ tracks: songInfo[] }>(link, {
+      .get<{ tracks: SongInfo[] }>(link, {
         headers: new HttpHeaders({ Authorization: this.BEARER + this.token }),
       })
       .pipe(
@@ -64,7 +64,7 @@ export class RecommendService {
       );
   }
 
-  getRecommendArray(): songInfo[] {
+  getRecommendArray(): SongInfo[] {
     return this.recommendSongs;
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { songInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class TrackService {
 
   constructor(private http: HttpClient) {}
 
-  getTrack(id: string): Observable<songInfo> {
-    return this.http.get<songInfo>(`${this.GET_TRACK_LINK}${id}`);
+  getTrack(id: string): Observable<SongInfo> {
+    return this.http.get<SongInfo>(`${this.GET_TRACK_LINK}${id}`);
   }
 }

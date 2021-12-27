@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  visible = true;
+  visible = false;
   private headerSub: Subscription;
   private isLoginSub: Subscription;
   isLogin = false;

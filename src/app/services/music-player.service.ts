@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { songInfo } from '../modules/shared/models/songInfo.model';
+import { SongInfo } from '../modules/shared/models/songInfo.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -7,7 +7,7 @@ export class MusicPlayerService {
   private audio = new Audio();
   actualTime = new EventEmitter<number>();
   isPaused = new EventEmitter<boolean>();
-  trackData = new EventEmitter<songInfo>();
+  trackData = new EventEmitter<SongInfo>();
   trackDuration = new EventEmitter<number>();
   trackVolume = new EventEmitter<number>();
   interval: any;
@@ -30,7 +30,7 @@ export class MusicPlayerService {
     this.audio.setAttribute('src','');
   }
 
-  play(newTrack: songInfo): void {
+  play(newTrack: SongInfo): void {
     this.pause();
     this.audio.setAttribute('src',newTrack.preview_url);
     this.isPaused.next(false);
@@ -42,7 +42,7 @@ export class MusicPlayerService {
     this.audio.volume = newValue;
   }
 
-  private loadAndPlay(newTrack: songInfo) {
+  private loadAndPlay(newTrack: SongInfo) {
     this.isLoading.next(true);
     this.audio.load();
     this.audio.onloadeddata = () => {

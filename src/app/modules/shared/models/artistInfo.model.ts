@@ -1,7 +1,5 @@
-export class artistInfo {
-  images: {
-      height: number;
-      width: number;
-      url: string;
-  }[];
+import { ImageProperty } from "./image.model";
+
+export class ArtistInfo {
+  images: ImageProperty[];
 }

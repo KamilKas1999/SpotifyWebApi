@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MusicCardComponent } from './music-card.component';
-import { songInfo } from '../../models/songInfo.model';
+import { SongInfo } from '../../models/songInfo.model';
 
 describe('MusicCard', () => {
   let component: MusicCardComponent;
   let fixture: ComponentFixture<MusicCardComponent>;
-  let mockTrack: songInfo = {
+  let mockTrack: SongInfo = {
     album: {
       albym_type: '',
       artists: [],
