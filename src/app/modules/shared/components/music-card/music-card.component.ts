@@ -3,6 +3,8 @@ import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { UserLibraryService } from 'src/app/modules/shared/services/user-library.service';
 import { MessageService } from 'src/app/services/message.service';
+import { trackFeature } from 'src/app/modules/track/models/trackFeature.model';
+import { ResolvedTypeReferenceDirectiveWithFailedLookupLocations } from 'typescript';
 
 @Component({
   selector: 'app-music-card',
@@ -18,6 +20,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   linkToMusic: string;
   minutes: string | number;
   seconds: string | number;
+  artists: string = "";
   private followMessageText = 'Dodano do polubionych!';
   private unfollowMessageText = 'Usunięto z polubionych!';
   constructor(
@@ -35,6 +38,13 @@ export class MusicCardComponent implements OnInit, OnDestroy {
       this.seconds = String(
         Math.floor((tempTime - this.minutes) * 600)
       ).substring(0, 2);
+      let length =       this.track.artists.length;
+      for(let i = 0; i <length; i++){
+        this.artists = this.artists + this.track.artists[i].name;
+        if( i != length - 1){
+          this.artists = this.artists + ", ";
+        }
+      }
   }
 
   changeTrackSaving(): void {

@@ -9,20 +9,15 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  visible = false;
-  private headerSub: Subscription;
+  visible = true;
   private isLoginSub: Subscription;
   isLogin = false;
   constructor(
     private authService: LoginService,
-    private headerVisible: HeaderVisibleService
   ) {}
 
   ngOnInit(): void {
-    this.headerVisible.status.emit(false);
-    this.headerSub = this.headerVisible.status.subscribe((visible: boolean) => {
-      this.visible = visible;
-    });
+
     this.isLogin = this.authService.isLogin();
     this.isLoginSub = this.authService.loginEmitter.subscribe((isLogin) => {
       this.isLogin = isLogin;
@@ -30,10 +25,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.headerVisible.status.emit(true);
-    if (this.headerSub) {
-      this.headerSub.unsubscribe();
-    }
     if (this.isLoginSub) {
       this.isLoginSub.unsubscribe();
     }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { UserData } from '../models/userData.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,8 @@ import { Observable, of } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getUserInfo(): Observable<{ display_name: string }> {
-     return this.http.get<{ display_name: string }>(
+  getUserInfo(): Observable<UserData> {
+     return this.http.get<UserData>(
        'https://api.spotify.com/v1/me'
      );
   }

@@ -1,32 +1,3 @@
 <div>
-  <h1>Witaj, {{ name }} :)</h1>
-  <ul>
-    <li>
-      <a routerLink="/top"> Twoje Top </a>
-    </li>
 
-    <li>
-      <a routerLink="/recommend"> Rekomenduj </a>
-    </li>
-
-    <li>
-      <a routerLink="/" (click)="onLogout()">Wyloguj </a>
-    </li>
-  </ul>
-
-  <img
-    class="first albumImage"
-    *ngIf="firstImageSrc"
-    src="{{ firstImageSrc }}"
-  />
-  <img
-    class="second albumImage"
-    *ngIf="secondImageSrc"
-    src="{{ secondImageSrc }}"
-  />
-  <img
-    class="third albumImage"
-    *ngIf="thirdImageSrc"
-    src="{{ thirdImageSrc }}"
-  />
 </div>

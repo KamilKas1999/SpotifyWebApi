@@ -5,7 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  {path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'sesionExpired', component: SessionExpiredComponent },
 ];

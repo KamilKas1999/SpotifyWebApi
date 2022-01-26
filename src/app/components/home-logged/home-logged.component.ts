@@ -39,7 +39,6 @@ export class HomeLoggedComponent implements OnInit, OnDestroy {
       (data) => {
         this.name = data.display_name;
         this.isLoading = false;
-        console.log(data.display_name + "gg");
       },
       (err) => {
         this.isLoading = false;

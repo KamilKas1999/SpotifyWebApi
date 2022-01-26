@@ -10,8 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  visible = false;
-  private headerSub: Subscription;
+  visible = true;
   constructor(
     private route: ActivatedRoute,
     private loginService: LoginService,
@@ -26,15 +25,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.code = params.code;
     });
     this.loginService.getloginToken(this.code).subscribe(() => {
-      this.router.navigate(['/']);
-    });
-    this.headerVisible.status.emit(false);
-    this.headerSub = this.headerVisible.status.subscribe((visible: boolean) => {
-      this.visible = visible;
+      this.router.navigate(['/recommend']);
     });
   }
 
   ngOnDestroy(): void {
-    this.headerSub.unsubscribe();
   }
 }

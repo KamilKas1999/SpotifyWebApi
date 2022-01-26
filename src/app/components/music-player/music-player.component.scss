@@ -88,7 +88,6 @@
 }
 
 .animation {
-  animation-name: imageAnimation;
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
@@ -206,20 +205,4 @@ input[type="range"]:focus::-ms-fill-upper {
   }
 }
 
-@keyframes imageAnimation {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    scale: 1.03;
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  75% {
-    scale: 1.17;
-  }
-  100% {
-    scale: (1.2);
-  }
-}
+

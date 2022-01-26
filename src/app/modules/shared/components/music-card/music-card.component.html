@@ -1,4 +1,4 @@
-<div class="element">
+<!-- <div class="element">
   <div class="row">
     <div class="logo">
       <a target="_blank" href="{{ track.album.external_urls.spotify }}">
@@ -16,7 +16,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 mx-auto">
-          <div class="details">
+           <div class="details">
             <p>Czas trawania:</p>
             <p>{{ minutes }} : {{ seconds }}</p>
           </div>
@@ -27,12 +27,13 @@
           <div class="details">
             <p>Data wydania albumu:</p>
             <p>{{ track.album.release_date }}</p>
-          </div>
+          </div> 
         </div>
         <div class="col-sm-0 col-md-12 col-lg-6 col-xl-6 mx-auto">
           <div class="name">
             <div class="details">
-              <p>Artyści:</p>
+              <p *ngIf="track.artists.length == 1">Wykonawca:</p>
+              <p *ngIf="track.artists.length > 1">Wykonawcy:</p>
               <ul>
                 <li *ngFor="let artist of track.artists">{{ artist.name }}</li>
               </ul>
@@ -76,6 +77,65 @@
       <p *ngIf="!linkToMusic">
         Kliknij na logo Spotify by zobaczyć ją w serwisie Spotify
       </p>
+    </div>
+  </div>
+</div> -->
+
+<div class="element">
+
+  <div class="row">
+    <div class="album col-sm-12 col-md-4 col-lg-3 col-xl-3 mx-auto">
+      <img src="{{ imageUrl }}" />
+    </div>
+    <div class="col-sm-0 col-md-8 col-lg-9 col-xl-9 mx-auto">
+      <!-- <div class="logo">
+          <img src="../../../assets//Spotify_Logo_RGB_White.png" />
+      </div> -->
+      <div class="row">
+        <h1>{{ track.name }}</h1>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="name">
+            <div class="details">
+              <p>{{artists}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="buttons">
+          <button
+            (click)="onPlayMusic()"
+            title="Odtwórz 30 sekund"
+            [disabled]="!linkToMusic"
+          >
+            <img src="../../../assets/outline_play_arrow_white_48dp.png" />
+          </button>
+          <button
+            (click)="changeTrackSaving()"
+            title="{{ isSaved ? 'Usuń z ulubionych' : 'Dodaj do ulubionych' }}"
+          >
+            <img
+              src="{{
+                isSaved
+                  ? '../../../assets/heart-64.svg'
+                  : '../../../assets/heart-64 unliked.svg'
+              }}"
+            />
+          </button>
+          <a routerLink="{{ '/track/' + track.id }}">
+            <button title="Dowiedz się więcej o utworze">
+              <img src="../../../assets/more_horiz_white_48dp.svg" />
+            </button>
+          </a>
+          <a href="{{track.album.external_urls.spotify}}">
+            <button title="Otwórz w spotify">
+              <img src="../../../assets/icon.png" />
+            </button>
+          </a>
+        </div>
+      </div> 
     </div>
   </div>
 </div>

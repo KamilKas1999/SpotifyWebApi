@@ -1,7 +1,10 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeaderVisibleService } from 'src/app/services/header-visible.service';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -15,23 +18,35 @@ export class HeaderComponent implements OnInit {
   visible = true;
   isOpen = false;
   positionY = window.scrollY;
+  name: string;
+  avatar: string;
 
   constructor(
     private authService: LoginService,
-    private headerVisible: HeaderVisibleService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    if (this.isLogin) {
+      this.getUserData();
+     }
     this.isLogin = this.authService.isLogin();
     this.authService.loginEmitter.subscribe((isLogin) => {
       this.isLogin = isLogin;
+      if (isLogin) {
+       this.getUserData();
+      }
     });
-    this.headerSub = this.headerVisible.status.subscribe((visible: boolean) => {
-      this.visible = visible;
+    // setInterval(() => {
+    //   this.positionY = window.scrollY;
+    // }, 1000);
+  }
+
+  getUserData(){
+    this.userService.getUserInfo().subscribe((data) => {
+      this.name = data.display_name.substr(0, data.display_name.indexOf(' '));
+      this.avatar = data.images[0].url;
     });
-    setInterval(() => {
-      this.positionY = window.scrollY;
-    },1000)
   }
 
   hideNavigation() {
@@ -60,7 +75,7 @@ export class HeaderComponent implements OnInit {
   onBackToTop() {
     let scrollToTop = window.setInterval(() => {
       let pos = window.pageYOffset;
-    
+
       if (pos > 0) {
         window.scrollTo(0, pos - 200);
       } else {

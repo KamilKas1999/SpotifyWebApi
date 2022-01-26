@@ -22,7 +22,8 @@ export class TokenInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       });
-    } else {
+    } else if(!request.url.endsWith('getToken'))  {
+      console.log(request.url)
       this.authService.logout(true);
     }
     return next.handle(request);

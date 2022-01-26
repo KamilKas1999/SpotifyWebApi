@@ -4,8 +4,5 @@ import { Injectable,EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class HeaderVisibleService {
-
-  status = new EventEmitter<boolean>();
-
   constructor() { }
 }
