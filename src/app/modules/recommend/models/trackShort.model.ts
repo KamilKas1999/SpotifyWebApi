@@ -1,6 +1,7 @@
 export class TrackShort{
     private _name: string;
     private _id: string;
+    private type = "TRACK";
 
     public get id(){
       return this._id;

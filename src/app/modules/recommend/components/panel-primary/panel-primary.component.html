@@ -1,4 +1,4 @@
-<div class="row" *ngIf="primarySettings.artist">
+<!-- <div class="row" *ngIf="primarySettings.artist">
   <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 mx-auto">
     <label for="artists">Wykonawca</label>
   </div>
@@ -108,5 +108,42 @@
     <button type="button" (click)="randomSettings()">
       <img src="../../../../../assets/casino_white_24dp.svg" />
     </button>
+  </div>
+</div> -->
+<section>
+  <div
+    class="block"
+    *ngFor="let a of added; let i = index"
+    (click)="onRemove(i)"
+  >
+    <p *ngIf="a.name; else elseBlock">{{ a.name }}</p>
+    <img src="../../../../../assets/remove_white_48dp.svg" />
+    <ng-template #elseBlock>
+      <p #elseBlock>{{ a }}</p>
+    </ng-template>
+  </div>
+  <div class="block" *ngIf="added.length < 5">
+    <img src="../../../../../assets/add_white_48dp.svg" />
+  </div>
+</section>
+
+<div class="primary">
+  <div class="section">
+    <div class="block" *ngFor="let track of tracks" (click)="onAdd(track)">
+      <p>{{ track.name }}</p>
+      <img src="../../../../../assets/add_white_48dp.svg" />
+    </div>
+  </div>
+  <div class="section">
+    <div class="block" *ngFor="let artist of artists" (click)="onAdd(artist)">
+      <p>{{ artist.name }}</p>
+      <img src="../../../../../assets/add_white_48dp.svg" />
+    </div>
+  </div>
+  <div class="section">
+    <div class="block" *ngFor="let genre of genres" (click)="onAdd(genre)">
+      <p>{{ genre }}</p>
+      <img src="../../../../../assets/add_white_48dp.svg" />
+    </div>
   </div>
 </div>

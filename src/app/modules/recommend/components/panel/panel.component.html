@@ -1,12 +1,8 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <div *ngIf="!isLoading">
-  <button type="button" (click)="onPrimaryButton()">
-    {{ primaryVisible ? "Ukryj podstawowe" : "Pokaż podstawowe" }}
-  </button>
-  <div class="panelPart" [ngClass]="primaryVisible ? 'showed' : 'hidden'">
+
     <app-panel-primary></app-panel-primary>
 
-  </div>
   <button type="button" (click)="onAdvanceButton()">
     {{ advancedVisible ? "Ukryj zaawansowane" : "Pokaż zaawansowane" }}
   </button>
@@ -17,5 +13,3 @@
 
   <button (click)="onRecommend()">Odśwież Rekomendacje</button>
 </div>
-*Dostępni do wyboru artyści oraz utwory bazują na twoich najczęściej słuchanych
-utworach

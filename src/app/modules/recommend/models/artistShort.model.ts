@@ -1,6 +1,7 @@
 export class ArtistShort {
   private _name: string;
   private _id: string;
+  private type = "ARTIST";
   public get name() {
     return this._name;
   }
