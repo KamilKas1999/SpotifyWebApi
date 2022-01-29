@@ -34,7 +34,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.subIsLoading();
   }
 
-  clearPlayer(){
+  clearPlayer() {
     this.track = null;
     this.musicPlayer.clearPlayer();
   }

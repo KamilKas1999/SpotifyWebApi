@@ -13,7 +13,6 @@ import { ResolvedTypeReferenceDirectiveWithFailedLookupLocations } from 'typescr
 })
 export class MusicCardComponent implements OnInit, OnDestroy {
   @Input() track: SongInfo;
-  imageUrl: string;
   isSaved = false;
   isPaused = false;
   musicTime = 0;
@@ -31,7 +30,6 @@ export class MusicCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.checkUserSavedThisSong();
-      this.imageUrl = this.track.album.images[1].url;
       this.linkToMusic = this.track.preview_url;
       const tempTime = this.track.duration_ms / 60000;
       this.minutes = Math.floor(tempTime);

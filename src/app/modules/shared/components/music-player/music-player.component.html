@@ -1,0 +1,64 @@
+<div class="panel">
+  <div class="left">
+    <img
+      *ngIf="track"
+      id="albumImg"
+      [ngClass]="{ animation: !isPaused }"
+      src="{{ track.album.images[1].url }}"
+    />
+  </div>
+  <div class="middle-button">
+    <button
+      (click)="onClick()"
+      [disabled]="!track"
+      title="{{ isPaused ? 'Odtwórz utwór' : 'Zapauzuj utwór' }}"
+    >
+      <img id="buttonImg" src="assets/pause_white_24dp.svg" *ngIf="!isPaused" />
+      <img
+        id="buttonImg"
+        src="assets/play_arrow_white_24dp.svg"
+        *ngIf="isPaused"
+      />
+    </button>
+  </div>
+  <div class="middle">
+    <div class="ranger">
+      <div class="time">
+        <p>{{ minutes }}:{{ seconds < 10 ? "0" + seconds : seconds }}</p>
+      </div>
+      <input
+        #ranger
+        type="range"
+        min="{{ minValue }}"
+        max="{{ maxValue }}"
+        value="{{ actuallValue }}"
+        step="0.02"
+        (change)="valueChange(ranger.value)"
+        (input)="valueInput(ranger.value)"
+      />
+      <div class="time">
+        <p>
+          {{ totalMinutes }}:{{
+            totalSeconds < 10 ? "0" + totalSeconds : totalSeconds
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="volume-ranger">
+      <div id="volumeIcon">
+        <img src="assets/volume_up_black_48dp.svg" />
+      </div>
+      <input
+        #volumeRange
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+        (input)="volumeInput(volumeRange.value)"
+      />
+    </div>
+  </div>
+</div>

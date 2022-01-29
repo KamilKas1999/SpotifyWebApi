@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { SpotifyTopService } from 'src/app/modules/top/services/spotify-top.service';
-import { isThisTypeNode } from 'typescript';
-import { threadId } from 'worker_threads';
 import { ArtistShort } from '../../models/artistShort.model';
 import { PrimarySettings } from '../../models/primarySettings.model';
 import { TrackShort } from '../../models/trackShort.model';

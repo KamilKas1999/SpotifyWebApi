@@ -83,45 +83,50 @@
 
 <div class="element">
   <div class="image">
-    <img src="{{ imageUrl }}" />
+    <img src="{{ track.album.images[1].url }}" />
   </div>
   <div class="background">
     <div id="standard-info">
       <h1>{{ track.name }}</h1>
-      <p>{{ artists }}</p>
-    </div>
-    <div>
-      <div class="buttons">
-        <button
-          (click)="onPlayMusic()"
-          title="Odtwórz 30 sekund"
-          [disabled]="!linkToMusic"
-        >
-          <img src="../../../assets/outline_play_arrow_white_48dp.png" />
-        </button>
-        <button
-          (click)="changeTrackSaving()"
-          title="{{ isSaved ? 'Usuń z ulubionych' : 'Dodaj do ulubionych' }}"
-        >
-          <img
-            src="{{
-              isSaved
-                ? '../../../assets/heart-64.svg'
-                : '../../../assets/heart-64 unliked.svg'
-            }}"
-          />
-        </button>
-        <a routerLink="{{ '/track/' + track.id }}">
-          <button title="Dowiedz się więcej o utworze">
-            <img src="../../../assets/more_horiz_white_48dp.svg" />
-          </button>
-        </a>
-        <a href="{{ track.album.external_urls.spotify }}">
-          <button title="Otwórz w spotify">
-            <img src="../../../assets/icon.png" />
-          </button>
-        </a>
+      <div class="artists">
+        <div class="artist" *ngFor="let artist of track.artists">
+          <p>{{ artist.name }}</p>
+        </div>
       </div>
     </div>
+    <div class="buttons">
+      <button
+        (click)="onPlayMusic()"
+        title="Odtwórz 30 sekund"
+        [disabled]="!linkToMusic"
+      >
+        <img src="../../../assets/outline_play_arrow_white_48dp.png" />
+      </button>
+      <button
+        (click)="changeTrackSaving()"
+        title="{{ isSaved ? 'Usuń z ulubionych' : 'Dodaj do ulubionych' }}"
+      >
+        <img
+          src="{{
+            isSaved
+              ? '../../../assets/heart-64.svg'
+              : '../../../assets/heart-64 unliked.svg'
+          }}"
+        />
+      </button>
+      <a routerLink="{{ '/track/' + track.id }}">
+        <button title="Dowiedz się więcej o utworze">
+          <img src="../../../assets/more_horiz_white_48dp.svg" />
+        </button>
+      </a>
+      <a href="{{ track.album.external_urls.spotify }}">
+        <button title="Otwórz w spotify">
+          <img src="../../../assets/icon.png" />
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="player">
+    <app-music-player></app-music-player>
   </div>
 </div>

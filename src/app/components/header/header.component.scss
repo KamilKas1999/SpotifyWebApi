@@ -69,7 +69,7 @@ a:hover {
 .buttons {
   display: flex;
 }
-.hiddenNav{
+.hiddenNav {
   display: none;
 }
 @media only screen and (max-width: 1000px) {
@@ -94,7 +94,7 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     transition: none;
-    p{
+    p {
       color: #ddd;
     }
   }
@@ -102,9 +102,9 @@ a:hover {
     transform: none;
     font-size: 400;
   }
-.buttons{
-  margin: 30px;
-}
+  .buttons {
+    margin: 30px;
+  }
   button {
     border: none;
     background-color: #4e4b4b;

@@ -8,7 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { MusicPlayerComponent } from './components/music-player/music-player.component';
+import { MusicPlayerComponent } from './modules/shared/components/music-player/music-player.component';
 import { RecommendModule } from './modules/recommend/recommend.module';
 import { TopModule } from './modules/top/top.module';
 import { TrackModule } from './modules/track/track.module';
@@ -27,7 +27,6 @@ import { SessionExpiredComponent } from './pages/session-expired/session-expired
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    MusicPlayerComponent,
     HomeLoggedComponent,
     HomeNotLoggedComponent,
     MessageComponent,
