@@ -36,14 +36,14 @@ import { MessageService } from 'src/app/services/message.service';
       state(
         'rise',
         style({
-          background: '#CA8222',
+          background: 'white',
         })
       ),
       state(
         'standard',
         style({
           background:
-            ' rgb(219,190,151) linear-gradient(90deg, rgba(219,190,151,1) 0%, rgba(253,237,216,1) 100%)',
+            'white',
         })
       ),
       transition('rise <=> standard', [animate('0.2s ease')]),

@@ -1,10 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
-import { UserLibraryService } from 'src/app/modules/shared/services/user-library.service';
 import { MessageService } from 'src/app/services/message.service';
-import { trackFeature } from 'src/app/modules/track/models/trackFeature.model';
-import { ResolvedTypeReferenceDirectiveWithFailedLookupLocations } from 'typescript';
+import { UserLibraryService } from '../../services/UserLibraryService/user-library.service';
+
 
 @Component({
   selector: 'app-music-card',
@@ -20,6 +19,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   minutes: string | number;
   seconds: string | number;
   artists: string = "";
+  number = 0;
   private followMessageText = 'Dodano do polubionych!';
   private unfollowMessageText = 'Usunięto z polubionych!';
   constructor(

@@ -27,19 +27,20 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.isLogin) {
+    // this.userService.userEmitter.subscribe(data => {
+    //   this.avatar = data.images[0].url;
+    //   this.name = data.name;
+    // })
+    if (this.authService.isLogin()) {
+      this.isLogin = true;
       this.getUserData();
      }
-    this.isLogin = this.authService.isLogin();
     this.authService.loginEmitter.subscribe((isLogin) => {
       this.isLogin = isLogin;
       if (isLogin) {
        this.getUserData();
       }
     });
-    // setInterval(() => {
-    //   this.positionY = window.scrollY;
-    // }, 1000);
   }
 
   getUserData(){

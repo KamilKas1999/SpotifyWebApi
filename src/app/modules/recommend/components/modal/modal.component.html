@@ -1,0 +1,31 @@
+<div class="background">
+    <div class="panel">
+        <div class="buttons">
+            <button (click)="setMode(1)" ><p>Utwory</p></button>
+            <button (click)="setMode(2)" ><p>Wykonawcy</p></button>
+            <button (click)="setMode(3)" ><p>Gatunki</p></button>
+            <button (click)="close()" ><p>X</p></button>
+        </div>
+        <div class="primary">
+            <div class="section" *ngIf="mode == 1">
+              <div class="block" *ngFor="let track of tracks" (click)="onAdd(track)" >
+                <p>{{ track.name }}</p>
+                <img src="../../../../../assets/add_white_48dp.svg" />
+              </div>
+            </div>
+            <div class="section" *ngIf="mode == 2">
+              <div class="block" *ngFor="let artist of artists" (click)="onAdd(artist)">
+                <p>{{ artist.name }}</p>
+                <img src="../../../../../assets/add_white_48dp.svg" />
+              </div>
+            </div>
+            <div class="section" *ngIf="mode == 3">
+              <div class="block" *ngFor="let genre of genres" (click)="onAdd(genre)" >
+                <p>{{ genre }}</p>
+                <img src="../../../../../assets/add_white_48dp.svg" />
+              </div>
+            </div>
+          
+          </div>
+    </div>
+</div>

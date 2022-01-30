@@ -10,40 +10,7 @@ p {
     bottom: 0px;
     right: 0px;
     display: flex;
-    img {
-      filter: invert(1);
-    }
-  
-    .first {
-      animation: animation 5s ease-in-out infinite;
-    }
-  
-    .second {
-      animation: animationSecond 6s ease-in-out infinite;
-    }
   }
   
-  @keyframes animation {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-100px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes animationSecond {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-50px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
+
   

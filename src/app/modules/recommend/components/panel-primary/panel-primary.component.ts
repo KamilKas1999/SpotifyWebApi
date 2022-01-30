@@ -17,6 +17,7 @@ export class PanelPrimaryComponent implements OnInit {
   artists: ArtistShort[] = [];
   genres: string[];
   added: any[];
+  showModal: boolean = false;
   constructor(
     private recommendService: RecommendService,
     private topsevice: SpotifyTopService,
@@ -29,6 +30,8 @@ export class PanelPrimaryComponent implements OnInit {
   }
 
   onAdd(o) {
+    console.log(o)
+
     if (this.added.some((e) => e == o) || this.added.length >= 5) {
       return;
     }
@@ -37,6 +40,14 @@ export class PanelPrimaryComponent implements OnInit {
 
   onRemove(i: number) {
     this.added.splice(i, 1);
+  }
+
+  onAddMore(){
+    this.showModal = true;
+  }
+
+  onCloseModal(){
+    this.showModal = false;
   }
 
   randomSettings() {

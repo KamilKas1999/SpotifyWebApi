@@ -15,7 +15,13 @@ export class MusicPlayerService {
   isLoading = new EventEmitter<boolean>();
   volume = 0.5;
 
+  private scripts: any = {};
+
   constructor() {}
+
+  init() {
+ 
+  }
 
   pause(): void {
     if (!this.audio.paused) {
@@ -26,13 +32,13 @@ export class MusicPlayerService {
   }
 
   clearPlayer() {
-    this.audio.pause()
-    this.audio.setAttribute('src','');
+    this.audio.pause();
+    this.audio.setAttribute('src', '');
   }
 
   play(newTrack: SongInfo): void {
     this.pause();
-    this.audio.setAttribute('src',newTrack.preview_url);
+    this.audio.setAttribute('src', newTrack.preview_url);
     this.isPaused.next(false);
     this.loadAndPlay(newTrack);
   }

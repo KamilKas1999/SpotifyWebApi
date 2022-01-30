@@ -2,11 +2,8 @@
   <app-panel (newItemEvent)="startLoading()"></app-panel>
 </div>
 <div *ngIf="!isLoading">
-  <p *ngIf="recommendSongs.length === 0">
-    Nie znaleziono pasujących utworów lub użytkownik ich jeszcze nie wyszukał
-  </p>
-
-  <app-music-card-list [tracks] = "recommendSongs"></app-music-card-list>
+  <button (click)="onCreatePlaylist()">Stwórz playlistę</button>
+  <app-music-card-list [tracks]="recommendSongs"></app-music-card-list>
 </div>
 <div *ngIf="isLoading">
   lo
