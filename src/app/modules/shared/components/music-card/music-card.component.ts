@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -12,10 +12,11 @@ import { UserLibraryService } from '../../services/UserLibraryService/user-libra
 })
 export class MusicCardComponent implements OnInit, OnDestroy {
   @Input() track: SongInfo;
+  @Output() getSearchStatusChange = new EventEmitter<boolean>();
+
   isSaved = false;
   isPaused = false;
   musicTime = 0;
-  linkToMusic: string;
   minutes: string | number;
   seconds: string | number;
   artists: string = "";
@@ -30,7 +31,6 @@ export class MusicCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.checkUserSavedThisSong();
-      this.linkToMusic = this.track.preview_url;
       const tempTime = this.track.duration_ms / 60000;
       this.minutes = Math.floor(tempTime);
       this.seconds = String(

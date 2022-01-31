@@ -16,7 +16,7 @@
       <button
         (click)="onPlayMusic()"
         title="Odtwórz 30 sekund"
-        [disabled]="!linkToMusic"
+        [disabled]="!this.track.preview_url"
       >
         <img src="../../../assets/outline_play_arrow_white_48dp.png" />
       </button>
@@ -43,8 +43,5 @@
         </button>
       </a>
     </div>
-  </div>
-  <div class="player">
-    <app-music-player></app-music-player>
   </div>
 </div>
