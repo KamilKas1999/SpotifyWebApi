@@ -1,4 +1,39 @@
-<section>
+<div class="section">
+  <div class="buttons">
+    <div class="search">
+      <input
+        type="search"
+        placeholder="Wyszukaj utwory lub wykonawców"
+        #input
+        (keyup)="search(input.value)"
+      />
+      <div class="search-result">
+        <div class="tracks" *ngIf="trackSearchResult.length > 0">
+          <p>Utwory:</p>
+          <div
+            class="track"
+            *ngFor="let track of trackSearchResult"
+            (click)="onAdd(track)"
+          >
+            <p>{{ track.name }}</p>
+          </div>
+        </div>
+        <div class="artists" *ngIf="artistSearchResult.length > 0">
+          <p>Wykonawcy:</p>
+          <div
+            class="artist"
+            *ngFor="let artist of artistSearchResult"
+            (click)="onAdd(artist)"
+          >
+            <p>{{ artist.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>lub</p>
+    <button (click)="onAddMore()">Dodaj z polecanych dla ciebie</button>
+  </div>
   <div
     class="block"
     *ngFor="let a of added; let i = index"
@@ -10,15 +45,13 @@
       <p #elseBlock>{{ a }}</p>
     </ng-template>
   </div>
-  <div class="block" *ngIf="added.length < 5" (click)="onAddMore()">
-    <img src="../../../../../assets/add_white_48dp.svg" />
-  </div>
-  <app-modal
-    *ngIf="showModal"
-    [genres]="genres"
-    [artists]="artists"
-    [tracks]="tracks"
-    (close) = "onCloseModal()"
-    (add) = "onAdd($event)"
-  ></app-modal>
-</section>
+</div>
+
+<app-modal
+  *ngIf="showModal"
+  [genres]="genres"
+  [artists]="artists"
+  [tracks]="tracks"
+  (close)="onCloseModal()"
+  (add)="onAdd($event)"
+></app-modal>

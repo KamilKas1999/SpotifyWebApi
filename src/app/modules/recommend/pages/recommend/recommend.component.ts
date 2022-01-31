@@ -14,9 +14,8 @@ export class RecommendComponent implements OnInit, OnDestroy {
   private recommendSub: Subscription;
   recommendSongs: SongInfo[];
   constructor(
-    private recommendService: RecommendService,
-    private playlistService: PlayListCreatorService,
-    private messageService : MessageService
+    private recommendService: RecommendService
+
   ) {}
   @Input() isLoading = false;
   ngOnInit(): void {
@@ -37,13 +36,5 @@ export class RecommendComponent implements OnInit, OnDestroy {
     this.recommendSub.unsubscribe();
   }
 
-  onCreatePlaylist() {
-    this.playlistService
-      .createPlaylist()
-      .subscribe((response) =>
-        this.playlistService
-          .addTracksToPlaylist(this.recommendSongs, response.id)
-          .subscribe(response => this.messageService.sendMessage("Nowa playlista została utworzona!",""))
-      );
-  }
+
 }

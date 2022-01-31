@@ -1,146 +1,67 @@
-<h1>Zaawansowane</h1>
-<div>
-  <div>
-    <label for="minDuration"
-      >Minimalny czas trwania
-      {{
-        advancedSettings.minDuration ? ": " + (advancedSettings.minDuration / 60000).toFixed(2) : ""
-      }}</label
-    >
+<div class="advanced">
+  <div id="tempo">
     <input
       type="range"
-      name="minDuration"
-      id="minDuration"
+      (change)="changed()"
       min="0"
-      max="1000000"
-      step="10000"
-      [(ngModel)]="advancedSettings.minDuration"
-      (change) = "changed()"
-      [ngClass]="{
-        green: advancedSettings.minDuration
-          ? advancedSettings.maxDuration
-            ? advancedSettings.minDuration < advancedSettings.maxDuration
-            : true
-          : false,
-        red: advancedSettings.maxDuration && advancedSettings.minDuration && advancedSettings.minDuration > advancedSettings.maxDuration
-      }"
+      max="160"
+      step="40"
+      [(ngModel)]="advancedSettings.tempo"
     />
+    <p>Tempo</p>
+    <p>Średnie</p>
   </div>
-  <div>
-    <label for="maxDuration"
-      >Maksymalny czas trwania
-      {{
-        advancedSettings.maxDuration ? ": " + (advancedSettings.maxDuration / 60000).toFixed(2) : ""
-      }}</label
-    >
+  <div id="dancebility">
     <input
       type="range"
-      name="maxDuration"
-      id="maxDuration"
+      (change)="changed()"
       min="0"
-      max="1000000"
-      step="10000"
-      [(ngModel)]="advancedSettings.maxDuration"
-      [ngClass]="{
-        green: advancedSettings.maxDuration
-          ? advancedSettings.minDuration
-            ? advancedSettings.minDuration < advancedSettings.maxDuration
-            : true
-          : false,
-        red: advancedSettings.maxDuration && advancedSettings.minDuration && advancedSettings.minDuration > advancedSettings.maxDuration
-      }"
+      max="1"
+      step="0.1"
+      [(ngModel)]="advancedSettings.danceability"
     />
+    <p>Taneczność</p>
+    <p>Średnie</p>
   </div>
-</div>
-<div>
-  <div>
-    <label for="minTempo"
-      >Minimalne tempo {{ advancedSettings.minTempo ? ": " + advancedSettings.minTempo : "" }}</label
-    >
-
+  <div id="energy">
     <input
       type="range"
-      name="minTempo"
-      id="minTempo"
+      (change)="changed()"
       min="0"
-      max="200"
-      [(ngModel)]="advancedSettings.minTempo"
-      [ngClass]="{
-        green: advancedSettings.minTempo ? (advancedSettings.maxTempo ? advancedSettings.minTempo < advancedSettings.maxTempo : true) : false,
-        red: advancedSettings.minTempo && advancedSettings.maxTempo && advancedSettings.minTempo > advancedSettings.maxTempo
-      }"
+      max="1"
+      step="0.1"
+      [(ngModel)]="advancedSettings.energy"
     />
+    <p>Energia</p>
+    <p>Średnie</p>
   </div>
-
-  <div>
-    <label for="maxTempo"
-      >Maksymalne tempo {{ advancedSettings.maxTempo ? ": " + advancedSettings.maxTempo : "" }}
-    </label>
-
+  <div id="mood">
+    <input type="range" (change)="changed()" min="0" max="1" step="0.1" />
+    <p>Nastrój</p>
+    <p>Średnie</p>
+  </div>
+  <div id="instrumentalnss">
     <input
       type="range"
-      name="maxTempo"
-      id="maxTempo"
+      (change)="changed()"
       min="0"
-      max="200"
-      [(ngModel)]="advancedSettings.maxTempo"
-      [ngClass]="{
-        green: advancedSettings.maxTempo ? (advancedSettings.minTempo ? advancedSettings.minTempo < advancedSettings.maxTempo : true) : false,
-        red: advancedSettings.maxTempo && advancedSettings.minTempo && advancedSettings.minTempo > advancedSettings.maxTempo
-      }"
+      max="1"
+      step="0.1"
+      [(ngModel)]="advancedSettings.instrumentalness"
     />
+    <p>Instrumentalność</p>
+    <p>Średnie</p>
+  </div>
+  <div id="acousticness">
+    <input
+      type="range"
+      (change)="changed()"
+      min="0"
+      max="1"
+      step="0.1"
+      [(ngModel)]="advancedSettings.acousticness"
+    />
+    <p>Akustyka</p>
+    <p>Średnie</p>
   </div>
 </div>
-
-<div>
-  <div>
-    <label for="minPopularity"
-      >Minimalna pupularność
-      {{ advancedSettings.minPopularity ? ": " + advancedSettings.minPopularity : "" }}</label
-    >
-
-    <input
-      type="range"
-      name="minPopularity"
-      id="minPopularity"
-      min="0"
-      max="100"
-      [(ngModel)]="advancedSettings.minPopularity"
-      [ngClass]="{
-        green: advancedSettings.minPopularity
-          ? advancedSettings.maxPopularity
-            ? advancedSettings.minPopularity < advancedSettings.maxPopularity
-            : true
-          : false,
-        red: advancedSettings.minPopularity && advancedSettings.maxPopularity && advancedSettings.minPopularity > advancedSettings.maxPopularity
-      }"
-    />
-  </div>
-  <div>
-    <label for="maxPopularity"
-      >Maksymalna popularność
-      {{ advancedSettings.maxPopularity ? ": " + advancedSettings.maxPopularity : "" }}</label
-    >
-    <input
-      type="range"
-      name="maxPopularity"
-      id="maxPopularity"
-      min="0"
-      max="100"
-      [(ngModel)]="advancedSettings.maxPopularity"
-      [ngClass]="{
-        green: advancedSettings.maxPopularity
-          ? advancedSettings.minPopularity
-            ? advancedSettings.minPopularity < advancedSettings.maxPopularity
-            : true
-          : false,
-        red: advancedSettings.maxPopularity && advancedSettings.minPopularity && advancedSettings.minPopularity > advancedSettings.maxPopularity
-      }"
-    />
-  </div>
-</div>
-<button type="button" (click)="resetAdvanced()">
-  Resetuj zaawansowane
-</button>
-
-

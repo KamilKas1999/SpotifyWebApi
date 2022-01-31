@@ -8,24 +8,15 @@ import { RecommendService } from '../../services/recommend.service';
   styleUrls: ['./panel-advanced.component.scss'],
 })
 export class PanelAdvancedComponent implements OnInit {
-  advancedSettings: AdvancedSettings = new AdvancedSettings();
+  advancedSettings: AdvancedSettings;
 
   constructor(private recommendService: RecommendService) {}
 
   ngOnInit(): void {
-    this.changed();
-  }
-
-  resetAdvanced() {
-    this.advancedSettings.minDuration = null;
-    this.advancedSettings.maxDuration = null;
-    this.advancedSettings.minTempo = null;
-    this.advancedSettings.maxTempo = null;
-    this.advancedSettings.minPopularity = null;
-    this.advancedSettings.maxPopularity = null;
+    this.advancedSettings = this.recommendService.advancedSettings;
   }
 
   changed() {
-    this.recommendService.advancedSettingsEmmiter.emit(this.advancedSettings);
+
   }
 }

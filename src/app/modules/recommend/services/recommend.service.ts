@@ -11,51 +11,39 @@ import { AdvancedSettings } from '../models/advancedSettings.model';
 export class RecommendService {
   recommendChanged = new Subject<SongInfo[]>();
   private recommendSongs: SongInfo[] = [];
-  private token: string;
   private SEED_ARTISTS = 'seed_artists';
   private SEED_GENRES = 'seed_genres';
   private SEED_TRACKS = 'seed_tracks';
-  private LIMIT = 'limit=';
-  private MIN_DURATION_MS = 'min_duration_ms=';
-  private MAX_DURATION_MS = 'max_duration_ms=';
-  private MIN_TEMPO = 'min_tempo=';
-  private MAX_TEMPO = 'max_tempo=';
-  private MIN_POPULARITY = 'min_popularity=';
-  private MAX_POPULARITY = 'max_popularity ';
+  private TARGET_TEMPO = 'target_tempo=';
+  private TARGET_INSTRUMENTALNESS = 'target_instrumentalness';
+  private TARGET_ENERGY = 'target_energy';
+  private TARGET_DANCEABILITY = 'target_danceability';
+  private TARGET_ACOUSTICNESS = 'target_acousticness';
+
   private RecomendationsLink = 'https://api.spotify.com/v1/recommendations';
-  private BEARER = 'Bearer ';
   added: any[] = [];
-  private advancedSettings: AdvancedSettings;
-  advancedSettingsEmmiter = new EventEmitter<AdvancedSettings>();
+  advancedSettings: AdvancedSettings = new AdvancedSettings();
   isLoadingEmmiter = new EventEmitter<boolean>();
 
   getRecommendSongs(): SongInfo[] {
     return this.recommendSongs.slice();
   }
 
-  constructor(private http: HttpClient) {
-    this.advancedSettingsEmmiter.subscribe((settings) => {
-      this.advancedSettings = settings;
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   getRecommend(): Observable<{ tracks: SongInfo[] }> {
-    return this.http
-      .get<{ tracks: SongInfo[] }>(this.createLink().href, {
-        headers: new HttpHeaders({ Authorization: this.BEARER + this.token }),
-      })
-      .pipe(
-        tap(
-          (data) => {
-            this.recommendSongs = data.tracks;
-            this.recommendChanged.next(this.recommendSongs);
-          },
-          () => {
-            this.recommendSongs = [];
-            this.recommendChanged.next(this.recommendSongs);
-          }
-        )
-      );
+    return this.http.get<{ tracks: SongInfo[] }>(this.createLink().href).pipe(
+      tap(
+        (data) => {
+          this.recommendSongs = data.tracks;
+          this.recommendChanged.next(this.recommendSongs);
+        },
+        () => {
+          this.recommendSongs = [];
+          this.recommendChanged.next(this.recommendSongs);
+        }
+      )
+    );
   }
 
   getRecommendArray(): SongInfo[] {
@@ -64,15 +52,6 @@ export class RecommendService {
 
   private createLink(): URL {
     let link = this.RecomendationsLink;
-    // if (this.primarySettings.artistActive) {
-    //   link = link + '&' + this.SEED_ARTISTS + this.primarySettings.artist.id;
-    // }
-    // if (this.primarySettings.genreActive) {
-    //   link = link + '&' + this.SEED_GENRES + this.primarySettings.genre;
-    // }
-    // if (this.primarySettings.trackActive) {
-    //   link = link + '&' + this.SEED_TRACKS + this.primarySettings.track.id;
-    // }
 
     const url = new URL(link);
     this.added.forEach((el) => {
@@ -81,7 +60,6 @@ export class RecommendService {
           console.log('add key ' + this.SEED_TRACKS + ' ' + el.name);
           url.searchParams.append(this.SEED_TRACKS, el.id);
         } else {
-          console.log('add value ' + el.name);
           url.href = url.href + ',' + el.id;
         }
       }
@@ -109,33 +87,26 @@ export class RecommendService {
       }
     });
 
-    // if (this.advancedSettings.minDuration) {
-    //   link =
-    //     link + '&' + this.MIN_DURATION_MS + this.advancedSettings.minDuration;
-    // }
-
-    // if (this.advancedSettings.maxDuration) {
-    //   link =
-    //     link + '&' + this.MAX_DURATION_MS + this.advancedSettings.maxDuration;
-    // }
-
-    // if (this.advancedSettings.minTempo) {
-    //   link = link + '&' + this.MIN_TEMPO + this.advancedSettings.minTempo;
-    // }
-
-    // if (this.advancedSettings.maxTempo) {
-    //   link = link + '&' + this.MAX_TEMPO + this.advancedSettings.maxTempo;
-    // }
-
-    // if (this.advancedSettings.minPopularity) {
-    //   link =
-    //     link + '&' + this.MIN_POPULARITY + this.advancedSettings.minPopularity;
-    // }
-
-    // if (this.advancedSettings.maxPopularity) {
-    //   link =
-    //     link + '&' + this.MAX_POPULARITY + this.advancedSettings.maxPopularity;
-    // }
+    url.searchParams.append(
+      this.TARGET_ENERGY,
+      this.advancedSettings.energy.toString()
+    );
+    url.searchParams.append(
+      this.TARGET_ACOUSTICNESS,
+      this.advancedSettings.acousticness.toString()
+    );
+    url.searchParams.append(
+      this.TARGET_DANCEABILITY,
+      this.advancedSettings.danceability.toString()
+    );
+    url.searchParams.append(
+      this.TARGET_INSTRUMENTALNESS,
+      this.advancedSettings.instrumentalness.toString()
+    );
+    url.searchParams.append(
+      this.TARGET_TEMPO,
+      this.advancedSettings.tempo.toString()
+    );
     return url;
   }
 }

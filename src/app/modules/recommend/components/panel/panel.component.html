@@ -1,15 +1,15 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <div *ngIf="!isLoading">
+  <app-panel-advanced></app-panel-advanced>
 
     <app-panel-primary></app-panel-primary>
 
-  <button type="button" (click)="onAdvanceButton()">
-    {{ advancedVisible ? "Ukryj zaawansowane" : "Pokaż zaawansowane" }}
-  </button>
-<div class="panelPart" [ngClass]="advancedVisible ? 'showed' : 'hidden'">
-  <app-panel-advanced></app-panel-advanced>
-
-</div>
-
-  <button (click)="onRecommend()">Odśwież Rekomendacje</button>
+  <div class="buttons">
+    <button (click)="onRecommend()"  [disabled]="addedValues.length == 0">
+      Odśwież Rekomendacje
+    </button>
+    <button (click)="onCreatePlaylist()" [disabled]="tracks.length == 0">
+      Stwórz playlistę
+    </button>
+  </div>
 </div>
