@@ -11,22 +11,30 @@ export class ModalComponent implements OnInit {
   @Input('tracks') tracks: TrackShort[] = [];
   @Input('artists') artists: ArtistShort[] = [];
   @Input('genres') genres: string[];
+  filteredGenres: string[] = [];
+  @Input('mode') mode: number = 0;
   @Output('close') closeModel = new EventEmitter<boolean>();
   @Output('add') addNew = new EventEmitter<any>();
-  mode = 1;
+  artistOrTracks = 0;
   constructor() {}
 
-  ngOnInit(): void {}
-
-  setMode(mode: number) {
-    this.mode = mode;
+  ngOnInit(): void {
+    this.filteredGenres = this.genres;
   }
 
-  onAdd(object: any){
+  setArtOrTra(value: number) {
+    this.artistOrTracks = value;
+  }
+
+  onAdd(object: any) {
     this.addNew.emit(object);
   }
-  
+
   close() {
     this.closeModel.emit(true);
+  }
+
+  filter(value: string){
+     this.filteredGenres = this.genres.filter(el => el.includes(value.toLowerCase()));
   }
 }

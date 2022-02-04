@@ -13,10 +13,7 @@ import { MessageService } from 'src/app/services/message.service';
 export class RecommendComponent implements OnInit, OnDestroy {
   private recommendSub: Subscription;
   recommendSongs: SongInfo[];
-  constructor(
-    private recommendService: RecommendService
-
-  ) {}
+  constructor(private recommendService: RecommendService) {}
   @Input() isLoading = false;
   ngOnInit(): void {
     this.recommendSongs = this.recommendService.getRecommendSongs();
@@ -35,6 +32,4 @@ export class RecommendComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.recommendSub.unsubscribe();
   }
-
-
 }

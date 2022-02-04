@@ -38,8 +38,6 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.addedValues = this.recommendService.added;
-    console.log(this.addedValues);
-    console.log(this.tracks);
     this.recommendService.isLoadingEmmiter.subscribe((isLoading) => {
       this.isLoading = isLoading;
     });
@@ -51,7 +49,6 @@ export class PanelComponent implements OnInit {
   }
 
   onCreatePlaylist() {
-    console.log(this.tracks)
     this.playlistService
       .createPlaylist()
       .subscribe((response) =>

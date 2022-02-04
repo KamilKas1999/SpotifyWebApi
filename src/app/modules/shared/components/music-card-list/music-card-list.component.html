@@ -1,3 +1,4 @@
+<p *ngIf="tracks.length != 0">{{describe}}</p>
 <div class="computer">
   <app-music-card *ngFor="let track of tracks" [track]="track"></app-music-card>
 </div>

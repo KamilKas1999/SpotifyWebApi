@@ -1,49 +1,74 @@
-<div class="section">
+<div
+  class="section"
+  [ngClass]="{ hidden: hideComponent, showed: !hideComponent }"
+>
+  <h1>Bazowe rekomendacji</h1>
+  <button (click)="onHide()" class="showButton">
+    <img
+      [ngClass]="{ rotate: !hideComponent }"
+      src="../../../../../assets/expand_more_black_24dp.svg"
+    />
+  </button>
   <div class="buttons">
-    <div class="search">
-      <input
-        type="search"
-        placeholder="Wyszukaj utwory lub wykonawców"
-        #input
-        (keyup)="search(input.value)"
-      />
-      <div class="search-result">
-        <div class="tracks" *ngIf="trackSearchResult.length > 0">
-          <p>Utwory:</p>
-          <div
-            class="track"
-            *ngFor="let track of trackSearchResult"
-            (click)="onAdd(track)"
-          >
-            <p>{{ track.name }}</p>
+    <div id="artistsAndTracks">
+      <h1>Artyści i wykonawcy</h1>
+      <div class="content">
+        <div class="search">
+          <input
+            type="search"
+            placeholder="Wyszukaj"
+            #input
+            (keyup)="search(input.value)"
+          />
+          <div class="search-result">
+            <div class="tracks" *ngIf="trackSearchResult.length > 0">
+              <p>Utwory:</p>
+              <div
+                class="block"
+                *ngFor="let track of trackSearchResult"
+                (click)="onAdd(track)"
+              >
+                <p>{{ track.name }}</p>
+                <img src="../../../../../assets/add_white_48dp.svg" />
+              </div>
+            </div>
+            <div class="artists" *ngIf="artistSearchResult.length > 0">
+              <p>Wykonawcy:</p>
+              <div
+                class="block"
+                *ngFor="let artist of artistSearchResult"
+                (click)="onAdd(artist)"
+              >
+                <p>{{ artist.name }}</p>
+                <img src="../../../../../assets/add_white_48dp.svg" />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="artists" *ngIf="artistSearchResult.length > 0">
-          <p>Wykonawcy:</p>
-          <div
-            class="artist"
-            *ngFor="let artist of artistSearchResult"
-            (click)="onAdd(artist)"
-          >
-            <p>{{ artist.name }}</p>
-          </div>
+        <div class="add">
+          <button (click)="onAddMore(0)">Wybierz z listy</button>
         </div>
       </div>
     </div>
-
-    <p>lub</p>
-    <button (click)="onAddMore()">Dodaj z polecanych dla ciebie</button>
+    <div id="genres">
+      <h1>Gatunki</h1>
+      <div class="content">
+        <button (click)="onAddMore(1)">Dodaj</button>
+      </div>
+    </div>
   </div>
-  <div
-    class="block"
-    *ngFor="let a of added; let i = index"
-    (click)="onRemove(i)"
-  >
-    <p *ngIf="a.name; else elseBlock">{{ a.name }}</p>
-    <img src="../../../../../assets/remove_white_48dp.svg" />
-    <ng-template #elseBlock>
-      <p #elseBlock>{{ a }}</p>
-    </ng-template>
+  <div class="selected">
+    <div
+      class="block"
+      *ngFor="let a of added; let i = index"
+      (click)="onRemove(i)"
+    >
+      <p *ngIf="a.name; else elseBlock">{{ a.name }}</p>
+      <img src="../../../../../assets/remove_white_48dp.svg" />
+      <ng-template #elseBlock>
+        <p #elseBlock>{{ a }}</p>
+      </ng-template>
+    </div>
   </div>
 </div>
 
@@ -52,6 +77,7 @@
   [genres]="genres"
   [artists]="artists"
   [tracks]="tracks"
+  [mode]="mode"
   (close)="onCloseModal()"
   (add)="onAdd($event)"
 ></app-modal>

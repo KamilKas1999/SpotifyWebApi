@@ -8,6 +8,7 @@ import { SongInfo } from '../../models/songInfo.model';
 })
 export class MusicCardListComponent implements OnInit {
   @Input('tracks') tracks: SongInfo[];
+  @Input('describe') describe = ""
   selectedIndex: number = 0;
   constructor() {}
 

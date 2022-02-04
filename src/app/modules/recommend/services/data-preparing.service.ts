@@ -5,6 +5,7 @@ import { ArtistShort } from '../models/artistShort.model';
 import { Genre } from '../models/genre.model';
 import { SongInfo } from '../../shared/models/songInfo.model';
 import { TrackShort } from '../models/trackShort.model';
+import { Artist } from '../../shared/models/artist.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,18 +18,26 @@ export class DataPreparingService {
 
   constructor(private http: HttpClient) {}
 
-  prepareArtist(top: SongInfo[]): ArtistShort[] {
-    let artists: ArtistShort[] = [];
-    const map = new Map<string,string>();
+  // prepareArtist(top: SongInfo[]): ArtistShort[] {
+  //   let artists: ArtistShort[] = [];
+  //   const map = new Map<string,string>();
+  //   for (let el of top) {
+  //     for (let artist of el.artists) {
+  //       map.set(artist.id,artist.name);
+  //     }
+  //   }
+  //   map.forEach((value,key) => {
+  //     artists.push(new ArtistShort(value,key));
+  //   })
+  //   return artists;
+  // }
+
+  prepareArtist(top: Artist[]): ArtistShort[] {
+    const tracksNameList: ArtistShort[] = [];
     for (let el of top) {
-      for (let artist of el.artists) {
-        map.set(artist.id,artist.name);
-      }
+      tracksNameList.push(new ArtistShort(el.name, el.id));
     }
-    map.forEach((value,key) => {
-      artists.push(new ArtistShort(value,key));
-    })
-    return artists;
+    return tracksNameList;
   }
 
   getRandomArtist(mapArtist: ArtistShort[]): ArtistShort {

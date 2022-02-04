@@ -1,4 +1,17 @@
+.hidden {
+  height: 40px;
+}
+.showed {
+  height: 250px;
+}
 .section {
+  h1 {
+    padding: 5px;
+    margin: 2px;
+    font-size: 20px;
+    color: #202020;
+  }
+
   background-color: white; // #4f90d3;
   -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
   -moz-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
@@ -12,19 +25,96 @@
   margin-right: auto;
   width: 100%;
   border: 1px solid black;
-  min-height: 200px;
+  position: relative;
+  transition: 0.3s;
+  overflow: hidden;
+  .showButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    border: none;
+    img {
+      transition: 0.3s;
+    }
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+  }
   .buttons {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    p {
-      width: 20%;
+    h1 {
       text-align: center;
-      margin-top: 20px;
       font-size: 20px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0;
+      padding: 0;
     }
+    #artistsAndTracks {
+      width: 90%;
+      .content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .search {
+          width: 45%;
+          position: relative;
+          z-index: 2;
+          input {
+            display: block;
+            border-radius: 5px;
+            background: #031b88b4;
+            color: white;
+            box-shadow: none;
+            font-size: 20px;
+            text-align: center;
+            transition: 0.4s;
+            margin: 0 15px;
+            border: none;
+            width: 100%;
+          }
+          .search-result {
+            width: 100%;
+            background-color: white; // #4f90d3;
+            -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
+            -moz-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
+            box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
+            backdrop-filter: blur(17px);
+            -webkit-backdrop-filter: blur(17px);
+            border-radius: 2px;
+            border: 2px solid black;
+            margin-left: auto;
+            margin-right: auto;
+            position: absolute;
+            max-height: 150px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            top: 35px;
+            left: 15px;
+            .block {
+              display: flex;
+              width: 95%;
+              margin-left: auto;
+              margin-top: auto;
+            }
+          }
+        }
+      }
+
+      .add {
+        width: 50%;
+      }
+    }
+    #genres {
+      width: 20%;
+      .content {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+
     button {
       display: block;
       border-radius: 5px;
@@ -34,86 +124,67 @@
       font-size: 20px;
       text-align: center;
       transition: 0.4s;
-      margin: 15px;
       border: none;
-      width: 45%;
-    }
-    .search {
-      width: 45%;
-      position: relative;
-      z-index: 2;
-
-      input {
-        display: block;
-        border-radius: 5px;
-        background: #031b88b4;
-        color: white;
-        box-shadow: none;
-        font-size: 20px;
-        text-align: center;
-        transition: 0.4s;
-        margin: 15px;
-        border: none;
-        width: 100%;
-      }
-      .search-result {
-        width: 100%;
-        background-color: white; // #4f90d3;
-        -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-        -moz-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-        box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-        backdrop-filter: blur(17px);
-        -webkit-backdrop-filter: blur(17px);
-        border-radius: 2px;
-        border: 2px solid black;
-        margin-left: auto;
-        margin-right: auto;
-        position: absolute;
-        top: 50px;
-        left: 15px;
-        p {
-          width: 100%;
-          text-align: left;
-          color: #031b88b4;
-          font-size: 15px;
-          padding: 2px;
-          margin: 0;
-          z-index: 500;
-        }
-        .artist,
-        .track {
-          p {
-            width: 100%;
-            text-align: left;
-            color: #031b88b4;
-            font-size: 13px;
-            padding: 2px;
-            margin: 0;
-            margin-left: 10px;
-            cursor: pointer;
-          }
-        }
-      }
+      width: 95%;
+      margin: 0 5px;
     }
   }
 }
 
+.selected {
+  margin-top: 20px;
+}
 .block {
   background-color: #031b88b4;
   border-radius: 25px;
   border: 1px solid black;
   display: inline-flex;
   margin: 10px;
-cursor: pointer;
+  cursor: pointer;
+  justify-content: space-between;
   p {
-    text-align: center;
     color: #eee;
     font-size: 15px;
     margin: 0;
     padding: 5px 0 5px 10px;
   }
-  img{
+  img {
     width: 24px;
     margin-left: 5px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .showed {
+    height: 300px;
+  }
+  .section {
+    .buttons {
+      display: block;
+      #artistsAndTracks {
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        .content {
+          .search {
+            width: 100%;
+            input {
+              margin: 0;
+            }
+            .search-result {
+              left: 0px;
+            }
+          }
+          div {
+            width: 100%;
+          }
+        }
+      }
+      #genres {
+        margin-top: 20px;
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
   }
 }

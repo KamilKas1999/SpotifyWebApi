@@ -21,6 +21,9 @@ export class PanelPrimaryComponent implements OnInit {
   showModal: boolean = false;
   artistSearchResult = [];
   trackSearchResult = [];
+  hideComponent = false;
+  mode = 0;
+
   constructor(
     private recommendService: RecommendService,
     private topsevice: SpotifyTopService,
@@ -31,6 +34,10 @@ export class PanelPrimaryComponent implements OnInit {
   ngOnInit(): void {
     this.randomSettings();
     this.added = this.recommendService.added;
+  }
+
+  onHide() {
+    this.hideComponent = !this.hideComponent;
   }
 
   onAdd(o) {
@@ -45,7 +52,9 @@ export class PanelPrimaryComponent implements OnInit {
     this.added.splice(i, 1);
   }
 
-  onAddMore() {
+  onAddMore(mode: number) {
+    this.mode = mode;
+    console.log(this.mode);
     this.showModal = true;
   }
 
@@ -73,20 +82,23 @@ export class PanelPrimaryComponent implements OnInit {
   }
 
   randomSettings() {
-    this.topsevice.getTopTracks().subscribe((data) => {
+    this.topsevice.getTopArtists().subscribe((data) => {
       this.artists = this.dataPreparing.prepareArtist(data.items);
+      if (this.added.length < 3) {
+        this.added.push(this.dataPreparing.getRandomArtist(this.artists));
+      }
+    });
+    this.topsevice.getTopTracks().subscribe((data) => {
       this.tracks = this.dataPreparing.prepareTracks(data.items);
-      if (this.added.length == 0) {
-        this.added.push(
-          this.tracks[Math.floor(Math.random() * this.tracks.length)]
-        );
-        this.added.push(
-          this.artists[Math.floor(Math.random() * this.artists.length)]
-        );
+      if (this.added.length < 3) {
+        this.added.push(this.dataPreparing.getRandomTrack(this.tracks));
       }
     });
     this.dataPreparing.getGenres().subscribe((data) => {
       this.genres = data.genres;
+      if (this.added.length < 3) {
+        this.added.push(this.dataPreparing.getRandomGenre(this.genres));
+      }
     });
   }
 }

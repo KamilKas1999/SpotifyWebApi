@@ -1,6 +1,11 @@
-.advanced {
-  display: grid;
+.hidden {
+  height: 40px;
+}
 
+.showed {
+  height: 400px;
+}
+.advanced {
   justify-content: space-between;
   background-color: white; // #4f90d3;
   -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
@@ -15,21 +20,45 @@
   margin-right: auto;
   width: 100%;
   border: 1px solid black;
-  min-height: 200px;
-  padding-top: 50px;
   z-index: 0;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  div {
-    margin-top: 50px;
-    p:first-of-type {
-      font-size: 16px;
-
+  position: relative;
+  transition: 0.3s;
+  overflow: hidden;
+  h1 {
+    padding: 5px;
+    margin: 2px;
+    font-size: 20px;
+    color: #202020;
+  }
+  button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    border: none;
+    img {
+      transition: 0.3s;
     }
-    p {
-      font-size: 12px;
-      width: 5cm;
-      text-align: center;
 
+    .rotate {
+      transform: rotate(180deg);
+    }
+  }
+  div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin-top: 20px;
+    div {
+      display: block;
+      margin-top: 100px;
+      max-width: 150px;
+      p:first-of-type {
+        font-size: 16px;
+      }
+      p {
+        font-size: 12px;
+        text-align: center;
+      }
     }
   }
 }
@@ -125,14 +154,24 @@ input[type="range"]:focus::-ms-fill-lower {
 input[type="range"]:focus::-ms-fill-upper {
   background: #031b88b4;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
+  .showed {
+    height: 800px;
+  }
   .advanced {
-    grid-template-columns: 1fr 1fr 1fr;
+    div {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
+  .showed {
+    height: 1200px;
+  }
   .advanced {
-    grid-template-columns: 1fr 1fr;
+    div {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

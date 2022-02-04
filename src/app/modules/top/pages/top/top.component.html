@@ -1,5 +1,5 @@
 <div *ngIf="!isLoading">
-  <app-music-card-list [tracks]="topTracks"></app-music-card-list>
+  <app-music-card-list [tracks]="topTracks" [describe]="'Twoje top utwory'"></app-music-card-list>
 </div>
 <div *ngIf="isLoading">
   <app-loading></app-loading>

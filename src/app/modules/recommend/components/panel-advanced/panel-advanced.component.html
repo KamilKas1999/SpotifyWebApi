@@ -1,67 +1,74 @@
-<div class="advanced">
-  <div id="tempo">
-    <input
-      type="range"
-      (change)="changed()"
-      min="0"
-      max="160"
-      step="40"
-      [(ngModel)]="advancedSettings.tempo"
-    />
-    <p>Tempo</p>
-    <p>Średnie</p>
+<div class="advanced" [ngClass]="{'hidden' : hideComponent, 'showed':!hideComponent}">
+    <h1>Parametry rekomendacji</h1>
+    <button (click)="onHide()">
+      <img [ngClass]="{'rotate' : !hideComponent}" src="../../../../../assets/expand_more_black_24dp.svg"/>
+    </button>
+  <div>
+    <div id="tempo">
+      <input
+        type="range"
+        (change)="changed()"
+        min="0"
+        max="160"
+        step="40"
+        [(ngModel)]="advancedSettings.tempo"
+      />
+      <p>Tempo</p>
+      <p>{{tempValueDesc}}</p>
+    </div>
+    <div id="dancebility">
+      <input
+        type="range"
+        (change)="changed()"
+        min="0"
+        max="1"
+        step="0.1"
+        [(ngModel)]="advancedSettings.danceability"
+      />
+      <p>Taneczność</p>
+      <p>{{danceValueDesc}}</p>
+    </div>
+    <div id="energy">
+      <input
+        type="range"
+        (change)="changed()"
+        min="0"
+        max="1"
+        step="0.1"
+        [(ngModel)]="advancedSettings.energy"
+      />
+      <p>Energia</p>
+      <p>{{energyValueDesc}}</p>
+    </div>
+    <div id="mood">
+      <input type="range" (change)="changed()" min="0" max="1" step="0.1" />
+      <p>Nastrój</p>
+      <p>Średnie</p>
+    </div>
+    <div id="instrumentalnss">
+      <input
+        type="range"
+        (change)="changed()"
+        min="0"
+        max="1"
+        step="0.1"
+        [(ngModel)]="advancedSettings.instrumentalness"
+      />
+      <p>Instrumentalność</p>
+      <p>{{instrValueDesc}}</p>
+    </div>
+    <div id="acousticness">
+      <input
+        type="range"
+        (change)="changed()"
+        min="0"
+        max="1"
+        step="0.1"
+        [(ngModel)]="advancedSettings.acousticness"
+      />
+      <p>Akustyka</p>
+      <p>{{accousticValueDesc}}</p>
+    </div>
   </div>
-  <div id="dancebility">
-    <input
-      type="range"
-      (change)="changed()"
-      min="0"
-      max="1"
-      step="0.1"
-      [(ngModel)]="advancedSettings.danceability"
-    />
-    <p>Taneczność</p>
-    <p>Średnie</p>
-  </div>
-  <div id="energy">
-    <input
-      type="range"
-      (change)="changed()"
-      min="0"
-      max="1"
-      step="0.1"
-      [(ngModel)]="advancedSettings.energy"
-    />
-    <p>Energia</p>
-    <p>Średnie</p>
-  </div>
-  <div id="mood">
-    <input type="range" (change)="changed()" min="0" max="1" step="0.1" />
-    <p>Nastrój</p>
-    <p>Średnie</p>
-  </div>
-  <div id="instrumentalnss">
-    <input
-      type="range"
-      (change)="changed()"
-      min="0"
-      max="1"
-      step="0.1"
-      [(ngModel)]="advancedSettings.instrumentalness"
-    />
-    <p>Instrumentalność</p>
-    <p>Średnie</p>
-  </div>
-  <div id="acousticness">
-    <input
-      type="range"
-      (change)="changed()"
-      min="0"
-      max="1"
-      step="0.1"
-      [(ngModel)]="advancedSettings.acousticness"
-    />
-    <p>Akustyka</p>
-    <p>Średnie</p>
-  </div>
+ 
 </div>

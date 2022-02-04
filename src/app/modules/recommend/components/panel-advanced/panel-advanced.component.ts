@@ -9,6 +9,12 @@ import { RecommendService } from '../../services/recommend.service';
 })
 export class PanelAdvancedComponent implements OnInit {
   advancedSettings: AdvancedSettings;
+  hideComponent = false;
+  tempValueDesc = "Średnie"
+  danceValueDesc = "Średnia"
+  instrValueDesc = "Średnia"
+  energyValueDesc = "Średnia"
+  accousticValueDesc = "Średnia"
 
   constructor(private recommendService: RecommendService) {}
 
@@ -16,7 +22,61 @@ export class PanelAdvancedComponent implements OnInit {
     this.advancedSettings = this.recommendService.advancedSettings;
   }
 
-  changed() {
+  onHide(){
+    this.hideComponent = !this.hideComponent;
+  }
 
+  changed() {
+    this.refreshTempValueDesc();
+    this.refreshDanceValueDesc();
+    this.refreshEnergyValueDesc();
+    this.refreshInstrValueDesc();
+    this.refreshAccousticValueDesc();
+  }
+
+  private refreshTempValueDesc(){
+    if(this.advancedSettings.tempo <  54){
+      this.tempValueDesc = "Małe";
+    }else if(this.advancedSettings.tempo > 107){
+      this.tempValueDesc = "Duże";
+    }else{
+      this.tempValueDesc = "Średnie";
+    }
+  }
+  private refreshDanceValueDesc(){
+    if(this.advancedSettings.danceability <  0.33){
+      this.danceValueDesc = "Mała";
+    }else if(this.advancedSettings.danceability > 0.66){
+      this.danceValueDesc = "Duża";
+    }else{
+      this.danceValueDesc = "Średnia";
+    }
+  }
+  private refreshEnergyValueDesc(){
+    if(this.advancedSettings.energy <  0.33){
+      this.energyValueDesc = "Mała";
+    }else if(this.advancedSettings.energy > 0.66){
+      this.energyValueDesc = "Duża";
+    }else{
+      this.energyValueDesc = "Średnia";
+    }
+  }
+  private refreshInstrValueDesc(){
+    if(this.advancedSettings.instrumentalness <  0.33){
+      this.instrValueDesc = "Mała";
+    }else if(this.advancedSettings.instrumentalness > 0.66){
+      this.instrValueDesc = "Duża";
+    }else{
+      this.instrValueDesc = "Średnia";
+    }
+  }
+  private refreshAccousticValueDesc(){
+    if(this.advancedSettings.acousticness <  0.33){
+      this.accousticValueDesc = "Mała";
+    }else if(this.advancedSettings.acousticness > 0.66){
+      this.accousticValueDesc = "Duża";
+    }else{
+      this.accousticValueDesc = "Średnia";
+    }
   }
 }
