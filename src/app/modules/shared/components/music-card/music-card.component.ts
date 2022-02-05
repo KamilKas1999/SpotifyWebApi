@@ -1,9 +1,17 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { MessageService } from 'src/app/services/message.service';
 import { UserLibraryService } from '../../services/UserLibraryService/user-library.service';
-
+import { ArtistShort } from 'src/app/modules/recommend/models/artistShort.model';
+import { Artist } from '../../models/artist.model';
 
 @Component({
   selector: 'app-music-card',
@@ -19,8 +27,8 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   musicTime = 0;
   minutes: string | number;
   seconds: string | number;
-  artists: string = "";
   number = 0;
+  isOpen=false;
   private followMessageText = 'Dodano do polubionych!';
   private unfollowMessageText = 'Usunięto z polubionych!';
   constructor(
@@ -29,20 +37,26 @@ export class MusicCardComponent implements OnInit, OnDestroy {
     private messageService: MessageService
   ) {}
 
+  onOpen(){
+    this.isOpen = !this.isOpen;
+  }
+
+
   ngOnInit(): void {
-      this.checkUserSavedThisSong();
-      const tempTime = this.track.duration_ms / 60000;
-      this.minutes = Math.floor(tempTime);
-      this.seconds = String(
-        Math.floor((tempTime - this.minutes) * 600)
-      ).substring(0, 2);
-      let length =       this.track.artists.length;
-      for(let i = 0; i <length; i++){
-        this.artists = this.artists + this.track.artists[i].name;
-        if( i != length - 1){
-          this.artists = this.artists + ", ";
-        }
-      }
+    this.checkUserSavedThisSong();
+    const tempTime = this.track.duration_ms / 60000;
+    this.minutes = Math.floor(tempTime);
+    this.seconds = String(
+      Math.floor((tempTime - this.minutes) * 600)
+    ).substring(0, 2);
+  }
+
+  getArtistShorted(): Artist[]{
+    return this.track.artists.slice(0,2);
+  }
+
+  plusArtist(): number{
+    return this.track.artists.length - 2;;
   }
 
   changeTrackSaving(): void {
