@@ -17,6 +17,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   private isPausedSub: Subscription;
   private trackSub: Subscription;
   private trackDuration: Subscription;
+  private trackVolumeSub: Subscription;
   track: SongInfo;
   isLoading = false;
   minutes: string | number = 0;
@@ -24,6 +25,8 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   totalSeconds: string | number = 0;
   totalMinutes: string | number = 0;
   private isLoadingSub: Subscription;
+  isOpen = false;
+  volume = 0.5;
   constructor(private musicPlayer: MusicPlayerService) {}
 
   ngOnInit(): void {
@@ -33,10 +36,13 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.subDuration();
     this.subIsLoading();
   }
-  init(){
+  init() {
     this.musicPlayer.init();
   }
 
+  onExpand(): void {
+    this.isOpen = !this.isOpen;
+  }
   clearPlayer() {
     this.track = null;
     this.musicPlayer.clearPlayer();
@@ -47,6 +53,12 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       this.actuallValue = time;
       this.seconds = this.countSeconds(time);
       this.minutes = this.countMinutes(time);
+    });
+  }
+
+  private subValume(): void {
+    this.trackVolumeSub = this.musicPlayer.trackVolume.subscribe((volume) => {
+      this.volume = volume;
     });
   }
 
@@ -93,6 +105,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   volumeInput(newValue: number) {
+    this.volume = newValue;
     this.musicPlayer.setVolume(newValue);
   }
 
@@ -120,5 +133,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.isPausedSub.unsubscribe();
     this.trackSub.unsubscribe();
     this.isLoadingSub.unsubscribe();
+    this.trackDuration.unsubscribe();
+    this.trackVolumeSub.unsubscribe();
   }
 }

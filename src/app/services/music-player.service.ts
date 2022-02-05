@@ -14,11 +14,7 @@ export class MusicPlayerService {
   intervalForPaused: any;
   isLoading = new EventEmitter<boolean>();
   volume = 0.5;
-
-  private scripts: any = {};
-
   constructor() {}
-
   init() {
  
   }
@@ -55,6 +51,7 @@ export class MusicPlayerService {
       this.trackData.next(newTrack);
       this.trackDuration.next(this.audio.duration);
       this.audio.volume = this.volume;
+      this.trackVolume.emit(this.volume);
       this.audio.play();
       this.isPaused.next(false);
       this.playInterval();
