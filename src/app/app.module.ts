@@ -20,7 +20,6 @@ import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-lo
 import { MessageComponent } from './components/message/message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
-
 @NgModule({
   declarations: [
     AppComponent,

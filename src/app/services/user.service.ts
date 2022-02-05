@@ -9,7 +9,6 @@ import { LoginService } from './login.service';
   providedIn: 'root',
 })
 export class UserService {
-  user: UserData = new UserData();
   userEmitter = new EventEmitter<UserData>();
   constructor(private http: HttpClient, private authService: LoginService) {
     if (authService.isLogin()) {
@@ -20,8 +19,7 @@ export class UserService {
   getUserInfo(): Observable<UserData> {
     return this.http.get<UserData>('https://api.spotify.com/v1/me').pipe(
       tap((data) => {
-        this.user = data;
-        this.userEmitter.emit(this.user);
+        this.userEmitter.emit(data);
       })
     );
   }

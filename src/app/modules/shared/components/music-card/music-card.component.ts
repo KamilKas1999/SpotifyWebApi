@@ -12,6 +12,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { UserLibraryService } from '../../services/UserLibraryService/user-library.service';
 import { ArtistShort } from 'src/app/modules/recommend/models/artistShort.model';
 import { Artist } from '../../models/artist.model';
+import { SpotifyMusicPlayerService } from 'src/app/services/spotifyMusicPlayer/spotify-music-player.service';
 
 @Component({
   selector: 'app-music-card',
@@ -34,13 +35,17 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   constructor(
     private musicPlayer: MusicPlayerService,
     private userLibrary: UserLibraryService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private spotifyMusicPlayer: SpotifyMusicPlayerService
   ) {}
 
   onOpen(){
     this.isOpen = !this.isOpen;
   }
 
+  addToQueue():void{
+    this.spotifyMusicPlayer.addToQueue(this.track);
+  }
 
   ngOnInit(): void {
     this.checkUserSavedThisSong();
@@ -52,10 +57,12 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   }
 
   getArtistShorted(): Artist[]{
+    if(this.isOpen) return  this.track.artists;
     return this.track.artists.slice(0,2);
   }
 
   plusArtist(): number{
+    if(this.isOpen) return 0;
     return this.track.artists.length - 2;;
   }
 

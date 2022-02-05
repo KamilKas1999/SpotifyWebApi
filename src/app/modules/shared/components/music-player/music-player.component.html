@@ -1,57 +1,62 @@
-<div class="panel"  [ngClass]="{ 'openPanel' : isOpen,'closePanel' : !isOpen}">
+<div class="panel" [ngClass]="{ openPanel: isOpen, closePanel: !isOpen }">
   <div class="left">
+    <button (click)="setMode(0)">1</button>
+    <button (click)="setMode(1)">2</button>
     <img
-      *ngIf="track"
+      *ngIf="track && mode == 0"
       id="albumImg"
       [ngClass]="{ animation: !isPaused }"
       src="{{ track.album.images[1].url }}"
     />
-    <div *ngIf="track">
-      <p>{{ track.name }}</p>
-    </div>
+    <img
+      *ngIf="currentState && mode == 1"
+      id="albumImg"
+      [ngClass]="{ animation: !isPaused }"
+      src="{{ currentState.track_window.current_track.album.images[1].url }}"
+    />
+    <p *ngIf="track && mode == 0">{{ track.name }}</p>
+    <p *ngIf="currentState && mode == 1">
+      {{ currentState.track_window.current_track.name }}
+    </p>
   </div>
   <div class="middle-button">
+    <button [disabled]="mode == 0 || !currentState" (click)="skipPrev()">
+      <img class="buttonImg" src="assets/skip_previous_white_24dp.svg" />
+    </button>
     <button
       (click)="onClick()"
-      [disabled]="!track"
+      [disabled]="(mode == 0 && !track) || (mode == 1 && !currentState)"
       title="{{ isPaused ? 'Odtwórz utwór' : 'Zapauzuj utwór' }}"
     >
-      <img id="buttonImg" src="assets/pause_white_24dp.svg" *ngIf="!isPaused" />
       <img
-        id="buttonImg"
-        src="assets/play_arrow_white_24dp.svg"
-        *ngIf="isPaused"
+        class="buttonImg"
+        src="assets/pause_white_24dp.svg"
+        *ngIf="
+          (mode == 0 && !isPaused) ||
+          (mode == 1 && currentState && currentState.disallows.resuming) ||
+          (mode == 0 && !track) ||
+          (mode == 1 && !currentState)
+        "
       />
+      <img
+        class="buttonImg"
+        src="assets/play_arrow_white_24dp.svg"
+        *ngIf="
+          (mode == 0 && track && isPaused) ||
+          (mode == 1 && currentState && currentState.disallows.pausing)
+        "
+      />
+    </button>
+    <button [disabled]="mode == 0 || !currentState" (click)="skipNext()">
+      <img class="buttonImg" src="assets/skip_next_white_24dp.svg" />
     </button>
     <button id="expand-button" (click)="onExpand()">
-      <img [ngClass]="{'rotate' : !isOpen}" src="assets/expand_more_black_24dp.svg" />
+      <img
+        [ngClass]="{ rotate: !isOpen }"
+        src="assets/expand_more_black_24dp.svg"
+      />
     </button>
   </div>
-  <div class="middle">
-    <div class="ranger">
-      <div class="time">
-        <p>{{ minutes }}:{{ seconds < 10 ? "0" + seconds : seconds }}</p>
-      </div>
-      <input
-        #ranger
-        type="range"
-        min="{{ minValue }}"
-        max="{{ maxValue }}"
-        value="{{ actuallValue }}"
-        step="0.02"
-        (change)="valueChange(ranger.value)"
-        (input)="valueInput(ranger.value)"
-      />
-      <div class="time">
-        <p>
-          {{ totalMinutes }}:{{
-            totalSeconds < 10 ? "0" + totalSeconds : totalSeconds
-          }}
-        </p>
-      </div>
-    </div>
-  </div>
-
   <div class="right">
     <div class="volume-ranger">
       <div id="volumeIcon">
@@ -63,7 +68,7 @@
         min="0"
         max="1"
         step="0.05"
-        value={{volume}}
+        value="{{ volume }}"
         (input)="volumeInput(volumeRange.value)"
       />
     </div>

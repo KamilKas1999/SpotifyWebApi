@@ -1,11 +1,18 @@
-<div class="element" [ngClass]="{'musicCardOpen':isOpen,'musicCardClose':!isOpen}">
+<div
+  class="element"
+  [ngClass]="{ musicCardOpen: isOpen, musicCardClose: !isOpen }"
+>
   <div class="expand-button">
     <button (click)="onOpen()">
-      <img  [ngClass]="{'rotate':isOpen}" src="assets/expand_more_black_24dp.svg"></button>
+      <img
+        [ngClass]="{ rotate: isOpen }"
+        src="assets/expand_more_black_24dp.svg"
+      />
+    </button>
   </div>
- 
+
   <div class="image">
-    <img  src="{{ track.album.images[1].url }}" />
+    <img src="{{ track.album.images[1].url }}" />
   </div>
   <div class="background">
     <div id="standard-info">
@@ -14,7 +21,7 @@
         <div class="artist" *ngFor="let artist of getArtistShorted()">
           <p>{{ artist.name }}</p>
         </div>
-        <div  class="artist" *ngIf="plusArtist() > 0">
+        <div class="artist" *ngIf="plusArtist() > 0">
           <p>+{{ plusArtist() }}</p>
         </div>
       </div>
@@ -25,7 +32,10 @@
         title="Odtwórz 30 sekund"
         [disabled]="!this.track.preview_url"
       >
-        <img src="../../../assets/outline_play_arrow_white_48dp.png" />
+        <img src="assets/outline_play_arrow_white_48dp.png" />
+      </button>
+      <button (click)="addToQueue()" title="Dodaj do kolejki">
+        <img src="assets/queue_white_48dp.svg" />
       </button>
       <button
         (click)="changeTrackSaving()"
@@ -33,20 +43,18 @@
       >
         <img
           src="{{
-            isSaved
-              ? '../../../assets/heart-64.svg'
-              : '../../../assets/heart-64 unliked.svg'
+            isSaved ? 'assets/heart-64.svg' : 'assets/heart-64 unliked.svg'
           }}"
         />
       </button>
       <a routerLink="{{ '/track/' + track.id }}">
         <button title="Dowiedz się więcej o utworze">
-          <img src="../../../assets/more_horiz_white_48dp.svg" />
+          <img src="assets/more_horiz_white_48dp.svg" />
         </button>
       </a>
       <a href="{{ track.album.external_urls.spotify }}">
         <button title="Otwórz w spotify">
-          <img src="../../../assets/icon.png" />
+          <img src="assets/icon.png" />
         </button>
       </a>
     </div>

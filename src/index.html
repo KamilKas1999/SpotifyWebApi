@@ -5,6 +5,7 @@
     <title>SpotifyAppByKamilKasprzak</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script async src="https://sdk.scdn.co/spotify-player.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -13,51 +14,6 @@
     />
   </head>
   <body>
-    <!-- <button id="togglePlay">Toggle Play</button>
-
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-    <script>
-      window.onSpotifyWebPlaybackSDKReady = () => {
-        console.log(localStorage.getItem("access_token"));
-        const player = new Spotify.Player({
-          name: "Recommendation app",
-          getOAuthToken: (cb) => {
-            cb(localStorage.getItem("access_token"));
-          },
-          volume: 1,
-        });
-
-        player.addListener("ready", ({ device_id }) => {
-          console.log("Ready with Device ID", device_id);
-        });
-
-        player.addListener("not_ready", ({ device_id }) => {
-          console.log("Device ID has gone offline", device_id);
-        });
-
-        player.addListener("initialization_error", ({ message }) => {
-          console.error(message);
-        });
-
-        player.addListener("authentication_error", ({ message }) => {
-          console.error(message);
-        });
-
-        player.addListener("account_error", ({ message }) => {
-          console.error(message);
-        });
-
-        document.getElementById("togglePlay").onclick = function () {
-          player.togglePlay();
-        };
-
-        player.pause().then(() => {
-          console.log("Paused!");
-        });
-        player.connect();
-      };
-    </script> -->
-
     <app-root></app-root>
   </body>
 </html>

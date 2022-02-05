@@ -1,5 +1,8 @@
+/// <reference types="@types/spotify-web-playback-sdk"/>
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { SongInfo } from '../modules/shared/models/songInfo.model';
+import { MessageService } from './message.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,11 +17,11 @@ export class MusicPlayerService {
   intervalForPaused: any;
   isLoading = new EventEmitter<boolean>();
   volume = 0.5;
-  constructor() {}
-  init() {
- 
-  }
-
+  track: SongInfo;
+  constructor(
+  
+  ) {}
+  init() {}
   pause(): void {
     if (!this.audio.paused) {
       this.isPaused.next(true);
@@ -33,11 +36,18 @@ export class MusicPlayerService {
   }
 
   play(newTrack: SongInfo): void {
+    this.track = newTrack;
     this.pause();
     this.audio.setAttribute('src', newTrack.preview_url);
     this.isPaused.next(false);
     this.loadAndPlay(newTrack);
   }
+
+
+
+ 
+
+ 
 
   setVolume(newValue: number) {
     this.volume = newValue;

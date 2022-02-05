@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
+import { SpotifyMusicPlayerService } from 'src/app/services/spotifyMusicPlayer/spotify-music-player.service';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-music-player',
@@ -27,7 +29,12 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   private isLoadingSub: Subscription;
   isOpen = false;
   volume = 0.5;
-  constructor(private musicPlayer: MusicPlayerService) {}
+  mode = 1;
+  currentState: any;
+  constructor(
+    private musicPlayer: MusicPlayerService,
+    private spotifyMusicPlayer: SpotifyMusicPlayerService
+  ) {}
 
   ngOnInit(): void {
     this.subTime();
@@ -35,9 +42,21 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.subTrack();
     this.subDuration();
     this.subIsLoading();
+    this.spotifyMusicPlayer.currentStateEmitter.subscribe(
+      (state) => (this.currentState = state)
+    );
   }
-  init() {
-    this.musicPlayer.init();
+
+  setMode(value: number): void {
+    this.mode = value;
+  }
+
+  skipNext() {
+    this.spotifyMusicPlayer.skipNext();
+  }
+
+  skipPrev() {
+    this.spotifyMusicPlayer.skipPrev();
   }
 
   onExpand(): void {
@@ -105,15 +124,27 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   volumeInput(newValue: number) {
-    this.volume = newValue;
-    this.musicPlayer.setVolume(newValue);
+    if (this.mode == 0) {
+      this.volume = newValue;
+      this.musicPlayer.setVolume(newValue);
+    } else if (this.mode == 1) {
+      this.spotifyMusicPlayer.setVolume(newValue);
+    }
   }
 
   onClick() {
-    if (this.isPaused) {
-      this.musicPlayer.resumeMusic();
-    } else {
-      this.musicPlayer.pause();
+    if (this.mode == 0) {
+      if (this.isPaused) {
+        this.musicPlayer.resumeMusic();
+      } else {
+        this.musicPlayer.pause();
+      }
+    } else if (this.mode == 1) {
+      if (this.currentState.disallows.pausing) {
+        this.spotifyMusicPlayer.resume();
+      } else if (this.currentState.disallows.resuming) {
+        this.spotifyMusicPlayer.pause();
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="navigationpanel" >
+<div class="navigationpanel">
   <div class="left">
     <a
       class="link"
@@ -28,44 +28,53 @@
         <p>Cześć, {{ name }}</p>
       </div>
       <img src="{{ avatar }}" />
-        <div class="openOrClose" (click)="onShow()" *ngIf="visible">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <button class="logout"(click)="onLogout()">
-          <img src="assets/logout_black_48dp.svg" />
-        </button>
+      <div class="openOrClose" (click)="onShow()" *ngIf="visible">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <button class="logout" (click)="connectDevice()">
+        <img src="assets/devices_black_48dp.svg" />
+      </button>
+      <button class="logout" (click)="onLogout()">
+        <img src="assets/logout_black_48dp.svg" />
+      </button>
     </div>
   </div>
 </div>
 
-<div class="hiddenNav" [ngClass]="{ open: isOpen, close: !isOpen }" *ngIf="visible">
- <div class="buttons">
-  <button class="logout"(click)="onLogout()">
-    <img src="assets/logout_white_48dp.svg" />
-  </button>
-  <button class="logout"(click)="onShow()">
-    <img src="assets/close_white_48dp.svg" />
-  </button>
- </div>
+<div
+  class="hiddenNav"
+  [ngClass]="{ open: isOpen, close: !isOpen }"
+  *ngIf="visible"
+>
+  <div class="buttons">
+    <button class="logout" (click)="connectDevice()">
+      <img src="assets/devices_black_48dp.svg" />
+    </button>
+    <button class="logout" (click)="onLogout()">
+      <img src="assets/logout_white_48dp.svg" />
+    </button>
+    <button class="logout" (click)="onShow()">
+      <img src="assets/close_white_48dp.svg" />
+    </button>
+  </div>
   <a
-  class="link"
-  routerLink="/recommend"
-  (click)="hideNavigation()"
-  *ngIf="isLogin"
-  [routerLinkActive]="['activeLink']"
->
-  <p>Strona główna</p>
-</a>
-<a
-  class="link"
-  routerLink="/top"
-  (click)="hideNavigation()"
-  *ngIf="isLogin"
-  [routerLinkActive]="['activeLink']"
->
-  <p>Twoje Top</p>
-</a>
-
+    class="link"
+    routerLink="/recommend"
+    (click)="hideNavigation()"
+    *ngIf="isLogin"
+    [routerLinkActive]="['activeLink']"
+  >
+    <p>Strona główna</p>
+  </a>
+  <a
+    class="link"
+    routerLink="/top"
+    (click)="hideNavigation()"
+    *ngIf="isLogin"
+    [routerLinkActive]="['activeLink']"
+  >
+    <p>Twoje Top</p>
+  </a>
 </div>
