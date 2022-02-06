@@ -8,18 +8,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { MusicPlayerComponent } from './modules/shared/components/music-player/music-player.component';
 import { RecommendModule } from './modules/recommend/recommend.module';
 import { TopModule } from './modules/top/top.module';
 import { TrackModule } from './modules/track/track.module';
 import { AuthGuardService } from './security/AuthGuard';
-import { TokenInterceptor } from './security/token.interceptor';
 import { SharedModule } from './modules/shared/shared.module';
 import { HomeLoggedComponent } from './components/home-logged/home-logged.component';
 import { HomeNotLoggedComponent } from './components/home-not-logged/home-not-logged.component';
 import { MessageComponent } from './components/message/message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
+import { TokenInterceptor } from './security/token-intertceptor/token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,

@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SongInfo } from '../../shared/models/songInfo.model';
-import { AdvancedSettings } from '../models/advancedSettings.model';
+import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
+import { AdvancedSettings } from '../../models/advancedSettings.model';
 
 @Injectable({
   providedIn: 'root',

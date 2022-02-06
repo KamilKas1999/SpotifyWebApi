@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { HeaderVisibleService } from 'src/app/services/header-visible.service';
-import { LoginService } from 'src/app/services/login.service';
+import { ActivatedRoute,  Router } from '@angular/router';
+import { LoginService } from 'src/app/services/authenticate/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +13,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private loginService: LoginService,
     private router: Router,
-    private headerVisible: HeaderVisibleService
   ) {}
 
   code: string;

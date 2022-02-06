@@ -1,10 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
-import { RecommendService } from 'src/app/modules/recommend/services/recommend.service';
-import { PlayListCreatorService } from 'src/app/modules/shared/services/PlalistCreatorService/play-list-creator-service.service';
-import { MessageService } from 'src/app/services/message.service';
-
+import { RecommendService } from '../../services/recomendation/recommend.service';
 @Component({
   selector: 'app-recommend',
   templateUrl: './recommend.component.html',

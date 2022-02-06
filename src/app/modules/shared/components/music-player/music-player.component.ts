@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
-import { MusicPlayerService } from 'src/app/services/music-player.service';
-import { SpotifyMusicPlayerService } from 'src/app/services/spotifyMusicPlayer/spotify-music-player.service';
-import { threadId } from 'worker_threads';
+import { MusicPlayerService } from 'src/app/services/limited-music-player/music-player.service';
+import { PlayerModeService } from 'src/app/services/player-mode/player-mode.service';
+import { SpotifyMusicPlayerService } from 'src/app/services/spotify-music-player/spotify-music-player.service';
 
 @Component({
   selector: 'app-music-player',
@@ -29,11 +29,16 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   private isLoadingSub: Subscription;
   isOpen = false;
   volume = 0.5;
-  mode = 1;
+  mode = 0;
   currentState: any;
+
+
+
+
   constructor(
     private musicPlayer: MusicPlayerService,
-    private spotifyMusicPlayer: SpotifyMusicPlayerService
+    private spotifyMusicPlayer: SpotifyMusicPlayerService,
+    private modeService: PlayerModeService
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +50,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.spotifyMusicPlayer.currentStateEmitter.subscribe(
       (state) => (this.currentState = state)
     );
+    this.modeService.modeEmitter.subscribe(newMode => this.mode = newMode)
   }
 
   setMode(value: number): void {
-    this.mode = value;
+    this.modeService.setMode(value);
   }
 
   skipNext() {

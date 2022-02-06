@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MessageService } from 'src/app/services/message.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-message',

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
-import { SpotifyTopService } from 'src/app/modules/top/services/spotify-top.service';
+import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spotify-top.service';
 
 @Component({
   selector: 'app-top',
@@ -13,9 +13,7 @@ export class TopComponent implements OnInit, OnDestroy {
   topTracks: SongInfo[];
   private topSub: Subscription;
 
-  constructor(
-    private spotifyTopService: SpotifyTopService,
-  ) {}
+  constructor(private spotifyTopService: SpotifyTopService) {}
 
   ngOnInit(): void {
     this.isLoading = true;

@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { MessageService } from './message.service';
 
-import { HeaderVisibleService } from './header-visible.service';
-
-describe('HeaderVisibleService', () => {
-  let service: HeaderVisibleService;
+describe('MessageService', () => {
+  let service: MessageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HeaderVisibleService);
+    service = TestBed.inject(MessageService);
   });
 
   it('should be created', () => {

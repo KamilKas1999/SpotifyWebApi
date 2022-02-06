@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdvancedSettings } from '../../models/advancedSettings.model';
-import { RecommendService } from '../../services/recommend.service';
+import { RecommendService } from '../../services/recomendation/recommend.service';
 
 @Component({
   selector: 'app-panel-advanced',

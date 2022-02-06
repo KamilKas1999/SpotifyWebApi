@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { LoginService } from 'src/app/services/login.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { SongInfo } from '../../models/songInfo.model';
 
 @Injectable({

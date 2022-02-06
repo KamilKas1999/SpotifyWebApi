@@ -1,17 +1,8 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { NgForm } from '@angular/forms';
-
-import { RecommendService } from 'src/app/modules/recommend/services/recommend.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
-import { PlayListCreatorService } from 'src/app/modules/shared/services/PlalistCreatorService/play-list-creator-service.service';
-import { MessageService } from 'src/app/services/message.service';
+import { PlayListCreatorService } from 'src/app/modules/shared/services/playlist-creator/play-list-creator-service.service';
+import { MessageService } from 'src/app/services/message/message.service';
+import { RecommendService } from '../../services/recomendation/recommend.service';
 
 @Component({
   selector: 'app-panel',
@@ -19,7 +10,6 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./panel.component.scss'],
 })
 export class PanelComponent implements OnInit {
-
   advancedVisible = false;
   primaryVisible = true;
   isLoading: boolean = false;
@@ -28,13 +18,11 @@ export class PanelComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<never>();
   @Input('tracks') tracks: SongInfo[];
 
-
   constructor(
     private recommendService: RecommendService,
     private playlistService: PlayListCreatorService,
     private messageService: MessageService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.addedValues = this.recommendService.added;

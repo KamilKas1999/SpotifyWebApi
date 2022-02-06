@@ -3,9 +3,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { User } from '../models/user.model';
-import { environment } from '../../environments/environment';
-import { MusicPlayerService } from './music-player.service';
+import { User } from '../../models/user.model';
+import { environment } from '../../../environments/environment';
+import { MusicPlayerService } from '../limited-music-player/music-player.service';
+import { SpotifyMusicPlayerService } from '../spotify-music-player/spotify-music-player.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private musicPlayer: MusicPlayerService
+    private musicPlayer: MusicPlayerService,
+    private spotifyPlayerService: SpotifyMusicPlayerService
   ) {}
 
   isLogin(): boolean {
@@ -71,6 +73,7 @@ export class LoginService {
 
   logout(sessionExpired: boolean): void {
     this.musicPlayer.clearPlayer();
+    this.spotifyPlayerService.disconnect();
     this.loginEmitter.next(false);
     localStorage.removeItem('access_token');
     localStorage.removeItem('expire_date');

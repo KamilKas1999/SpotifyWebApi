@@ -7,12 +7,13 @@ import {
   Output,
 } from '@angular/core';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
-import { MusicPlayerService } from 'src/app/services/music-player.service';
-import { MessageService } from 'src/app/services/message.service';
-import { UserLibraryService } from '../../services/UserLibraryService/user-library.service';
+import { MusicPlayerService } from 'src/app/services/limited-music-player/music-player.service';
+import { MessageService } from 'src/app/services/message/message.service';
+import { UserLibraryService } from '../../services/user-library/user-library.service';
 import { ArtistShort } from 'src/app/modules/recommend/models/artistShort.model';
 import { Artist } from '../../models/artist.model';
-import { SpotifyMusicPlayerService } from 'src/app/services/spotifyMusicPlayer/spotify-music-player.service';
+import { SpotifyMusicPlayerService } from 'src/app/services/spotify-music-player/spotify-music-player.service';
+import { PlayerModeService } from 'src/app/services/player-mode/player-mode.service';
 
 @Component({
   selector: 'app-music-card',
@@ -29,21 +30,23 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   minutes: string | number;
   seconds: string | number;
   number = 0;
-  isOpen=false;
+  isOpen = false;
+  mode = 0;
   private followMessageText = 'Dodano do polubionych!';
   private unfollowMessageText = 'Usunięto z polubionych!';
   constructor(
     private musicPlayer: MusicPlayerService,
     private userLibrary: UserLibraryService,
     private messageService: MessageService,
-    private spotifyMusicPlayer: SpotifyMusicPlayerService
+    private spotifyMusicPlayer: SpotifyMusicPlayerService,
+    private modeService: PlayerModeService
   ) {}
 
-  onOpen(){
+  onOpen() {
     this.isOpen = !this.isOpen;
   }
 
-  addToQueue():void{
+  addToQueue(): void {
     this.spotifyMusicPlayer.addToQueue(this.track);
   }
 
@@ -54,16 +57,18 @@ export class MusicCardComponent implements OnInit, OnDestroy {
     this.seconds = String(
       Math.floor((tempTime - this.minutes) * 600)
     ).substring(0, 2);
+    this.mode = this.modeService.mode;
+    this.modeService.modeEmitter.subscribe(newMode => this.mode = newMode);
   }
 
-  getArtistShorted(): Artist[]{
-    if(this.isOpen) return  this.track.artists;
-    return this.track.artists.slice(0,2);
+  getArtistShorted(): Artist[] {
+    if (this.isOpen) return this.track.artists;
+    return this.track.artists.slice(0, 2);
   }
 
-  plusArtist(): number{
-    if(this.isOpen) return 0;
-    return this.track.artists.length - 2;;
+  plusArtist(): number {
+    if (this.isOpen) return 0;
+    return this.track.artists.length - 2;
   }
 
   changeTrackSaving(): void {

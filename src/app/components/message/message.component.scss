@@ -1,5 +1,4 @@
 .box {
-  border: 1px solid black;
   color: #fff;
   border-style: solid;
   border-width: 5px;
@@ -13,6 +12,13 @@
   right: 10px;
   z-index: 1000;
   text-align: center;
+  -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
+  box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(17px);
+  border-radius: 10px;
+  border: 3px solid #031b88b4;
   p {
     color: black;
     font-size: 25x;
@@ -26,9 +32,9 @@
     border-radius: 100%;
     height: 50px;
     width: 50px;
-    border: 2px solid black;
+    border: 2px solid #202020;
     margin: 10px;
-    background: #191414;
+    background: #031b88b4;
     box-shadow: none;
     font-size: 10px;
     text-align: center;
@@ -47,7 +53,7 @@
     transition: 0.3s;
   }
   button:enabled:hover > img {
-    transform: scale(1.5);
+    transform: scale(1.2);
     filter: invert(1);
   }
 }

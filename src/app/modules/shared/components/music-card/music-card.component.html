@@ -28,13 +28,14 @@
     </div>
     <div class="buttons">
       <button
+        *ngIf="mode == 0"
         (click)="onPlayMusic()"
         title="Odtwórz 30 sekund"
         [disabled]="!this.track.preview_url"
       >
         <img src="assets/outline_play_arrow_white_48dp.png" />
       </button>
-      <button (click)="addToQueue()" title="Dodaj do kolejki">
+      <button *ngIf="mode == 1" (click)="addToQueue()" title="Dodaj do kolejki">
         <img src="assets/queue_white_48dp.svg" />
       </button>
       <button

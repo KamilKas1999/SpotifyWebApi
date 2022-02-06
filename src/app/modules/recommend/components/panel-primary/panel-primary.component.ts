@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SpotifyTopService } from 'src/app/modules/top/services/spotify-top.service';
+import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spotify-top.service';
 import { ArtistShort } from '../../models/artistShort.model';
 import { PrimarySettings } from '../../models/primarySettings.model';
 import { TrackShort } from '../../models/trackShort.model';
-import { DataPreparingService } from '../../services/data-preparing.service';
-import { RecommendService } from '../../services/recommend.service';
-import { SearchService } from '../../services/searchService/search.service';
+import { DataPreparingService } from '../../services/data-preparing/data-preparing.service';
+import { RecommendService } from '../../services/recomendation/recommend.service';
+import { SearchService } from '../../services/search/search.service';
 
 @Component({
   selector: 'app-panel-primary',

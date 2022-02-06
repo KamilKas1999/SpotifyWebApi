@@ -1,13 +1,9 @@
-import { Route } from '@angular/compiler/src/core';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserData } from 'src/app/models/userData.model';
-import { HeaderVisibleService } from 'src/app/services/header-visible.service';
-import { LoginService } from 'src/app/services/login.service';
-import { MusicPlayerService } from 'src/app/services/music-player.service';
-import { SpotifyMusicPlayerService } from 'src/app/services/spotifyMusicPlayer/spotify-music-player.service';
-import { UserService } from 'src/app/services/user.service';
+import { LoginService } from 'src/app/services/authenticate/login.service';
+import { SpotifyMusicPlayerService } from 'src/app/services/spotify-music-player/spotify-music-player.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +21,7 @@ export class HeaderComponent implements OnInit {
   avatar: string;
   user: UserData;
   product: string;
+  connected = false;
   constructor(
     private authService: LoginService,
     private userService: UserService,
@@ -42,6 +39,9 @@ export class HeaderComponent implements OnInit {
         this.getUserData();
       }
     });
+    this.spotifyPlayerService.currentStateEmitter.subscribe(
+      (state) => (this.connected = !!state)
+    );
   }
 
   getUserData() {

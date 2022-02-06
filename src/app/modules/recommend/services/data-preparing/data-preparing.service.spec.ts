@@ -1,13 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
 import { DataPreparingService } from './data-preparing.service';
-import { Album } from '../../shared/models/album.model';
-import { ArtistInfo } from '../../shared/models/artistInfo.model';
-import { SongInfo } from '../../shared/models/songInfo.model';
-import { ArtistShort } from '../models/artistShort.model';
-import { TrackShort } from '../models/trackShort.model';
-import { Artist } from '../../shared/models/artist.model';
+import { SongInfo } from '../../../shared/models/songInfo.model';
+import { ArtistShort } from '../../models/artistShort.model';
+import { TrackShort } from '../../models/trackShort.model';
+import { Artist } from '../../../shared/models/artist.model';
 
 describe('DataPreparingService', () => {
   let service: DataPreparingService;
