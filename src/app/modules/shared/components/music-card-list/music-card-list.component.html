@@ -1,16 +1,4 @@
-<p *ngIf="tracks.length != 0">{{describe}}</p>
-<div class="computer">
+<p *ngIf="tracks.length != 0">{{ describe }}</p>
+<div>
   <app-music-card *ngFor="let track of tracks" [track]="track"></app-music-card>
-</div>
-<div class="mobile" *ngIf="tracks.length > 0">
-  <div class="tracks">
-    <div
-      class="track"
-      *ngFor="let track of tracks; let i = index"
-      (click)="onSelected(i)"
-    >
-      <img src="{{ track.album.images[1].url }}" />
-    </div>
-  </div>
-  <app-music-card [track]="tracks[selectedIndex]"></app-music-card>
 </div>

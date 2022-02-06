@@ -75,7 +75,7 @@ export class MusicPlayerService {
         this.pauseInterval();
         this.isPaused.next(true);
       }
-    }, 50);
+    }, 1000);
   }
 
   private pauseInterval() {
@@ -85,7 +85,7 @@ export class MusicPlayerService {
         this.isPaused.next(false);
         this.playInterval();
       }
-    }, 100);
+    }, 1000);
   }
 
   setTime(time: number): void {

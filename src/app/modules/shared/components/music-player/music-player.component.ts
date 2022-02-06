@@ -11,30 +11,31 @@ import { SpotifyMusicPlayerService } from 'src/app/services/spotify-music-player
   styleUrls: ['./music-player.component.scss'],
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
+  //shared
   minValue = 0;
   maxValue = 0;
   actuallValue = 0;
   isPaused = true;
+  minutes: string | number = 0;
+  seconds: string | number = 0;
+  totalSeconds: string | number = 0;
+  totalMinutes: string | number = 0;
+  isOpen: boolean = false;
+  volume = 0.5;
+  mode = 0;
+  private modeSub: Subscription;
+  //limited-mode
   private actuallTimeSub: Subscription;
   private isPausedSub: Subscription;
   private trackSub: Subscription;
   private trackDuration: Subscription;
   private trackVolumeSub: Subscription;
   track: SongInfo;
-  isLoading = false;
-  minutes: string | number = 0;
-  seconds: string | number = 0;
-  totalSeconds: string | number = 0;
-  totalMinutes: string | number = 0;
-  private isLoadingSub: Subscription;
-  isOpen = false;
-  volume = 0.5;
-  mode = 0;
+  //spotify-mode
+  private currentStateSub: Subscription;
   currentState: any;
 
-
-
-
+  //shared
   constructor(
     private musicPlayer: MusicPlayerService,
     private spotifyMusicPlayer: SpotifyMusicPlayerService,
@@ -42,38 +43,100 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subTime();
-    this.subIsPaused();
-    this.subTrack();
-    this.subDuration();
-    this.subIsLoading();
-    this.spotifyMusicPlayer.currentStateEmitter.subscribe(
-      (state) => (this.currentState = state)
-    );
-    this.modeService.modeEmitter.subscribe(newMode => this.mode = newMode)
+    this.subShared();
+    this.subLimited();
+  }
+
+  private subShared() {
+    this.subMode();
+  }
+
+  private unsubShared() {
+    this.modeSub.unsubscribe();
+  }
+
+  private subMode() {
+    this.modeSub = this.modeService.modeEmitter.subscribe((newMode) => {
+      this.mode = newMode;
+      if (this.mode == 0) {
+        this.unsubSpotify();
+        this.subLimited();
+      } else if (this.mode == 1) {
+        this.unsubLimited();
+        this.subSpotify();
+      }
+    });
   }
 
   setMode(value: number): void {
     this.modeService.setMode(value);
   }
 
-  skipNext() {
-    this.spotifyMusicPlayer.skipNext();
-  }
-
-  skipPrev() {
-    this.spotifyMusicPlayer.skipPrev();
-  }
-
   onExpand(): void {
     this.isOpen = !this.isOpen;
   }
-  clearPlayer() {
-    this.track = null;
-    this.musicPlayer.clearPlayer();
+
+  volumeInput(newValue: number) {
+    if (this.mode == 0) {
+      this.volume = newValue;
+      this.musicPlayer.setVolume(newValue);
+    } else if (this.mode == 1) {
+      this.spotifyMusicPlayer.setVolume(newValue);
+    }
   }
 
+  onClick() {
+    if (this.mode == 0) {
+      this.onClickLimitedMode();
+    } else if (this.mode == 1) {
+      this.onClickSpotifyMode();
+    }
+  }
+
+  valueChange(newTime) {
+    this.actuallValue = newTime;
+    if (this.mode == 0) {
+      this.musicPlayer.setTime(newTime);
+      this.seconds = this.countSeconds(newTime);
+      this.minutes = this.countMinutes(newTime);
+      this.subTime();
+    } else if (this.mode == 1) {
+      this.spotifyMusicPlayer.setPosition(newTime);
+    }
+  }
+  valueInput() {
+    this.actuallTimeSub.unsubscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.subShared();
+  }
+
+  //limited-mode
+  private subLimited() {
+    this.subDuration();
+    this.subTime();
+    this.subIsPaused();
+    this.subTrack();
+    this.subValume();
+  }
+
+  private unsubLimited() {
+    this.actuallTimeSub.unsubscribe();
+    this.isPausedSub.unsubscribe();
+    this.trackSub.unsubscribe();
+    this.trackDuration.unsubscribe();
+    this.trackVolumeSub.unsubscribe();
+  }
+  onClickLimitedMode(): void {
+    if (this.isPaused) {
+      this.musicPlayer.resumeMusic();
+    } else {
+      this.musicPlayer.pause();
+    }
+  }
   private subTime(): void {
+    if (this.actuallTimeSub) this.actuallTimeSub.unsubscribe();
     this.actuallTimeSub = this.musicPlayer.actualTime.subscribe((time) => {
       this.actuallValue = time;
       this.seconds = this.countSeconds(time);
@@ -123,54 +186,59 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     );
   }
 
-  private subIsLoading(): void {
-    this.isLoadingSub = this.musicPlayer.isLoading.subscribe((isLoading) => {
-      this.isLoading = isLoading;
+  //spotify-mode
+
+  private subSpotify() {
+    this.subCurrentState();
+  }
+
+  private unsubSpotify() {
+    this.currentStateSub.unsubscribe();
+  }
+
+  private onClickSpotifyMode(): void {
+    if (this.currentState.disallows.pausing) {
+      this.spotifyMusicPlayer.resume();
+    } else if (this.currentState.disallows.resuming) {
+      this.spotifyMusicPlayer.pause();
+    }
+  }
+
+  private subCurrentState(): void {
+    this.spotifyMusicPlayer.currentStateEmitter.subscribe((state) => {
+      this.currentState = state;
+      this.updateTimeFromSpotify(state);
     });
   }
+  updateTimeFromSpotify(state) {
+    if (!state) return;
+    this.actuallValue = state.position;
+    this.seconds = this.countSecondsSpotify(state.position);
+    this.minutes = this.countMinutesSpotify(state.position);
+    this.maxValue = state.duration;
+    this.totalSeconds = this.countSecondsSpotify(state.duration);
+    this.totalMinutes = this.countMinutesSpotify(state.duration);
+  }
 
-  volumeInput(newValue: number) {
-    if (this.mode == 0) {
-      this.volume = newValue;
-      this.musicPlayer.setVolume(newValue);
-    } else if (this.mode == 1) {
-      this.spotifyMusicPlayer.setVolume(newValue);
+  private countSecondsSpotify(time: number) {
+    return ((Math.floor(time) / 1000) % 60).toFixed(0);
+  }
+
+  private countMinutesSpotify(time: number) {
+    let cloneTime = time / 1000;
+    let minutes = 0;
+    while (cloneTime >= 60) {
+      cloneTime = cloneTime - 60;
+      minutes++;
     }
+    return minutes.toFixed(0);
   }
 
-  onClick() {
-    if (this.mode == 0) {
-      if (this.isPaused) {
-        this.musicPlayer.resumeMusic();
-      } else {
-        this.musicPlayer.pause();
-      }
-    } else if (this.mode == 1) {
-      if (this.currentState.disallows.pausing) {
-        this.spotifyMusicPlayer.resume();
-      } else if (this.currentState.disallows.resuming) {
-        this.spotifyMusicPlayer.pause();
-      }
-    }
+  skipNext() {
+    this.spotifyMusicPlayer.skipNext();
   }
 
-  valueChange(newTime) {
-    this.musicPlayer.setTime(newTime);
-    this.actuallValue = newTime;
-    this.seconds = this.countSeconds(newTime);
-    this.minutes = this.countMinutes(newTime);
-    this.subTime();
-  }
-  valueInput(s) {
-    this.actuallTimeSub.unsubscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.actuallTimeSub.unsubscribe();
-    this.isPausedSub.unsubscribe();
-    this.trackSub.unsubscribe();
-    this.isLoadingSub.unsubscribe();
-    this.trackDuration.unsubscribe();
-    this.trackVolumeSub.unsubscribe();
+  skipPrev() {
+    this.spotifyMusicPlayer.skipPrev();
   }
 }

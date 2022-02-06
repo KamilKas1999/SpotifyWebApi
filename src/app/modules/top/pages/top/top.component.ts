@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Artist } from 'src/app/modules/shared/models/artist.model';
 import { SongInfo } from 'src/app/modules/shared/models/songInfo.model';
 import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spotify-top.service';
 
@@ -11,20 +12,21 @@ import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spot
 export class TopComponent implements OnInit, OnDestroy {
   isLoading = false;
   topTracks: SongInfo[];
-  private topSub: Subscription;
+  topArtists: Artist[];
 
   constructor(private spotifyTopService: SpotifyTopService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-
-    this.topSub = this.spotifyTopService.getTopTracks().subscribe((data) => {
+    this.spotifyTopService.getTopTracks().subscribe((data) => {
       this.topTracks = data.items;
+      this.isLoading = false;
+    });
+    this.spotifyTopService.getTopArtists().subscribe((data) => {
+      this.topArtists = data.items;
       this.isLoading = false;
     });
   }
 
-  ngOnDestroy(): void {
-    this.topSub.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

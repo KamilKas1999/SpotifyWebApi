@@ -11,6 +11,7 @@ export class SpotifyMusicPlayerService {
   lastAddedTrack: SongInfo;
   player: Spotify.Player;
   currentStateEmitter = new EventEmitter<any>();
+  checkStateInterval: any;
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
@@ -24,9 +25,20 @@ export class SpotifyMusicPlayerService {
     }
   }
 
+  setPosition(value:number){
+    this.player.seek(value);
+  }
+
   initPlayer() {
     if (this.player == null) {
       this.player = this.createNewPlayer();
+      this.checkStateInterval = setInterval(
+        () =>
+          this.player
+            .getCurrentState()
+            .then((state) => this.currentStateEmitter.emit(state)),
+        1000
+      );
     }
     this.player.connect();
   }
@@ -58,17 +70,17 @@ export class SpotifyMusicPlayerService {
       );
   }
   skipNext() {
-    this.player.nextTrack().then();
+    this.player.nextTrack();
   }
 
   skipPrev() {
-    this.player.nextTrack().then();
+    this.player.nextTrack();
   }
   pause() {
-    this.player.pause().then();
+    this.player.pause();
   }
   resume() {
-    this.player.resume().then();
+    this.player.resume();
   }
 
   setVolume(value: number) {

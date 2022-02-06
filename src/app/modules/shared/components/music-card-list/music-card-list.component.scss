@@ -1,35 +1,5 @@
 p{
-  font-size: 20px;
   width: 100%;
   text-align: center;
-
-}
-.computer {
-  display: block;
-}
-.mobile {
-  display: none;
-  .tracks {
-    display: flex;
-    width: 90%;
-    overflow-x: scroll;
-    margin-left: auto;
-    margin-right: auto;
-    .track {
-      img {
-        width: 75px;
-        border-radius: 10px;
-      }
-      margin: 10px;
-    }
-  }
 }
 
-@media only screen and (max-width: 700px) {
-  .computer {
-    display: none;
-  }
-  .mobile {
-    display: block;
-  }
-}
