@@ -23,7 +23,7 @@
   right: auto;
   left: auto;
   .left {
-    width: 20%;
+    width: 30%;
     justify-content: left;
     display: flex;
     #albumImg {
@@ -38,7 +38,7 @@
     }
   }
   .middle-button {
-    width: 20%;
+    width: 10%;
     display: flex;
     justify-content: right;
     #expand-button {
@@ -76,7 +76,7 @@
   }
   .middle {
     display: flex;
-    padding: 15px;
+    margin: 15px;
     width: 60%;
     .ranger {
       display: flex;
@@ -85,8 +85,12 @@
       .time {
         color: black;
         width: 10%;
-        text-align: center;
         min-width: 40px;
+        p {
+          text-align: center;
+          margin: 0;
+          margin-top: 15px;
+        }
       }
     }
   }

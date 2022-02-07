@@ -57,7 +57,6 @@ export class RecommendService {
     this.added.forEach((el) => {
       if (el.type == 'TRACK') {
         if (!url.href.includes(this.SEED_TRACKS)) {
-          console.log('add key ' + this.SEED_TRACKS + ' ' + el.name);
           url.searchParams.append(this.SEED_TRACKS, el.id);
         } else {
           url.href = url.href + ',' + el.id;
@@ -67,10 +66,8 @@ export class RecommendService {
     this.added.forEach((el) => {
       if (el.type == 'ARTIST') {
         if (!url.href.includes(this.SEED_ARTISTS)) {
-          console.log('add key ' + this.SEED_ARTISTS + ' ' + el.name);
           url.searchParams.append(this.SEED_ARTISTS, el.id);
         } else {
-          console.log('add value ' + el.name);
           url.href = url.href + ',' + el.id;
         }
       }
@@ -78,10 +75,8 @@ export class RecommendService {
     this.added.forEach((el) => {
       if (!el.type) {
         if (!url.href.includes(this.SEED_GENRES)) {
-          console.log('add key ' + this.SEED_GENRES + ' ' + el);
           url.searchParams.append(this.SEED_GENRES, el);
         } else {
-          console.log('add value ' + el);
           url.href = url.href + ',' + el;
         }
       }

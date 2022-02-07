@@ -19,7 +19,6 @@ export class PlayListCreatorService {
   }
 
   public addTrackToPlaylist(track: SongInfo, playlistId: string) {
-    console.log(playlistId);
     return this.http.post(
       'https://api.spotify.com/v1/playlists/{playlist_id}/tracks',
       {}
@@ -27,8 +26,6 @@ export class PlayListCreatorService {
   }
   public addTracksToPlaylist(tracks: SongInfo[], playlistId: string) {
     const ids = tracks.map(track => track.uri);
-    console.log(ids);
-    console.log(playlistId);
     return this.http.post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {uris:ids}

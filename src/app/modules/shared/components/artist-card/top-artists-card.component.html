@@ -2,7 +2,7 @@
   class="element"
   [ngClass]="{ musicCardOpen: isOpen, musicCardClose: !isOpen }"
 >
-  <div class="expand-button">
+  <div class="expand-button"  *ngIf="plusGenre() > 0">
     <button (click)="onOpen()">
       <img
         [ngClass]="{ rotate: isOpen }"
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="buttons">
-      <a routerLink="">
+      <a routerLink="{{ '/artist/' + artist.id }}">
         <button title="Dowiedz się więcej o utworze">
           <img src="assets/more_horiz_white_48dp.svg" />
         </button>

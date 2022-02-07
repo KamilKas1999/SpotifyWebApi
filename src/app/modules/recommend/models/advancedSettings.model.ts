@@ -5,6 +5,7 @@ export class AdvancedSettings {
   danceability: number = 0.5;
   energy: number = 0.5;
   mood: number = 0.5;
+  speechiness: number = 0.5;
 
   constructor() {}
 }

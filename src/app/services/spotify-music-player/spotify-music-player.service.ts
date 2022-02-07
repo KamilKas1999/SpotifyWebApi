@@ -35,7 +35,6 @@ export class SpotifyMusicPlayerService {
       this.checkStateInterval = setInterval(
         () =>
           this.player.getCurrentState().then((state) => {
-            console.log(state);
             this.currentStateEmitter.emit(state);
           }),
         1000

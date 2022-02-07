@@ -1,8 +1,14 @@
-<div class="advanced" [ngClass]="{'hidden' : hideComponent, 'showed':!hideComponent}">
-    <h1>Parametry rekomendacji</h1>
-    <button (click)="onHide()">
-      <img [ngClass]="{'rotate' : !hideComponent}" src="../../../../../assets/expand_more_black_24dp.svg"/>
-    </button>
+<div
+  class="advanced"
+  [ngClass]="{ hidden: hideComponent, showed: !hideComponent }"
+>
+  <h1>Parametry rekomendacji</h1>
+  <button (click)="onHide()">
+    <img
+      [ngClass]="{ rotate: !hideComponent }"
+      src="../../../../../assets/expand_more_black_24dp.svg"
+    />
+  </button>
   <div>
     <div id="tempo">
       <input
@@ -14,7 +20,7 @@
         [(ngModel)]="advancedSettings.tempo"
       />
       <p>Tempo</p>
-      <p>{{tempValueDesc}}</p>
+      <p>{{ tempValueDesc }}</p>
     </div>
     <div id="dancebility">
       <input
@@ -26,7 +32,7 @@
         [(ngModel)]="advancedSettings.danceability"
       />
       <p>Taneczność</p>
-      <p>{{danceValueDesc}}</p>
+      <p>{{ danceValueDesc }}</p>
     </div>
     <div id="energy">
       <input
@@ -38,12 +44,19 @@
         [(ngModel)]="advancedSettings.energy"
       />
       <p>Energia</p>
-      <p>{{energyValueDesc}}</p>
+      <p>{{ energyValueDesc }}</p>
     </div>
-    <div id="mood">
-      <input type="range" (change)="changed()" min="0" max="1" step="0.1" />
-      <p>Nastrój</p>
-      <p>Średnie</p>
+    <div id="speechiness">
+      <input
+        type="range"
+        (change)="changed()"
+        min="0"
+        max="1"
+        step="0.1"
+        [(ngModel)]="advancedSettings.speechiness"
+      />
+      <p>Wokal</p>
+      <p>{{ accousticSpechDesc }}</p>
     </div>
     <div id="instrumentalnss">
       <input
@@ -55,7 +68,7 @@
         [(ngModel)]="advancedSettings.instrumentalness"
       />
       <p>Instrumentalność</p>
-      <p>{{instrValueDesc}}</p>
+      <p>{{ instrValueDesc }}</p>
     </div>
     <div id="acousticness">
       <input
@@ -67,8 +80,7 @@
         [(ngModel)]="advancedSettings.acousticness"
       />
       <p>Akustyka</p>
-      <p>{{accousticValueDesc}}</p>
+      <p>{{ accousticValueDesc }}</p>
     </div>
   </div>
- 
 </div>

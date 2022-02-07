@@ -1,9 +1,8 @@
 <app-top-time-button (time-range)="getTopArtists($event)"></app-top-time-button>
-
 <div class="top" *ngIf="!isLoading">
-  <app-top-artists-card
+  <app-artist-card
     *ngFor="let artist of topArtists"
     [artist]="artist"
-  ></app-top-artists-card>
+  ></app-artist-card>
 </div>
 <app-loading *ngIf="isLoading"></app-loading>

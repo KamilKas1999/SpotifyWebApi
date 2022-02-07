@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopArtistsCardComponent } from './top-artists-card.component';
+import { ArtistComponent } from './artist.component';
 
-describe('TopArtistsCardComponent', () => {
-  let component: TopArtistsCardComponent;
-  let fixture: ComponentFixture<TopArtistsCardComponent>;
+describe('ArtistComponent', () => {
+  let component: ArtistComponent;
+  let fixture: ComponentFixture<ArtistComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TopArtistsCardComponent ]
+      declarations: [ ArtistComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopArtistsCardComponent);
+    fixture = TestBed.createComponent(ArtistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

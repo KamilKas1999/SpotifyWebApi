@@ -1,0 +1,14 @@
+<div *ngIf="loadingTrack || loadingTrackFeatures">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!loadingTrack">
+  <app-music-card [track]="track"></app-music-card>
+</div>
+
+<p>Wykonawcy</p>
+<div class="artists">
+  <app-artist-card
+    *ngFor="let artist of artists"
+    [artist]="artist"
+  ></app-artist-card>
+</div>

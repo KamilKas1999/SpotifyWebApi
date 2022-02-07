@@ -28,6 +28,7 @@ export class TopArtistsComponent implements OnInit {
     }
     this.isLoading = true;
     this.spotifyTopService.getTopArtists(timeRange).subscribe((data) => {
+      console.log(data)
       this.topArtists = data.items;
       this.isLoading = false;
     });

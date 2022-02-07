@@ -106,11 +106,9 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     }
   }
   valueInput() {
-    console.log(this.mode);
     if (this.mode == 0) {
       this.actuallTimeSub.unsubscribe();
     } else if (this.mode == 1) {
-      console.log('unsub');
       this.currentStateSub.unsubscribe();
     }
   }

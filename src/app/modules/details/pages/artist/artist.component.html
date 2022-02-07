@@ -1,0 +1,10 @@
+<div *ngIf="isLoading">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!isLoading">
+  <app-artist-card [artist]="artist"></app-artist-card>
+</div>
+<div id="top-tracks" *ngIf="!isLoadingTopTracks">
+  <p>Najpopularniejsze utwory {{artist.name}} w Polsce</p>
+  <app-music-card-list [tracks]="topArtistTrack"></app-music-card-list>
+</div>

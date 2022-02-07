@@ -54,7 +54,6 @@ export class PanelPrimaryComponent implements OnInit {
 
   onAddMore(mode: number) {
     this.mode = mode;
-    console.log(this.mode);
     this.showModal = true;
   }
 
