@@ -102,10 +102,17 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       this.subTime();
     } else if (this.mode == 1) {
       this.spotifyMusicPlayer.setPosition(newTime);
+      this.subCurrentState();
     }
   }
   valueInput() {
-    this.actuallTimeSub.unsubscribe();
+    console.log(this.mode);
+    if (this.mode == 0) {
+      this.actuallTimeSub.unsubscribe();
+    } else if (this.mode == 1) {
+      console.log('unsub');
+      this.currentStateSub.unsubscribe();
+    }
   }
 
   ngOnDestroy(): void {
@@ -122,6 +129,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   private unsubLimited() {
+    if (!this.trackSub) return;
     this.actuallTimeSub.unsubscribe();
     this.isPausedSub.unsubscribe();
     this.trackSub.unsubscribe();
@@ -187,12 +195,12 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   //spotify-mode
-
   private subSpotify() {
     this.subCurrentState();
   }
 
   private unsubSpotify() {
+    if (!this.currentStateSub) return;
     this.currentStateSub.unsubscribe();
   }
 
@@ -205,10 +213,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   private subCurrentState(): void {
-    this.spotifyMusicPlayer.currentStateEmitter.subscribe((state) => {
-      this.currentState = state;
-      this.updateTimeFromSpotify(state);
-    });
+    this.currentStateSub =
+      this.spotifyMusicPlayer.currentStateEmitter.subscribe((state) => {
+        this.currentState = state;
+        this.updateTimeFromSpotify(state);
+      });
   }
   updateTimeFromSpotify(state) {
     if (!state) return;

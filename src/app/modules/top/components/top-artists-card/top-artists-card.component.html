@@ -1,0 +1,41 @@
+<div
+  class="element"
+  [ngClass]="{ musicCardOpen: isOpen, musicCardClose: !isOpen }"
+>
+  <div class="expand-button">
+    <button (click)="onOpen()">
+      <img
+        [ngClass]="{ rotate: isOpen }"
+        src="assets/expand_more_black_24dp.svg"
+      />
+    </button>
+  </div>
+  <div class="image">
+    <img src="{{ artist.images[1].url }}" />
+  </div>
+  <div class="background">
+    <div id="standard-info">
+      <h1>{{ artist.name }}</h1>
+      <div class="artists">
+        <div class="artist" *ngFor="let genre of getGenresShorted()">
+          <p>{{ genre }}</p>
+        </div>
+        <div class="artist" *ngIf="plusGenre() > 0">
+          <p>+{{ plusGenre() }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <a routerLink="">
+        <button title="Dowiedz się więcej o utworze">
+          <img src="assets/more_horiz_white_48dp.svg" />
+        </button>
+      </a>
+      <a href="{{ artist.external_urls.spotify }}">
+        <button title="Otwórz w spotify">
+          <img src="assets/icon.png" />
+        </button>
+      </a>
+    </div>
+  </div>
+</div>

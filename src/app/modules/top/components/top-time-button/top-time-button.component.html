@@ -1,0 +1,20 @@
+<div class="buttons">
+  <button
+    [ngClass]="{ active: activeButtonNumber == 0 }"
+    (click)="emitTimeRange('long_term')"
+  >
+    Cały czas
+  </button>
+  <button
+    [ngClass]="{ active: activeButtonNumber == 1 }"
+    (click)="emitTimeRange('medium_term')"
+  >
+    6 miesięcy
+  </button>
+  <button
+    [ngClass]="{ active: activeButtonNumber == 2 }"
+    (click)="emitTimeRange('short_term')"
+  >
+    4 tygodnie
+  </button>
+</div>

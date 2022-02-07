@@ -11,13 +11,22 @@
     </a>
     <a
       class="link"
-      routerLink="/top"
+      routerLink="/top/tracks"
       (click)="hideNavigation()"
       *ngIf="isLogin"
       [routerLinkActive]="['activeLink']"
     >
-      <p>Twoje Top</p>
+      <p>Top utwory</p>
     </a>
+    <a
+    class="link"
+    routerLink="/top/artists"
+    (click)="hideNavigation()"
+    *ngIf="isLogin"
+    [routerLinkActive]="['activeLink']"
+  >
+    <p>Top wykonawcy</p>
+  </a>
     <a class="link" (click)="onLogin()" *ngIf="!isLogin">
       <p>Zaloguj</p>
     </a>
@@ -67,12 +76,21 @@
     <p>Strona główna</p>
   </a>
   <a
-    class="link"
-    routerLink="/top"
-    (click)="hideNavigation()"
-    *ngIf="isLogin"
-    [routerLinkActive]="['activeLink']"
-  >
-    <p>Twoje Top</p>
-  </a>
+  class="link"
+  routerLink="/top/tracks"
+  (click)="hideNavigation()"
+  *ngIf="isLogin"
+  [routerLinkActive]="['activeLink']"
+>
+  <p>Top utwory</p>
+</a>
+<a
+class="link"
+routerLink="/top/artists"
+(click)="hideNavigation()"
+*ngIf="isLogin"
+[routerLinkActive]="['activeLink']"
+>
+<p>Top wykonawcy</p>
+</a>
 </div>

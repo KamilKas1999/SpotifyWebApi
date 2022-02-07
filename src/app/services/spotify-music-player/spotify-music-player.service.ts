@@ -25,7 +25,7 @@ export class SpotifyMusicPlayerService {
     }
   }
 
-  setPosition(value:number){
+  setPosition(value: number) {
     this.player.seek(value);
   }
 
@@ -34,9 +34,10 @@ export class SpotifyMusicPlayerService {
       this.player = this.createNewPlayer();
       this.checkStateInterval = setInterval(
         () =>
-          this.player
-            .getCurrentState()
-            .then((state) => this.currentStateEmitter.emit(state)),
+          this.player.getCurrentState().then((state) => {
+            console.log(state);
+            this.currentStateEmitter.emit(state);
+          }),
         1000
       );
     }

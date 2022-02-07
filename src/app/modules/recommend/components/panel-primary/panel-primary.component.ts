@@ -82,13 +82,13 @@ export class PanelPrimaryComponent implements OnInit {
   }
 
   randomSettings() {
-    this.topsevice.getTopArtists().subscribe((data) => {
+    this.topsevice.getTopArtists('short_term').subscribe((data) => {
       this.artists = this.dataPreparing.prepareArtist(data.items);
       if (this.added.length < 3) {
         this.added.push(this.dataPreparing.getRandomArtist(this.artists));
       }
     });
-    this.topsevice.getTopTracks().subscribe((data) => {
+    this.topsevice.getTopTracks('short_term').subscribe((data) => {
       this.tracks = this.dataPreparing.prepareTracks(data.items);
       if (this.added.length < 3) {
         this.added.push(this.dataPreparing.getRandomTrack(this.tracks));

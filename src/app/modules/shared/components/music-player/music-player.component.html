@@ -67,7 +67,7 @@
           min="{{ minValue }}"
           max="{{ maxValue }}"
           value="{{ actuallValue }}"
-          step="0.02"
+          step="{{mode == 0 ? 1 :1000}}"
           (change)="valueChange(ranger.value)"
           (input)="valueInput()"
         />

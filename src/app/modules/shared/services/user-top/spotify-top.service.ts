@@ -8,15 +8,14 @@ import { SongInfo } from '../../models/songInfo.model';
   providedIn: 'root',
 })
 export class SpotifyTopService {
-  private  GET_TOP_TRACKS_URL: string = 'https://api.spotify.com/v1/me/top/tracks';
-  private  GET_TOP_ARTISTS_URL: string = 'https://api.spotify.com/v1/me/top/artists';
   constructor(private http: HttpClient) {}
 
-  getTopTracks(): Observable<{ items: SongInfo[] }> {
-    return this.http.get<{ items: SongInfo[] }>(this.GET_TOP_TRACKS_URL);
+  getTopTracks(timeRange: string): Observable<{ items: SongInfo[] }> {
+    return this.http.get<{ items: SongInfo[] }>(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`);
   }
 
-  getTopArtists(): Observable<{ items: Artist[] }> {
-    return this.http.get<{ items: Artist[] }>(this.GET_TOP_ARTISTS_URL);
+  getTopArtists(timeRange: string): Observable<{ items: Artist[] }> {
+    return this.http.get<{ items: Artist[] }>(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}`);
   }
+  
 }

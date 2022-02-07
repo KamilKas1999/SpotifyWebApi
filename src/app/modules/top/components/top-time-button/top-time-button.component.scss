@@ -1,0 +1,22 @@
+.buttons {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    button {
+      border-radius: 5px;
+      background: #031b88b4;
+      color: white;
+      box-shadow: none;
+      font-size: 20px;
+      text-align: center;
+      transition: 0.4s;
+      margin: 15px;
+      border: none;
+      width: 30%;
+    }
+    .active{
+      background: #031b88;
+    }
+  }
+

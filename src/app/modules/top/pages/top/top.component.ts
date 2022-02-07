@@ -12,18 +12,18 @@ import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spot
 export class TopComponent implements OnInit, OnDestroy {
   isLoading = false;
   topTracks: SongInfo[];
-  topArtists: Artist[];
 
   constructor(private spotifyTopService: SpotifyTopService) {}
 
   ngOnInit(): void {
+  this.getTopTracks('medium_term')
+  
+  }
+
+  getTopTracks(timeRange: string):void{
     this.isLoading = true;
-    this.spotifyTopService.getTopTracks().subscribe((data) => {
+    this.spotifyTopService.getTopTracks(timeRange).subscribe((data) => {
       this.topTracks = data.items;
-      this.isLoading = false;
-    });
-    this.spotifyTopService.getTopArtists().subscribe((data) => {
-      this.topArtists = data.items;
       this.isLoading = false;
     });
   }

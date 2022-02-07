@@ -1,6 +1,8 @@
-<div *ngIf="!isLoading">
-  <app-music-card-list [tracks]="topTracks" [describe]="'Twoje top utwory'"></app-music-card-list>
+<app-top-time-button (time-range)="getTopTracks($event)"></app-top-time-button>
+<div class="top" *ngIf="!isLoading">
+  <app-music-card-list
+    [tracks]="topTracks"
+    [describe]="'Twoje top utwory'"
+  ></app-music-card-list>
 </div>
-<div *ngIf="isLoading">
-  <app-loading></app-loading>
-</div>
+<app-loading *ngIf="isLoading"></app-loading>
