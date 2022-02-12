@@ -1,19 +1,20 @@
 <app-header></app-header>
 <br />
-<br />
-<br />
-<app-message></app-message>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <router-outlet></router-outlet>
-    </div>
+<div class="main">
+  <div class="left">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="right">
+    <router-outlet></router-outlet>
   </div>
 </div>
+<app-message></app-message>
 <br />
 <br />
-<br />
-<div class="player">
+<div class="bottom">
   <app-music-player *ngIf="isLogin"></app-music-player>
 </div>
-<p>Z kontem premium, oraz z strumieniowaniem muzyki do aplikacji, możesz słuchać całych utworów. Opcja nie dostępna na urządzeniach mobilnych.</p>
+<!-- <p>
+  Z kontem premium, oraz z strumieniowaniem muzyki do aplikacji, możesz słuchać
+  całych utworów. Opcja nie dostępna na urządzeniach mobilnych.
+</p> -->

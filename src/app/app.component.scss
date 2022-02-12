@@ -6,9 +6,37 @@ p {
   color: #606060;
 }
 
-@media only screen and (max-width: 1000px) {
-    p{
-        display: none;
+.left {
+  width: 10%;
+  position: fixed;
+  top: -10px;
+  left: 0;
+  height: 100vh;
+}
+.right {
+  width: 80%;
+  margin-left: 15%;
+  margin-right: 5%;
+}
 
-    }
+.bottom {
+  position: fixed;
+  width: 100vw;
+  overflow: hidden;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  p {
+    display: none;
+  }
+  .left {
+    display: none;
+  }
+  .right {
+    width: 100%;
+    margin: 0;
+  }
 }

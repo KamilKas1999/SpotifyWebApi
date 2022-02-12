@@ -20,12 +20,12 @@ export class ArtistCardComponent implements OnInit {
 
   getGenresShorted() {
     if (this.isOpen) return this.artist.genres;
-    return this.artist.genres.slice(0, 5);
+    return this.artist.genres.slice(0, 8);
   }
 
   plusGenre() {
     if (this.isOpen) return 0;
-    return this.artist.genres.length - 5;
+    return this.artist.genres.length - 8;
   }
 
   ngOnDestroy(): void {}

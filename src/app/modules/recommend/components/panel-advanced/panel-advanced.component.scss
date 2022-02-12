@@ -7,18 +7,14 @@
 }
 .advanced {
   justify-content: space-between;
-  background-color: white; // #4f90d3;
-  -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-  -moz-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-  box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-  backdrop-filter: blur(17px);
-  -webkit-backdrop-filter: blur(17px);
-  border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  border: 1px solid black;
   z-index: 0;
   position: relative;
   transition: 0.3s;
@@ -29,11 +25,12 @@
     font-size: 20px;
     color: #202020;
   }
-  button {
+  #showButton {
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: white;
+    background-color: none;
+    background: none;
     border: none;
     img {
       transition: 0.3s;
@@ -68,6 +65,7 @@ input[type="range"] {
   margin-top: 50px;
   width: 100%;
   transform: rotate(-90deg);
+  background: none;
 }
 input[type="range"]:focus {
   outline: none;

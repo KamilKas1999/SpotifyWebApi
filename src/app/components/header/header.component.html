@@ -1,36 +1,5 @@
 <div class="navigationpanel">
-  <div class="left">
-    <a
-      class="link"
-      routerLink="/recommend"
-      (click)="hideNavigation()"
-      *ngIf="isLogin"
-      [routerLinkActive]="['activeLink']"
-    >
-      <p>Strona główna</p>
-    </a>
-    <a
-      class="link"
-      routerLink="/top/tracks"
-      (click)="hideNavigation()"
-      *ngIf="isLogin"
-      [routerLinkActive]="['activeLink']"
-    >
-      <p>Top utwory</p>
-    </a>
-    <a
-    class="link"
-    routerLink="/top/artists"
-    (click)="hideNavigation()"
-    *ngIf="isLogin"
-    [routerLinkActive]="['activeLink']"
-  >
-    <p>Top wykonawcy</p>
-  </a>
-    <a class="link" (click)="onLogin()" *ngIf="!isLogin">
-      <p>Zaloguj</p>
-    </a>
-  </div>
+
   <div class="right" *ngIf="isLogin">
     <div class="userName">
       <div class="link">
@@ -47,7 +16,7 @@
         <img *ngIf="connected" id="check" src="assets/done_black_24dp.svg" />
       </button> -->
       <button (click)="onLogout()">
-        <img src="assets/logout_black_48dp.svg" />
+        <img src="assets/outline_logout_black_48dp.png" />
       </button>
     </div>
   </div>
@@ -76,21 +45,21 @@
     <p>Strona główna</p>
   </a>
   <a
-  class="link"
-  routerLink="/top/tracks"
-  (click)="hideNavigation()"
-  *ngIf="isLogin"
-  [routerLinkActive]="['activeLink']"
->
-  <p>Top utwory</p>
-</a>
-<a
-class="link"
-routerLink="/top/artists"
-(click)="hideNavigation()"
-*ngIf="isLogin"
-[routerLinkActive]="['activeLink']"
->
-<p>Top wykonawcy</p>
-</a>
+    class="link"
+    routerLink="/top/tracks"
+    (click)="hideNavigation()"
+    *ngIf="isLogin"
+    [routerLinkActive]="['activeLink']"
+  >
+    <p>Top utwory</p>
+  </a>
+  <a
+    class="link"
+    routerLink="/top/artists"
+    (click)="hideNavigation()"
+    *ngIf="isLogin"
+    [routerLinkActive]="['activeLink']"
+  >
+    <p>Top wykonawcy</p>
+  </a>
 </div>

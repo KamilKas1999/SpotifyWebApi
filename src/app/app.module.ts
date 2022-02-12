@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 import { TokenInterceptor } from './security/token-intertceptor/token.interceptor';
 import { DetailsModule } from './modules/details/details.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { DetailsModule } from './modules/details/details.module';
     HomeLoggedComponent,
     HomeNotLoggedComponent,
     MessageComponent,
-    SessionExpiredComponent
+    SessionExpiredComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

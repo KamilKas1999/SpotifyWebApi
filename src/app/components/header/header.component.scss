@@ -1,35 +1,11 @@
-a {
-  margin: 20px, 10px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  padding: 10px 20px;
-  transition: transform 0.2s;
-}
 p {
   color: #111;
   margin: 0;
   font-size: 25px;
 }
-a:hover {
-  transform: scale(1.2);
-  font-size: 700;
-}
-.activeLink {
-  background-color: #031b88;
-  border-radius: 15px;
 
-  p {
-    color: #eee;
-  }
-}
 .navigationpanel {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  border-bottom: 2px solid black;
-  padding: 10px;
+  width: 100%;
   display: flex;
   .left {
     display: flex;
@@ -51,7 +27,8 @@ a:hover {
   }
   button {
     border: none;
-    background-color: white;
+    background: none;
+
     position: relative;
     #check{
       position: absolute;

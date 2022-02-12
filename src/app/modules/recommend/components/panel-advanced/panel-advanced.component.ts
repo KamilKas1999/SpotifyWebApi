@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AdvancedSettings } from '../../models/advancedSettings.model';
 import { RecommendService } from '../../services/recomendation/recommend.service';
 
@@ -16,11 +17,15 @@ export class PanelAdvancedComponent implements OnInit {
   energyValueDesc = 'Średnia';
   accousticValueDesc = 'Średnia';
   accousticSpechDesc = 'Średni';
+  recommendSub: Subscription;
 
   constructor(private recommendService: RecommendService) {}
 
   ngOnInit(): void {
     this.advancedSettings = this.recommendService.advancedSettings;
+    this.recommendSub = this.recommendService.recommendChanged.subscribe(
+      () => this.hideComponent = true
+    );
   }
 
   onHide() {

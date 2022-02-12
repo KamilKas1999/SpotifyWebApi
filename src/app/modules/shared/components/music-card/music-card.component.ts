@@ -63,12 +63,12 @@ export class MusicCardComponent implements OnInit, OnDestroy {
 
   getArtistShorted(): Artist[] {
     if (this.isOpen) return this.track.artists;
-    return this.track.artists.slice(0, 2);
+    return this.track.artists.slice(0, 4);
   }
 
   plusArtist(): number {
     if (this.isOpen) return 0;
-    return this.track.artists.length - 2;
+    return this.track.artists.length - 4;
   }
 
   changeTrackSaving(): void {

@@ -3,7 +3,6 @@
   border-style: solid;
   border-width: 5px;
   border-spacing: 10px;
-  background-color: white;
   margin-left: auto;
   margin-right: auto;
   position: fixed;
@@ -12,13 +11,11 @@
   right: 10px;
   z-index: 1000;
   text-align: center;
-  -webkit-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-  -moz-box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-  box-shadow: 31px 30px 100px -41px rgba(66, 68, 90, 1);
-  backdrop-filter: blur(17px);
-  -webkit-backdrop-filter: blur(17px);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
-  border: 3px solid #031b88b4;
   p {
     color: black;
     font-size: 25x;

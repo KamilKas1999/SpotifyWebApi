@@ -3,10 +3,10 @@
   [ngClass]="{ hidden: hideComponent, showed: !hideComponent }"
 >
   <h1>Parametry rekomendacji</h1>
-  <button (click)="onHide()">
+  <button id="showButton" (click)="onHide()">
     <img
       [ngClass]="{ rotate: !hideComponent }"
-      src="../../../../../assets/expand_more_black_24dp.svg"
+      src="assets/expand_more_black_24dp.svg"
     />
   </button>
   <div>

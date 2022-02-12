@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spotify-top.service';
 import { ArtistShort } from '../../models/artistShort.model';
 import { PrimarySettings } from '../../models/primarySettings.model';
@@ -23,6 +24,7 @@ export class PanelPrimaryComponent implements OnInit {
   trackSearchResult = [];
   hideComponent = false;
   mode = 0;
+  recommendSub: Subscription;
 
   constructor(
     private recommendService: RecommendService,
@@ -34,6 +36,7 @@ export class PanelPrimaryComponent implements OnInit {
   ngOnInit(): void {
     this.randomSettings();
     this.added = this.recommendService.added;
+    this.recommendSub = this.recommendService.recommendChanged.subscribe(() => {console.log("hide"),this.hideComponent = true})
   }
 
   onHide() {

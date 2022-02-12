@@ -1,9 +1,4 @@
-.bottom {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  overflow: hidden;
-}
+
 .open,
 .close {
   height: auto;
@@ -14,26 +9,22 @@
   opacity: 1;
 }
 .panel {
-  width: 95%;
   margin-left: auto;
   margin-right: auto;
-  background-color: white;
-  border-top: 2px solid black;
+  background: #ffffff;
   display: flex;
-  right: auto;
-  left: auto;
+  height: 100px;
   .left {
     width: 30%;
     justify-content: left;
     display: flex;
     #albumImg {
-      width: 50px;
-      height: 50px;
-      margin: 10px;
+      width: 100px;
+      height: 100px;
     }
     div {
       p {
-        font-size: 20px;
+        font-size: 25px;
       }
     }
   }
@@ -96,7 +87,7 @@
   }
   .right {
     width: 20%;
-    padding: 15px;
+    margin-right: 40px;
     .volume-ranger {
       display: flex;
       justify-content: space-between;
@@ -117,6 +108,7 @@ input[type="range"] {
   height: 55px;
   -webkit-appearance: none;
   width: 100%;
+  background: none;
 }
 input[type="range"]:focus {
   outline: none;
@@ -210,10 +202,21 @@ input[type="range"]:focus::-ms-fill-upper {
   }
   .panel {
     overflow: hidden;
+    width: 100vw;
     .left {
       width: 80%;
       position: absolute;
       bottom: 0;
+      #albumImg {
+        width: 50px;
+        height: 50px;
+        margin: 6px;
+      }
+      div {
+        p {
+          font-size: 20px;
+        }
+      }
     }
     .middle-button {
       width: 20%;
