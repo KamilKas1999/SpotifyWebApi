@@ -5,7 +5,7 @@ import { SongInfo } from '../../modules/shared/models/songInfo.model';
   providedIn: 'root',
 })
 export class MusicPlayerService {
-  private audio = new Audio();
+  audio = new Audio();
   actualTime = new EventEmitter<number>();
   isPaused = new EventEmitter<boolean>();
   trackData = new EventEmitter<SongInfo>();

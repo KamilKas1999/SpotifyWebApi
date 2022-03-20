@@ -24,4 +24,8 @@ describe('HomeNotLoggedComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('has div with redirect to login',() =>{
+    expect(fixture.nativeElement.querySelector('.spotify')).toBeTruthy();
+  })
 });

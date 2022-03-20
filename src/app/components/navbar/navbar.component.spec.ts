@@ -22,4 +22,8 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should has 3 elements', () => {
+    expect(component.links.length).toBe(3);
+  });
 });

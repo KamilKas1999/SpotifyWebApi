@@ -36,7 +36,7 @@ export class PanelPrimaryComponent implements OnInit {
   ngOnInit(): void {
     this.randomSettings();
     this.added = this.recommendService.added;
-    this.recommendSub = this.recommendService.recommendChanged.subscribe(() => {console.log("hide"),this.hideComponent = true})
+    this.recommendSub = this.recommendService.recommendChanged.subscribe(() => {this.hideComponent = true})
   }
 
   onHide() {

@@ -227,11 +227,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.totalMinutes = this.countMinutesSpotify(state.duration);
   }
 
-  private countSecondsSpotify(time: number) {
+   countSecondsSpotify(time: number):string {
     return ((Math.floor(time) / 1000) % 60).toFixed(0);
   }
 
-  private countMinutesSpotify(time: number) {
+   countMinutesSpotify(time: number):string {
     let cloneTime = time / 1000;
     let minutes = 0;
     while (cloneTime >= 60) {

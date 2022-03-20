@@ -11,11 +11,12 @@ export class SpotifyTopService {
   constructor(private http: HttpClient) {}
 
   getTopTracks(timeRange: string): Observable<{ items: SongInfo[] }> {
-    return this.http.get<{ items: SongInfo[] }>(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`);
+    return this.http.get<{ items: SongInfo[] }>(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=10`);
   }
 
   getTopArtists(timeRange: string): Observable<{ items: Artist[] }> {
-    return this.http.get<{ items: Artist[] }>(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}`);
+    console.log("tttttttttttttttttttt")
+    return this.http.get<{ items: Artist[] }>(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10`);
   }
   
 }

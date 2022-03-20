@@ -16,7 +16,7 @@ export class PanelComponent implements OnInit {
   addedValues = [];
 
   @Output() newItemEvent = new EventEmitter<never>();
-  @Input('tracks') tracks: SongInfo[];
+  @Input('tracks') tracks: SongInfo[] = [];
 
   constructor(
     private recommendService: RecommendService,

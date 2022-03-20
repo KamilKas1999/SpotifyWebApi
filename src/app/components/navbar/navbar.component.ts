@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/authenticate/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +6,17 @@ import { LoginService } from 'src/app/services/authenticate/login.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  links = [{
+   name: "Strona główna",
+   link: "/recommend"
+  },{
+    name: "Top utwory",
+    link: "/top/tracks"
+  },{
+    name: "Top wykonawcy",
+    link: "/top/artists"
+  }]
 
   constructor() { }
 

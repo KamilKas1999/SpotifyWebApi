@@ -7,7 +7,7 @@ import { Artist } from 'src/app/modules/shared/models/artist.model';
   styleUrls: ['./top-artists-card.component.scss'],
 })
 export class ArtistCardComponent implements OnInit {
-  @Input() artist: Artist;
+  @Input('artist') artist: Artist = new Artist();
   isOpen = false;
 
   constructor() {}

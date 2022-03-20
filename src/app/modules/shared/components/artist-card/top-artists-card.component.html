@@ -11,7 +11,7 @@
     </button>
   </div>
   <div class="image">
-    <img src="{{ artist.images[1].url }}" />
+    <img *ngIf="artist.images.length >=2" src="{{ artist.images[1].url }}" />
   </div>
   <div class="background">
     <div id="standard-info">
@@ -31,7 +31,7 @@
           <img src="assets/more_horiz_white_48dp.svg" />
         </button>
       </a>
-      <a href="{{ artist.external_urls.spotify }}" target="_blank">
+      <a *ngIf = "artist.external_urls" href="{{ artist.external_urls.spotify }}" target="_blank">
         <button title="Otwórz w spotify">
           <img src="assets/icon.png" />
         </button>

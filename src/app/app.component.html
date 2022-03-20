@@ -1,7 +1,7 @@
 <app-header></app-header>
 <br />
 <div class="main">
-  <div class="left">
+  <div class="left" *ngIf="isLogin">
     <app-navbar></app-navbar>
   </div>
   <div class="right">
@@ -11,6 +11,7 @@
 <app-message></app-message>
 <br />
 <br />
+<br/>
 <div class="bottom">
   <app-music-player *ngIf="isLogin"></app-music-player>
 </div>

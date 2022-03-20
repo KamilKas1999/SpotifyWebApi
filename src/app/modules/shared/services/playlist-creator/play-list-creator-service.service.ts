@@ -8,7 +8,6 @@ import { SongInfo } from '../../models/songInfo.model';
   providedIn: 'root',
 })
 export class PlayListCreatorService {
-  private userSub: Subscription;
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
@@ -18,12 +17,6 @@ export class PlayListCreatorService {
     return this.http.post<{ id: string }>(link, { name: 'Twoje rekomendacje' });
   }
 
-  public addTrackToPlaylist(track: SongInfo, playlistId: string) {
-    return this.http.post(
-      'https://api.spotify.com/v1/playlists/{playlist_id}/tracks',
-      {}
-    );
-  }
   public addTracksToPlaylist(tracks: SongInfo[], playlistId: string) {
     const ids = tracks.map(track => track.uri);
     return this.http.post(

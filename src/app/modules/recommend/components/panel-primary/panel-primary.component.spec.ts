@@ -22,4 +22,11 @@ describe('PanelPrimaryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
+  it('has right desctiption', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toEqual('Bazowe rekomendacji');
+  });
 });

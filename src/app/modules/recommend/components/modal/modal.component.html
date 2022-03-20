@@ -2,11 +2,13 @@
   <div class="panel">
     {{ mode }}
     <div class="buttons">
-      <button (click)="setArtOrTra(0)" *ngIf="mode == 0"><p>Utwory</p></button>
-      <button (click)="setArtOrTra(1)" *ngIf="mode == 0">
+      <button (click)="setArtOrTra(0)" *ngIf="mode == 0" [ngClass]="{'activeButton' : artistOrTracks == 0}"><p>Utwory</p></button>
+      <button (click)="setArtOrTra(1)" *ngIf="mode == 0" [ngClass]="{'activeButton' : artistOrTracks == 1}">
         <p>Wykonawcy</p>
       </button>
-      <button (click)="close()"><p>X</p></button>
+      <button (click)="close()" class="activeButton">
+        <img src="assets/close_white_48dp.svg" />
+      </button>
       <input
         type="search"
         placeholder="Filtruj"
@@ -19,7 +21,7 @@
       <div class="section" *ngIf="mode == 0 && artistOrTracks == 0">
         <div class="block" *ngFor="let track of tracks" (click)="onAdd(track)">
           <p>{{ track.name }}</p>
-          <img src="../../../../../assets/add_white_48dp.svg" />
+          <img src="assets/add_white_48dp.svg" />
         </div>
       </div>
       <div class="section" *ngIf="mode == 0 && artistOrTracks == 1">
@@ -29,14 +31,18 @@
           (click)="onAdd(artist)"
         >
           <p>{{ artist.name }}</p>
-          <img src="../../../../../assets/add_white_48dp.svg" />
+          <img src="assets/add_white_48dp.svg" />
         </div>
       </div>
 
       <div class="section" *ngIf="mode == 1">
-        <div class="block" *ngFor="let genre of filteredGenres" (click)="onAdd(genre)">
+        <div
+          class="block"
+          *ngFor="let genre of filteredGenres"
+          (click)="onAdd(genre)"
+        >
           <p>{{ genre }}</p>
-          <img src="../../../../../assets/add_white_48dp.svg" />
+          <img src="/assets/add_white_48dp.svg" />
         </div>
       </div>
     </div>

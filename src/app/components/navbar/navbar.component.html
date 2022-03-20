@@ -1,24 +1,10 @@
 <div class="panel">
     <a
-    class="link"
-    routerLink="/recommend"
+    *ngFor="let link of links"
+    class={{link.name}}
+    routerLink={{link.link}}
     [routerLinkActive]="['activeLink']"
   >
-    <p>Strona główna</p>
+    <p>{{link.name}}</p>
   </a>
-  <a
-    class="link"
-    routerLink="/top/tracks"
-    [routerLinkActive]="['activeLink']"
-  >
-    <p>Top utwory</p>
-  </a>
-  <a
-    class="link"
-    routerLink="/top/artists"
-    [routerLinkActive]="['activeLink']"
-  >
-    <p>Top wykonawcy</p>
-  </a>
- 
 </div>

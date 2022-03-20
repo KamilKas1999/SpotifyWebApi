@@ -38,7 +38,7 @@ export class RecommendService {
           this.recommendSongs = data.tracks;
           this.recommendChanged.next(this.recommendSongs);
         },
-        () => {
+        (error) => {
           this.recommendSongs = [];
           this.recommendChanged.next(this.recommendSongs);
         }

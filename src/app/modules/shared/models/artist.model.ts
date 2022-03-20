@@ -8,7 +8,7 @@ export class Artist {
   name: string;
   id: string;
   type: string;
-  uri: string;
-  genres: string[];
-  images: ImageProperty[];
+  uri: string = '';
+  genres: string[] = [];
+  images: ImageProperty[] = [];
 }

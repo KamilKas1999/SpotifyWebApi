@@ -40,11 +40,17 @@
         height: 50px;
         margin-top: 20px;
       }
+      .activeButton{
+        background: #031b88b4;
+        p{
+          color: #eee;
+        }
+       
+      }
       button {
         display: block;
-        border-radius: 5px;
-        background: #031b88b4;
-        color: white;
+        border-radius: 10px;
+        color: #202020;
         box-shadow: none;
         font-size: 20px;
         text-align: center;
@@ -53,7 +59,7 @@
         border: none;
         p {
           text-align: center;
-          color: #eee;
+          color: #202020;
           font-size: 25px;
           margin: 0;
           padding: 10px 10px;

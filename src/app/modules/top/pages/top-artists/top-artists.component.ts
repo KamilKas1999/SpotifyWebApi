@@ -9,7 +9,7 @@ import { SpotifyTopService } from 'src/app/modules/shared/services/user-top/spot
 })
 export class TopArtistsComponent implements OnInit {
   isLoading = false;
-  topArtists: Artist[];
+  topArtists: Artist[] = [];
   activeButtonNumber = 1;
 
   constructor(private spotifyTopService: SpotifyTopService) {}
@@ -28,7 +28,6 @@ export class TopArtistsComponent implements OnInit {
     }
     this.isLoading = true;
     this.spotifyTopService.getTopArtists(timeRange).subscribe((data) => {
-      console.log(data)
       this.topArtists = data.items;
       this.isLoading = false;
     });
