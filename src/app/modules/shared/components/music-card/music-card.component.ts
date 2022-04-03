@@ -24,7 +24,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   @Input() track: SongInfo;
   @Output() getSearchStatusChange = new EventEmitter<boolean>();
 
-  isSaved = false;
+  @Input('isSaved') isSaved = false;
   isPaused = false;
   musicTime = 0;
   minutes: string | number;
@@ -51,7 +51,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.checkUserSavedThisSong();
+   // this.checkUserSavedThisSong();
     const tempTime = this.track.duration_ms / 60000;
     this.minutes = Math.floor(tempTime);
     this.seconds = String(
@@ -92,7 +92,7 @@ export class MusicCardComponent implements OnInit, OnDestroy {
       this.isSaved = true;
       this.messageService.sendMessage(this.followMessageText, this.track.name);
     });
-    this.checkUserSavedThisSong();
+   // this.checkUserSavedThisSong();
   }
 
   onRemoveMusic(): void {
@@ -105,11 +105,11 @@ export class MusicCardComponent implements OnInit, OnDestroy {
     });
   }
 
-  checkUserSavedThisSong() {
-    this.userLibrary.checkUserSavedTrack(this.track.id).subscribe((data) => {
-      this.isSaved = data.pop();
-    });
-  }
+  // checkUserSavedThisSong() {
+  //   this.userLibrary.checkUserSavedTrack(this.track.id).subscribe((data) => {
+  //     this.isSaved = data.pop();
+  //   });
+  // }
 
   ngOnDestroy(): void {}
 

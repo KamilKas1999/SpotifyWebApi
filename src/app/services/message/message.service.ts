@@ -17,7 +17,7 @@ export class MessageService {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.cancelMessage();
-    }, 5000);
+    }, 10000);
   }
 
   cancelMessage(): void {

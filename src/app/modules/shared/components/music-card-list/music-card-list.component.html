@@ -1,3 +1,3 @@
 <div>
-  <app-music-card *ngFor="let track of tracks" [track]="track"></app-music-card>
+  <app-music-card *ngFor="let track of tracks, let i = index" [track]="track" [isSaved]=" follows.length >= 10 ? follows[i] : false"></app-music-card>
 </div>

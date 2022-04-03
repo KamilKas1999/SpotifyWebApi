@@ -102,6 +102,9 @@ export class RecommendService {
       this.TARGET_TEMPO,
       this.advancedSettings.tempo.toString()
     );
+    url.searchParams.append(
+      "limit", "10"
+    )
     return url;
   }
 }

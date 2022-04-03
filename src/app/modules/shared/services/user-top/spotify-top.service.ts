@@ -15,7 +15,6 @@ export class SpotifyTopService {
   }
 
   getTopArtists(timeRange: string): Observable<{ items: Artist[] }> {
-    console.log("tttttttttttttttttttt")
     return this.http.get<{ items: Artist[] }>(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10`);
   }
   

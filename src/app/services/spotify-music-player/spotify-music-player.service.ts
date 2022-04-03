@@ -102,24 +102,24 @@ export class SpotifyMusicPlayerService {
       );
     });
     player.addListener('not_ready', ({ device_id }) => {
-      this.messageService.sendMessage('Device ID has gone offline', device_id);
+      //this.messageService.sendMessage('Device ID has gone offline', device_id);
     });
 
     player.addListener('initialization_error', ({ message }) => {
-      this.messageService.sendMessage(message, '');
+      //this.messageService.sendMessage(message, '');
     });
 
     player.addListener('authentication_error', ({ message }) => {
-      this.messageService.sendMessage(message, '');
+      //this.messageService.sendMessage(message, '');
     });
 
     player.addListener('account_error', ({ message }) => {
-      this.messageService.sendMessage(message, '');
+      //this.messageService.sendMessage(message, '');
     });
 
     player.addListener('player_state_changed', (currentState) => {
       if (currentState == null) {
-        this.messageService.sendMessage('Rozłączono', '');
+        this.messageService.sendMessage('Rozłączono z aplikacją Spotify', 'Spróbuj ponownie się połączyć w aplikacji Spotify');
         this.modeService.setMode(0);
       } else {
         this.modeService.setMode(1);

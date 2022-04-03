@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -58,6 +58,8 @@ export class LoginService {
       );
   }
 
+
+
   private handleAuthentication(
     access_token: string,
     expires_in: number,
@@ -67,7 +69,6 @@ export class LoginService {
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('expire_date', date.toString());
     localStorage.setItem('refresh_token', refresh_token);
-    
     this.loginEmitter.next(true);
   }
 
@@ -85,4 +86,3 @@ export class LoginService {
     }
   }
 }
-

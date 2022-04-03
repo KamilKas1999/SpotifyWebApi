@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SongInfo } from '../../models/songInfo.model';
+import { UserLibraryService } from '../../services/user-library/user-library.service';
 
 @Component({
   selector: 'app-music-card-list',
@@ -8,13 +9,20 @@ import { SongInfo } from '../../models/songInfo.model';
 })
 export class MusicCardListComponent implements OnInit {
   @Input('tracks') tracks: SongInfo[];
-  @Input('describe') describe = ""
+  @Input('describe') describe = '';
   selectedIndex: number = 0;
-  constructor() {}
+  follows: boolean[] = [];
+  constructor(private userLibrary: UserLibraryService) {}
 
   onSelected(index: number) {
     this.selectedIndex = index;
+    this.follows
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let ids = this.tracks.map((track) => track.id).join(',');
+    this.userLibrary
+      .checkUserSavedTrack(ids)
+      .subscribe((data) => (this.follows = data));
+  }
 }
